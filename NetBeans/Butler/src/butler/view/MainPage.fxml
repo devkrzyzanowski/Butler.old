@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #bbbbbb;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="1280.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Plik">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Narzędzia">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Pomoc">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <HBox layoutY="27.0" prefHeight="60.0" prefWidth="1280.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="68.0" prefWidth="100.0" style="-fx-background-radius: 0; -fx-background-color: #333333;" text="Grafik Rezerwacji" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin>
+            </Button>
+            <Separator orientation="VERTICAL" prefHeight="200.0">
+               <effect>
+                  <GaussianBlur />
+               </effect>
+            </Separator>
+            <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="100.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Baza Klientów" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin>
+            </Button>
+            <Separator orientation="VERTICAL" prefHeight="200.0">
+               <effect>
+                  <GaussianBlur />
+               </effect>
+            </Separator>
+            <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="100.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Button" textFill="#bfbfbf">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin>
+            </Button>
+            <Separator orientation="VERTICAL" prefHeight="200.0">
+               <effect>
+                  <GaussianBlur />
+               </effect>
+            </Separator>
+            <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="100.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Button" textFill="#bfbfbf">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin>
+            </Button>
+            <Separator orientation="VERTICAL" prefHeight="200.0">
+               <effect>
+                  <GaussianBlur />
+               </effect>
+            </Separator>
+            <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="100.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Button" textFill="#bfbfbf">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin>
+            </Button>
+            <Separator orientation="VERTICAL" prefHeight="200.0">
+               <effect>
+                  <GaussianBlur />
+               </effect>
+            </Separator>
+            <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="100.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Wykaz Pokoi" textFill="#bfbfbf">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin>
+            </Button>
+            <Separator orientation="VERTICAL" prefHeight="200.0">
+               <effect>
+                  <GaussianBlur />
+               </effect>
+            </Separator>
+            <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="100.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Statystyki" textFill="#bfbfbf">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin>
+            </Button>
+            <Separator orientation="VERTICAL" prefHeight="200.0">
+               <effect>
+                  <GaussianBlur />
+               </effect>
+            </Separator>
+            <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="100.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Ceny Pokoi" textFill="#bfbfbf">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <TableView layoutY="87.0" prefHeight="580.0" prefWidth="1280.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+            <TableColumn prefWidth="75.0" text="Column X" />
+            <TableColumn prefWidth="75.0" text="Column X" />
+            <TableColumn prefWidth="75.0" text="Column X" />
+        </columns>
+      </TableView>
+      <AnchorPane layoutY="775.0" prefHeight="25.0" prefWidth="1280.0" style="-fx-background-color: #333333;">
+         <children>
+            <Label layoutX="1214.0" layoutY="4.0" text="Version 0.0.0" textFill="#a8a8a8" AnchorPane.rightAnchor="0.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets right="6.0" />
+               </padding>
+            </Label>
+            <Label layoutY="4.0" prefHeight="17.0" prefWidth="184.0" text=" Użytkownik : Testowy" textFill="#a8a8a8">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="6.0" />
+               </padding>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

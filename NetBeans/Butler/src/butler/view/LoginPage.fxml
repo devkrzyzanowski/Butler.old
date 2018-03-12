@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#onMouseDragging" onMousePressed="#onMousePressed" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #dfe2db;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.FXMLDocumentController">
+   <children>
+      <AnchorPane prefHeight="374.0" prefWidth="200.0" style="-fx-background-color: #444444;">
+         <children>
+            <Label layoutX="22.0" layoutY="220.0" text="BUTLER" textFill="#b9b9b9">
+               <font>
+                  <Font name="System Bold" size="43.0" />
+               </font>
+               <effect>
+                  <Bloom />
+               </effect>
+            </Label>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="25.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../src/butlerIco.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="200.0" prefHeight="374.0" prefWidth="400.0">
+         <children>
+            <AnchorPane layoutY="117.0" prefHeight="141.0" prefWidth="400.0" style="-fx-background-color: #d3d6cf;">
+               <children>
+                  <Label layoutX="87.0" layoutY="18.0" text="Login :">
+                     <padding>
+                        <Insets right="6.0" />
+                     </padding>
+                  </Label>
+                  <Button fx:id="button" contentDisplay="TOP" layoutX="198.0" layoutY="90.0" mnemonicParsing="false" onAction="#handleLoginButton" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #333333; -fx-background-radius: 2;" text="Zaloguj" textFill="#d0d0d0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="-40.0" />
+                     </padding>
+                  </Button>
+                  <Hyperlink layoutX="81.0" layoutY="90.0" text="Przypomnij hasło" textFill="#388df4" />
+                  <TextField layoutX="129.0" layoutY="14.0" prefHeight="26.0" prefWidth="190.0" style="-fx-background-radius: 0;" />
+                  <PasswordField layoutX="130.0" layoutY="51.0" prefHeight="26.0" prefWidth="190.0" style="-fx-background-radius: 0;">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </PasswordField>
+                  <Hyperlink fx:id="registerHyperLink" layoutX="81.0" layoutY="113.0" onAction="#setScreenToRegisterPage" text="Rejestracja" textFill="#388df4" />
+                  <FontAwesomeIconView glyphName="LOCK" layoutX="106.0" layoutY="72.0" size="24" />
+                  <FontAwesomeIconView fill="#d0d0d0" glyphName="SIGN_IN" layoutX="276.0" layoutY="125.0" size="36" />
+               </children>
+            </AnchorPane>
+            <Button fx:id="exitButton1" layoutX="350.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleExitButton" prefHeight="22.0" prefWidth="50.0" style="-fx-background-radius: 2; -fx-background-color: #1e1e1e;" textFill="#cdcdcd">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="#d0d0d0" glyphName="CLOSE" size="16" />
+               </graphic>
+               <padding>
+                  <Insets left="-3.0" right="-3.0" />
+               </padding>
+            </Button>
+            <Button fx:id="minimizeButton" layoutX="292.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleMinimizeButton" prefHeight="22.0" prefWidth="50.0" style="-fx-background-radius: 2; -fx-background-color: #1e1e1e;" textFill="#cdcdcd">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <graphic>
+                  <FontAwesomeIconView fill="#d0d0d0" glyphName="WINDOW_MINIMIZE" size="16" />
+               </graphic>
+               <padding>
+                  <Insets left="-3.0" right="-3.0" />
+               </padding>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="374.0" prefHeight="26.0" prefWidth="600.0" style="-fx-background-color: #1f1f1f;">
+         <children>
+            <Label layoutX="520.0" layoutY="4.0" text="Version 0.0.0" textFill="#8d8d8d">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="6.0" right="6.0" />
+               </padding>
+            </Label>
+            <Hyperlink fx:id="regulationsButton" layoutY="3.0" onAction="#showRegulations" text="Regulamin" textFill="#388df4">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="6.0" />
+               </padding>
+            </Hyperlink>
+            <Hyperlink layoutX="65.0" layoutY="3.0" text="OWU" textFill="#388df4">
+               <padding>
+                  <Insets left="6.0" />
+               </padding>
+            </Hyperlink>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
