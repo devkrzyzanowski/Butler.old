@@ -5,8 +5,6 @@
  */
 package butler.controller;
 
-import butler.model.Model;
-import butler.utils.OperationHistory;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -19,9 +17,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -32,11 +27,9 @@ import javafx.stage.Stage;
 public class FXMLDocumentController implements Initializable {
     @FXML private Button exitButton;
     @FXML private Button minimizeButton;
-    
-    
+   
     private double xOffset = 0;
     private double yOffset = 0;
-    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

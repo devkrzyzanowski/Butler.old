@@ -5,7 +5,6 @@
  */
 package butler;
 
-import butler.controller.FXMLDocumentController;
 import butler.model.Model;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

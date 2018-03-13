@@ -11,8 +11,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
-import java.util.List;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -23,30 +22,25 @@ import javafx.collections.ObservableList;
  * @author Michał
  */
 public class Model {
-    private final String DBAddress = "jdbc:derby:EmbeddedDB; create=true;";
-    private final String DBUser = "root";
-    private final String DBPassword = "";
-    private final String DBDriver = "org.apache.derby.jdbc.EmbeddedDriver";
+    private final String DBAddress = "jdbc:derby://localhost:1527/ButlerDB;";
+    private final String DBUser = "User=root;";
+    private final String DBPassword = "Pass=;";
+    private final String DBDriver = "org.apache.derby.jdbc.ClientDriver";
     Connection con;
     
     /**
      * init Model
      */
     public Model(){
-        try{
+        try {
             Class.forName(DBDriver);
-        } catch (ClassNotFoundException e){
-            System.out.println(e);
+        } catch (ClassNotFoundException cnfe) {
+            System.err.println("Derby driver not found.");
         }
         try {
-            con = DriverManager.getConnection(DBAddress, DBUser, DBPassword);
-            //con.createStatement().execute("DROP TABLE Operations");
-            //con.createStatement().execute("CREATE TABLE Operations(operation varchar(45), time TIME, date DATE, users varchar(25))");
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Operations");
-            stmt.close();
+            con = DriverManager.getConnection(DBAddress +DBUser + DBPassword);
         } catch ( SQLException e){
-            System.err.println(e);
+            System.err.println("NIE POLACZONO");
         }
     }
     
@@ -55,8 +49,19 @@ public class Model {
      * @param login 
      * @param password
      * @return true on successfully connect to db or false on fail
+     * @throws java.sql.SQLException
      */
-    public boolean connectToDataBase(String login, String password){
+    public boolean connectToDataBase(String login, String password) throws SQLException{
+        try (Statement stmt = con.createStatement()) {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM DBUser");
+            while (rs.next()){
+                if (rs.getString("nick").equals(login)){
+                    if (rs.getString("password").equals(password)){
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
     
@@ -80,13 +85,13 @@ public class Model {
     
     /**
      * 
-     * @param userName
      * @param message
+     * @param user
      * @return true on successfully add or false on fail
      */
     public boolean addToOperationHistory(String message, String user){
         try {
-            con.createStatement().execute("INSERT INTO Operations(operation, time, date, users) VALUES ('"+message+"', CURRENT_TIME, CURRENT_DATE, '"+user+"')");
+            con.createStatement().execute("INSERT INTO Operation(operation, date, users) VALUES ('"+message+"', CURRENT_TIMESTAMP, '"+user+"')");
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
@@ -96,20 +101,39 @@ public class Model {
     
     public ObservableList<OperationHistory> getOperationHistoryList() throws SQLException {
         ObservableList<OperationHistory> list = FXCollections.observableArrayList();
-        Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM Operations");
-        while (rs.next()){
-            String operation = rs.getString("operation");
-            String time = rs.getString("time");
-            String date = rs.getString("date");
-            String user = rs.getString("users");
-            
-            list.add(new OperationHistory(operation, time, date, user));
+        try (Statement stmt = con.createStatement()) {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Operations");
+            while (rs.next()){
+                String operation = rs.getString("operation");
+                String date = rs.getString("date");
+                String user = rs.getString("users");
+                
+                list.add(new OperationHistory(operation, date, user));
+            }
         }
-        stmt.close();
         return list;
     }
     
+    /**
+     * 
+     * @param dateFrom
+     * @param dateTo
+     * @return 
+     * @throws java.sql.SQLException 
+     */
+     public ObservableList<OperationHistory> getOperationHistoryListFromTo(LocalDate dateFrom, LocalDate dateTo) throws SQLException {
+        ObservableList<OperationHistory> list = FXCollections.observableArrayList();
+        try (Statement stmt = con.createStatement()) {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Operations WHERE date BETWEEN TIMESTAMP('"+dateFrom+" 00:00:00') AND TIMESTAMP('"+dateTo+" 23:59:59')");
+            while (rs.next()){
+                String operation = rs.getString("operation");
+                String date = rs.getString("date");
+                String user = rs.getString("users");
+                list.add(new OperationHistory(operation, date, user));
+            }
+        }
+        return list;
+    }   
     /**
      * registerUser
      * @param login login for new user (must be unique)
@@ -157,5 +181,7 @@ public class Model {
         //TODO create
         return false;
     }
+
+
     
 }

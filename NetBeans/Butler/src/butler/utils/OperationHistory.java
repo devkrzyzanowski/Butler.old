@@ -10,14 +10,12 @@ package butler.utils;
  */
 public class OperationHistory {
     private String operation;
-    private String time;
     private String date;
     private String user;
     
     //TODO change date format from String to DATE
-    public OperationHistory(String operation,String time, String date, String user){
+    public OperationHistory(String operation, String date, String user){
         this.operation = operation;
-        this.time = time;
         this.date = date;
         this.user = user;
     }
@@ -30,9 +28,6 @@ public class OperationHistory {
     public void setUser(String user){
         this.user = user;
     }
-    public void setTime(String time){
-        this.time = time;
-    }
     public String getOperation(){
         return operation;
     }
@@ -42,8 +37,4 @@ public class OperationHistory {
     public String getUser(){
         return user;
     }
-    public String getTime(){
-        return time;
-    }
-    
 }

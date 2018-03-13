@@ -16,7 +16,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #444444;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.FXMLDocumentController">
    <children>
-      <MenuBar onMouseDragged="#onMouseDragging" onMousePressed="#onMousePressed" prefHeight="27.0" prefWidth="1280.0">
+      <MenuBar maxHeight="32.0" maxWidth="1280.0" minHeight="32.0" minWidth="1280.0" onMouseDragged="#onMouseDragging" onMousePressed="#onMousePressed" prefHeight="32.0" prefWidth="1280.0">
         <menus>
           <Menu mnemonicParsing="false" text="Plik">
             <items>
@@ -37,7 +37,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Button fx:id="exitButton" layoutX="1228.0" layoutY="2.0" mnemonicParsing="false" onAction="#handleExitButton" prefHeight="22.0" prefWidth="50.0" style="-fx-background-radius: 2; -fx-background-color: #1e1e1e;" textFill="#cdcdcd">
+      <Button fx:id="exitButton" layoutX="1226.0" layoutY="4.0" mnemonicParsing="false" onAction="#handleExitButton" prefHeight="22.0" prefWidth="50.0" style="-fx-background-radius: 2; -fx-background-color: #1e1e1e;" textFill="#cdcdcd">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -48,7 +48,7 @@
             <Insets left="-3.0" right="-3.0" />
          </padding>
       </Button>
-      <Button fx:id="minimizeButton" layoutX="1176.0" layoutY="2.0" mnemonicParsing="false" onAction="#handleMinimizeButton" prefHeight="22.0" prefWidth="50.0" style="-fx-background-radius: 2; -fx-background-color: #1e1e1e;" textFill="#cdcdcd">
+      <Button fx:id="minimizeButton" alignment="CENTER" layoutX="1174.0" layoutY="4.0" mnemonicParsing="false" onAction="#handleMinimizeButton" prefHeight="22.0" prefWidth="50.0" style="-fx-background-radius: 2; -fx-background-color: #1e1e1e;" textFill="#cdcdcd">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -62,11 +62,11 @@
             <Insets left="-3.0" right="-3.0" />
          </padding>
       </Button>
-      <HBox fx:id="menu" alignment="BOTTOM_CENTER" layoutY="27.0" prefHeight="60.0" prefWidth="1280.0">
+      <HBox fx:id="menu" alignment="BOTTOM_CENTER" layoutY="32.0" maxHeight="60.0" prefHeight="60.0" prefWidth="1280.0">
          <children>
-            <Label alignment="CENTER" prefHeight="60.0" prefWidth="180.0" text="BUTLER" textFill="#b9b9b9">
+            <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="60.0" prefWidth="180.0" text="BUTLER" textFill="#b9b9b9">
                <font>
-                  <Font name="System Bold" size="43.0" />
+                  <Font name="System Bold" size="34.0" />
                </font>
                <effect>
                   <Bloom />
@@ -75,88 +75,115 @@
                   <Insets />
                </opaqueInsets>
             </Label>
-            <Button mnemonicParsing="false" onAction="#setScreenBookingSchedule" prefHeight="60.0" prefWidth="120.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Grafik Rezerwacji" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#setScreenBookingSchedule" prefHeight="60.0" prefWidth="120.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Grafik Rezerwacji" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
                <HBox.margin>
                   <Insets left="1.0" right="1.0" />
                </HBox.margin>
                <graphic>
                   <FontAwesomeIconView fill="#d0d0d0" glyphName="CALENDAR" size="36" />
                </graphic>
+               <font>
+                  <Font name="Open Sans" size="12.0" />
+               </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#setScreenClientBase" prefHeight="60.0" prefWidth="107.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Baza Klientów" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#setScreenClientBase" prefHeight="60.0" prefWidth="107.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Baza Klientów" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
                <HBox.margin>
                   <Insets left="1.0" right="1.0" />
                </HBox.margin>
                <graphic>
                   <FontAwesomeIconView fill="#d0d0d0" glyphName="BOOK" size="36" />
                </graphic>
+               <font>
+                  <Font name="Open Sans" size="12.0" />
+               </font>
             </Button>
-            <Button disable="true" mnemonicParsing="false" prefHeight="60.0" prefWidth="137.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Wykaz Pokoi" textFill="#bfbfbf">
+            <Button alignment="CENTER" disable="true" mnemonicParsing="false" prefHeight="60.0" prefWidth="137.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Wykaz Pokoi" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
                <HBox.margin>
                   <Insets left="1.0" right="1.0" />
                </HBox.margin>
                <graphic>
                   <FontAwesomeIconView fill="#d0d0d0" glyphName="HOTEL" size="36" />
                </graphic>
+               <font>
+                  <Font name="Open Sans" size="12.0" />
+               </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#setScreenStatistics" prefHeight="60.0" prefWidth="116.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Statystyki" textAlignment="CENTER" textFill="#bfbfbf">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#setScreenStatistics" prefHeight="60.0" prefWidth="116.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Statystyki" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
                <HBox.margin>
                   <Insets left="1.0" right="1.0" />
                </HBox.margin>
                <graphic>
                   <FontAwesomeIconView fill="#d0d0d0" glyphName="BAR_CHART" size="36" />
                </graphic>
+               <font>
+                  <Font name="Open Sans" size="21.0" />
+               </font>
             </Button>
-            <Button disable="true" mnemonicParsing="false" prefHeight="60.0" prefWidth="100.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Ceny Pokoi" textAlignment="CENTER" textFill="#bfbfbf">
+            <Button alignment="CENTER" disable="true" mnemonicParsing="false" prefHeight="60.0" prefWidth="100.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Ceny Pokoi" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
                <HBox.margin>
                   <Insets left="1.0" right="1.0" />
                </HBox.margin>
                <graphic>
                   <FontAwesomeIconView fill="#d0d0d0" glyphName="USD" size="36" />
                </graphic>
+               <font>
+                  <Font name="Open Sans" size="12.0" />
+               </font>
             </Button>
-            <Button disable="true" mnemonicParsing="false" prefHeight="60.0" prefWidth="124.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Narzędzia" textAlignment="CENTER" textFill="#bfbfbf">
+            <Button alignment="CENTER" disable="true" mnemonicParsing="false" prefHeight="60.0" prefWidth="124.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Narzędzia" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
                <graphic>
                   <FontAwesomeIconView fill="#d0d0d0" glyphName="COGS" size="36" />
                </graphic>
                <HBox.margin>
                   <Insets left="1.0" right="1.0" />
                </HBox.margin>
+               <font>
+                  <Font name="Open Sans" size="12.0" />
+               </font>
             </Button>
-            <Button disable="true" mnemonicParsing="false" prefHeight="60.0" prefWidth="124.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Urząd" textAlignment="CENTER" textFill="#bfbfbf">
+            <Button alignment="CENTER" disable="true" mnemonicParsing="false" prefHeight="60.0" prefWidth="124.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Urząd" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
                <graphic>
                   <FontAwesomeIconView fill="#d0d0d0" glyphName="INSTITUTION" size="36" />
                </graphic>
                <HBox.margin>
                   <Insets left="1.0" right="1.0" />
                </HBox.margin>
+               <font>
+                  <Font name="Open Sans" size="12.0" />
+               </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#setScreenOperationHistory" prefHeight="60.0" prefWidth="124.0" style="-fx-background-radius: 0; -fx-background-color: #333333;" text="Historia Operacji" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#setScreenOperationHistory" prefHeight="60.0" prefWidth="124.0" style="-fx-background-radius: 0; -fx-background-color: #333333;" text="Historia Operacji" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
                <graphic>
                   <FontAwesomeIconView fill="#d0d0d0" glyphName="HISTORY" size="36" />
                </graphic>
                <HBox.margin>
                   <Insets left="1.0" right="1.0" />
                </HBox.margin>
+               <font>
+                  <Font name="Open Sans" size="12.0" />
+               </font>
             </Button>
-            <Button disable="true" mnemonicParsing="false" prefHeight="60.0" prefWidth="124.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Zgłoś błąd" textAlignment="CENTER" textFill="#bfbfbf">
+            <Button alignment="CENTER" disable="true" mnemonicParsing="false" prefHeight="60.0" prefWidth="124.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Zgłoś błąd" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
                <graphic>
                   <FontAwesomeIconView fill="#bf5f5f" glyphName="BUG" size="36" />
                </graphic>
                <HBox.margin>
                   <Insets left="1.0" right="1.0" />
                </HBox.margin>
+               <font>
+                  <Font name="Open Sans" size="12.0" />
+               </font>
             </Button>
          </children>
       </HBox>
-      <AnchorPane fx:id="main" layoutY="92.0" prefHeight="680.0" prefWidth="1280.0">
+      <AnchorPane fx:id="main" layoutY="92.0" prefHeight="675.0" prefWidth="1280.0">
          <children>
             <Pane prefHeight="680.0" prefWidth="1280.0" />
             <fx:include source="History.fxml" />
          </children></AnchorPane>
       <AnchorPane fx:id="footer" layoutY="771.0" prefHeight="30.0" prefWidth="1280.0" style="-fx-background-color: #333333;">
          <children>
-            <Label layoutX="1200.0" layoutY="8.0" text="Version 0.0.0" textFill="#a8a8a8" AnchorPane.rightAnchor="0.0">
+            <Label layoutX="1183.0" layoutY="4.0" text="Version 0.0.0" textFill="#a8a8a8" AnchorPane.rightAnchor="0.0">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -172,8 +199,8 @@
                   <Insets left="6.0" />
                </padding>
             </Label>
-            <ProgressBar layoutX="904.0" layoutY="7.0" prefWidth="200.0" progress="0.0" />
-            <Label layoutX="142.0" layoutY="7.0" text="Baza danych :" textFill="#a8a8a8">
+            <ProgressBar layoutX="914.0" layoutY="3.0" prefWidth="200.0" progress="0.0" />
+            <Label layoutX="167.0" layoutY="5.0" text="Baza danych :" textFill="#a8a8a8">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -181,7 +208,7 @@
                   <Insets left="6.0" right="6.0" />
                </padding>
             </Label>
-            <Label layoutX="226.0" layoutY="7.0" text="testDB" textFill="#a8a8a8">
+            <Label layoutX="269.0" layoutY="5.0" text="testDB" textFill="#a8a8a8">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -189,7 +216,7 @@
                   <Insets left="6.0" right="6.0" />
                </padding>
             </Label>
-            <Label layoutX="854.0" layoutY="8.0" prefHeight="17.0" prefWidth="50.0" text="Status :" textFill="#a8a8a8">
+            <Label layoutX="842.0" layoutY="4.0" prefHeight="21.0" prefWidth="72.0" text="Status :" textFill="#a8a8a8">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

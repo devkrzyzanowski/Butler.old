@@ -9,14 +9,21 @@ import butler.utils.OperationHistory;
 import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 /**
  *
@@ -25,7 +32,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class historyController implements Initializable {
     @FXML private TableView<OperationHistory> operationTableView;
     @FXML private TableColumn<OperationHistory, String> operation, user;
-    @FXML private TableColumn<OperationHistory, String> time, date;
+    @FXML private TableColumn<OperationHistory, String> date;
+    @FXML private DatePicker datePickerFrom, datePickerTo;
+    @FXML private Button showDataButton, printDataButton;
     Model model;
     
     @Override
@@ -38,12 +47,48 @@ public class historyController implements Initializable {
             Logger.getLogger(historyController.class.getName()).log(Level.SEVERE, null, ex);
         }
         operation.setCellValueFactory(new PropertyValueFactory<>("operation"));
-        time.setCellValueFactory(new PropertyValueFactory<>("time"));
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
         user.setCellValueFactory(new PropertyValueFactory<>("user"));
+        setDatePickerDisplayMethod(datePickerFrom, "yyyy-MM-dd");
+        setDatePickerDisplayMethod(datePickerTo, "yyyy-MM-dd");
+        showDataButton = new Button();
+        printDataButton = new Button();
     } 
     
-    
+        @FXML private void showData(ActionEvent event) {
+            try {
+            operationTableView.setItems(model.getOperationHistoryListFromTo(datePickerFrom.getValue(), datePickerTo.getValue()));
+            } catch (SQLException ex) {
+                //TODO init catch
+            }
 
+    }
+        @FXML private void printData(ActionEvent event) {
+            //TODO init Printing data from table
+    }
+        
+    private void setDatePickerDisplayMethod(DatePicker datePicker, String displayMethod) {
+        datePicker.setConverter(new StringConverter<LocalDate>() {          
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(displayMethod);
+        
+        @Override 
+        public String toString(LocalDate date) {
+            if (date != null) {
+                return dateFormatter.format(date);
+            } else {
+                return "";
+            }
+        }
+
+        @Override 
+        public LocalDate fromString(String string) {
+            if (string != null && !string.isEmpty()) {
+                 return LocalDate.parse(string, dateFormatter);
+            } else {
+                return null;
+            }
+        }
+        });
+    }
         
 }
