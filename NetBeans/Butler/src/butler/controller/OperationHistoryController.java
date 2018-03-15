@@ -29,7 +29,7 @@ import javafx.util.StringConverter;
  *
  * @author Michał
  */
-public class historyController implements Initializable {
+public class OperationHistoryController implements Initializable {
     @FXML private TableView<OperationHistory> operationTableView;
     @FXML private TableColumn<OperationHistory, String> operation, user;
     @FXML private TableColumn<OperationHistory, String> date;
@@ -39,12 +39,12 @@ public class historyController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       model = new Model();
+       model = butler.Butler.model;
        model.addToOperationHistory("testowanie histori operacji", "adminik");
         try {
             operationTableView.setItems(model.getOperationHistoryList());
         } catch (SQLException ex) {
-            Logger.getLogger(historyController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OperationHistoryController.class.getName()).log(Level.SEVERE, null, ex);
         }
         operation.setCellValueFactory(new PropertyValueFactory<>("operation"));
         date.setCellValueFactory(new PropertyValueFactory<>("date"));

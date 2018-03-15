@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="60.0" prefWidth="1280.0" style="-fx-background-color: #222222;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.fragments.MenuController">
+   <children>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="1280.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="60.0" prefWidth="205.0" text="BUTLER" textFill="#b9b9b9">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+               <effect>
+                  <Bloom />
+               </effect>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Button fx:id="bookingScheduleButton" mnemonicParsing="false" onAction="#setScreenToBookingSchedule" prefHeight="60.0" prefWidth="120.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Grafik Rezerwacji" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
+               <graphic>
+                  <FontAwesomeIconView fill="#d0d0d0" glyphName="CALENDAR" size="36" />
+               </graphic>
+               <HBox.margin>
+                  <Insets left="1.0" right="1.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="clientBaseButton" mnemonicParsing="false" onAction="#setScreenToClientBase" prefHeight="60.0" prefWidth="107.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Baza Klientów" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
+               <graphic>
+                  <FontAwesomeIconView fill="#d0d0d0" glyphName="BOOK" size="36" />
+               </graphic>
+               <HBox.margin>
+                  <Insets left="1.0" right="1.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="listOfRoomsButton" mnemonicParsing="false" onAction="#setScreenToListOfRooms" prefHeight="60.0" prefWidth="137.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Wykaz Pokoi" textFill="#bfbfbf">
+               <graphic>
+                  <FontAwesomeIconView fill="#d0d0d0" glyphName="HOTEL" size="36" />
+               </graphic>
+               <HBox.margin>
+                  <Insets left="1.0" right="1.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="statisticsButton" mnemonicParsing="false" onAction="#setScreenToStatistics" prefHeight="60.0" prefWidth="116.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Statystyki" textAlignment="CENTER" textFill="#bfbfbf">
+               <graphic>
+                  <FontAwesomeIconView fill="#d0d0d0" glyphName="BAR_CHART" size="36" />
+               </graphic>
+               <HBox.margin>
+                  <Insets left="1.0" right="1.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="priceOfRoomsButton" mnemonicParsing="false" onAction="#setScreenToPriceOfRooms" prefHeight="60.0" prefWidth="100.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Ceny Pokoi" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
+               <graphic>
+                  <FontAwesomeIconView fill="#d0d0d0" glyphName="USD" size="36" />
+               </graphic>
+               <HBox.margin>
+                  <Insets left="1.0" right="1.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#setScreenToSettings" prefHeight="60.0" prefWidth="124.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Narzędzia" textAlignment="CENTER" textFill="#bfbfbf">
+               <graphic>
+                  <FontAwesomeIconView fill="#d0d0d0" glyphName="COGS" size="36" />
+               </graphic>
+               <HBox.margin>
+                  <Insets left="1.0" right="1.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="institutionButton" mnemonicParsing="false" onAction="#setScreenToInstitution" prefHeight="60.0" prefWidth="124.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Urząd" textAlignment="CENTER" textFill="#bfbfbf">
+               <graphic>
+                  <FontAwesomeIconView fill="#d0d0d0" glyphName="INSTITUTION" size="36" />
+               </graphic>
+               <HBox.margin>
+                  <Insets left="1.0" right="1.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="operationHistoryButton" mnemonicParsing="false" onAction="#setScreenToOperationHistory" prefHeight="60.0" prefWidth="124.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Historia Operacji" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
+               <graphic>
+                  <FontAwesomeIconView fill="#d0d0d0" glyphName="HISTORY" size="36" />
+               </graphic>
+               <HBox.margin>
+                  <Insets left="1.0" right="1.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="sendBugButton" mnemonicParsing="false" prefHeight="60.0" prefWidth="124.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Zgłoś błąd" textAlignment="CENTER" textFill="#bfbfbf">
+               <graphic>
+                  <FontAwesomeIconView fill="#bf5f5f" glyphName="BUG" size="36" />
+               </graphic>
+               <HBox.margin>
+                  <Insets left="1.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

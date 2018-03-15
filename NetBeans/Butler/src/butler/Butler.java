@@ -18,10 +18,9 @@ import javafx.stage.StageStyle;
  * @author Michał
  */
 public class Butler extends Application {
-    Model model;
+    public static Model model;
     @Override
     public void start(Stage stage) throws Exception {
-        model = new Model();
         Parent root = FXMLLoader.load(getClass().getResource("view/LoginPage.fxml"));
         stage.initStyle(StageStyle.TRANSPARENT);
         Scene scene = new Scene(root);

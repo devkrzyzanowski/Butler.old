@@ -43,7 +43,7 @@ public class loginController {
         // TODO
     } 
     
-        @FXML private void onMouseDragging(MouseEvent event){
+    @FXML private void onMouseDragging(MouseEvent event){
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setX(event.getScreenX() - xOffset);
         stage.setY(event.getScreenY() - yOffset);
@@ -54,7 +54,7 @@ public class loginController {
         yOffset = event.getSceneY();
     }    
     @FXML private void setScreenToRegisterPage(ActionEvent event) throws IOException{
-    setPage(event, "RegisterPage");
+        setPage(event, "RegisterPage");
     }    
     @FXML private void handleExitButton() {
         Stage stage = (Stage) exitButton.getScene().getWindow();
@@ -66,9 +66,9 @@ public class loginController {
     }
     
     @FXML private void handleLoginButton(ActionEvent event) throws IOException {
-                   Model model = new Model();
+                   butler.Butler.model = new Model();
         try {
-                if (model.connectToDataBase(loginTextField.getText(), passwordTextField.getText())) {
+                if (butler.Butler.model.connectToDataBase(loginTextField.getText(), passwordTextField.getText())) {
                     setPage(event, "ClientBasePage");
                 } else {
                     System.out.println("Error login");

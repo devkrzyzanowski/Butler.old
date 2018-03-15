@@ -26,6 +26,9 @@ public class Model {
     private final String DBUser = "User=root;";
     private final String DBPassword = "Pass=;";
     private final String DBDriver = "org.apache.derby.jdbc.ClientDriver";
+    
+    private String connectedUserNick;
+    
     Connection con;
     
     /**
@@ -57,6 +60,7 @@ public class Model {
             while (rs.next()){
                 if (rs.getString("nick").equals(login)){
                     if (rs.getString("password").equals(password)){
+                        connectedUserNick = rs.getString("nick");
                         return true;
                     }
                 }
@@ -85,13 +89,27 @@ public class Model {
     
     /**
      * 
+     * @return true on successfuly close DB connection of false on fail
+     */
+    public boolean closeConnection(){       
+        try {
+            con.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }  
+    }
+    
+    /**
+     * 
      * @param message
      * @param user
      * @return true on successfully add or false on fail
      */
     public boolean addToOperationHistory(String message, String user){
         try {
-            con.createStatement().execute("INSERT INTO Operation(operation, date, users) VALUES ('"+message+"', CURRENT_TIMESTAMP, '"+user+"')");
+            con.createStatement().execute("INSERT INTO Operation(operation, date, dbUser_idDbUser) VALUES ('"+message+"', CURRENT_TIMESTAMP, 0)");
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
@@ -102,11 +120,11 @@ public class Model {
     public ObservableList<OperationHistory> getOperationHistoryList() throws SQLException {
         ObservableList<OperationHistory> list = FXCollections.observableArrayList();
         try (Statement stmt = con.createStatement()) {
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Operations");
+            ResultSet rs = stmt.executeQuery("SELECT operation, date, nick FROM APP.OPERATION o INNER JOIN APP.DBUSER u ON u.idDBUser = o.DBUser_idDBUser");
             while (rs.next()){
                 String operation = rs.getString("operation");
                 String date = rs.getString("date");
-                String user = rs.getString("users");
+                String user = rs.getString("nick");
                 
                 list.add(new OperationHistory(operation, date, user));
             }
@@ -124,12 +142,12 @@ public class Model {
      public ObservableList<OperationHistory> getOperationHistoryListFromTo(LocalDate dateFrom, LocalDate dateTo) throws SQLException {
         ObservableList<OperationHistory> list = FXCollections.observableArrayList();
         try (Statement stmt = con.createStatement()) {
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Operations WHERE date BETWEEN TIMESTAMP('"+dateFrom+" 00:00:00') AND TIMESTAMP('"+dateTo+" 23:59:59')");
+            ResultSet rs = stmt.executeQuery("SELECT operation, date, nick FROM APP.OPERATION o INNER JOIN APP.DBUSER u ON u.idDBUser = o.DBUser_idDBUser WHERE date BETWEEN TIMESTAMP('"+dateFrom+" 00:00:00') AND TIMESTAMP('"+dateTo+" 23:59:59')");
             while (rs.next()){
+                String nick = rs.getString("nick");
                 String operation = rs.getString("operation");
                 String date = rs.getString("date");
-                String user = rs.getString("users");
-                list.add(new OperationHistory(operation, date, user));
+                list.add(new OperationHistory(operation, date, nick));
             }
         }
         return list;
@@ -149,13 +167,11 @@ public class Model {
         return false;
     }
     
-    /**
-     * 
-     * @return db name or null if not connected
-     */
     public String getDataBaseName(){
-        //TODO create
-        return null;
+        return DBAddress;
+    }
+    public String getUserName(){
+        return DBUser;
     }
     
     /**
@@ -180,6 +196,14 @@ public class Model {
             Double homeNumber, String email){
         //TODO create
         return false;
+    }
+
+    public String getConnectedUserNick() {
+        if (!connectedUserNick.isEmpty()){
+        return connectedUserNick;
+        } else {
+            return null;
+        }
     }
 
 

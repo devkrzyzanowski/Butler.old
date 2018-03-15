@@ -17,7 +17,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #444444;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.FXMLDocumentController">
    <children>
-      <MenuBar onMouseDragged="#onMouseDragging" onMousePressed="#onMousePressed" prefHeight="27.0" prefWidth="1280.0">
+      <MenuBar onMouseDragged="#onMouseDragging" onMousePressed="#onMousePressed" prefHeight="25.0" prefWidth="1280.0">
         <menus>
           <Menu mnemonicParsing="false" text="Plik">
             <items>
@@ -68,11 +68,11 @@
             <Insets left="-3.0" right="-3.0" />
          </padding>
       </Button>
-      <HBox fx:id="menu" alignment="BOTTOM_CENTER" layoutY="27.0" prefHeight="60.0" prefWidth="1280.0">
+      <HBox fx:id="menu" alignment="BOTTOM_CENTER" layoutY="25.0" prefHeight="60.0" prefWidth="1280.0">
          <children>
             <Label alignment="CENTER" prefHeight="60.0" prefWidth="180.0" text="BUTLER" textFill="#b9b9b9">
                <font>
-                  <Font name="System Bold" size="43.0" />
+                  <Font name="System Bold" size="40.0" />
                </font>
                <effect>
                   <Bloom />
@@ -155,14 +155,14 @@
             </Button>
          </children>
       </HBox>
-      <AnchorPane fx:id="main" layoutY="92.0" prefHeight="680.0" prefWidth="1280.0">
+      <AnchorPane fx:id="main" layoutY="85.0" prefHeight="680.0" prefWidth="1280.0">
          <children>
-            <Pane prefHeight="680.0" prefWidth="1280.0" />
+            <Pane prefHeight="690.0" prefWidth="1280.0" />
             <fx:include source="History.fxml" />
          </children></AnchorPane>
-      <AnchorPane fx:id="footer" layoutY="771.0" prefHeight="30.0" prefWidth="1280.0" style="-fx-background-color: #333333;">
+      <AnchorPane fx:id="footer" layoutY="775.0" prefHeight="25.0" prefWidth="1280.0" style="-fx-background-color: #333333;">
          <children>
-            <Label layoutX="1200.0" layoutY="8.0" text="Version 0.0.0" textFill="#a8a8a8" AnchorPane.rightAnchor="0.0">
+            <Label layoutX="1200.0" layoutY="4.0" text="Version 0.0.0" textFill="#a8a8a8" AnchorPane.rightAnchor="0.0">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -170,7 +170,7 @@
                   <Insets left="6.0" right="6.0" />
                </padding>
             </Label>
-            <Label layoutY="5.0" prefHeight="17.0" prefWidth="184.0" text=" Użytkownik : Testowy" textFill="#a8a8a8">
+            <Label layoutY="4.0" prefHeight="17.0" prefWidth="184.0" text=" Użytkownik : Testowy" textFill="#a8a8a8">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -178,8 +178,8 @@
                   <Insets left="6.0" />
                </padding>
             </Label>
-            <ProgressBar layoutX="904.0" layoutY="7.0" prefWidth="200.0" progress="0.0" />
-            <Label layoutX="142.0" layoutY="7.0" text="Baza danych :" textFill="#a8a8a8">
+            <ProgressBar layoutX="904.0" layoutY="4.0" prefWidth="200.0" progress="0.0" />
+            <Label layoutX="142.0" layoutY="4.0" text="Baza danych :" textFill="#a8a8a8">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -187,7 +187,7 @@
                   <Insets left="6.0" right="6.0" />
                </padding>
             </Label>
-            <Label layoutX="226.0" layoutY="7.0" text="testDB" textFill="#a8a8a8">
+            <Label layoutX="226.0" layoutY="4.0" text="testDB" textFill="#a8a8a8">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -195,7 +195,7 @@
                   <Insets left="6.0" right="6.0" />
                </padding>
             </Label>
-            <Label layoutX="854.0" layoutY="8.0" prefHeight="17.0" prefWidth="50.0" text="Status :" textFill="#a8a8a8">
+            <Label layoutX="854.0" layoutY="4.0" prefHeight="17.0" prefWidth="50.0" text="Status :" textFill="#a8a8a8">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

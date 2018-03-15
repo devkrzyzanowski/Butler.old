@@ -53,7 +53,7 @@ public class FXMLDocumentController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         xOffset = event.getSceneX();
         yOffset = event.getSceneY();
-    }    
+    }
     @FXML private void setScreenToRegisterPage(ActionEvent event) throws IOException{
     setPage(event, "RegisterPage");
     }
@@ -67,18 +67,19 @@ public class FXMLDocumentController implements Initializable {
     @FXML private void handleRegisterButton(ActionEvent event) throws IOException {
         //TODO init
     }
-    @FXML private void setScreenBookingSchedule(ActionEvent event) throws IOException{
-    setPage(event, "BookingSchedulePage");
+        @FXML private void setScreenBookingSchedule(ActionEvent event) throws IOException{
+        setPage(event, "BookingSchedulePage");
     }
-        @FXML private void setScreenStatistics(ActionEvent event) throws IOException{
-    setPage(event, "StatisticsPage");
+    @FXML private void setScreenStatistics(ActionEvent event) throws IOException{
+        setPage(event, "StatisticsPage");
     }
     @FXML private void setScreenClientBase(ActionEvent event) throws IOException{
-    setPage(event, "ClientBasePage");
+        setPage(event, "ClientBasePage");
     }   
     @FXML private void setScreenOperationHistory(ActionEvent event) throws IOException, SQLException{
-        setPage(event, "Main");
+        setPage(event, "OperationHistoryPage");
     } 
+
     @FXML void showRegulations() {
 
     }    
