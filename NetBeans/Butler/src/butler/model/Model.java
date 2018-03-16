@@ -6,6 +6,7 @@
 package butler.model;
 
 import butler.utils.OperationHistory;
+import butler.utils.Room;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -16,6 +17,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 /**
  *
@@ -65,6 +68,8 @@ public class Model {
                     }
                 }
             }
+        } catch (NullPointerException e){
+            return false;
         }
         return false;
     }
@@ -111,10 +116,34 @@ public class Model {
         try {
             con.createStatement().execute("INSERT INTO Operation(operation, date, dbUser_idDbUser) VALUES ('"+message+"', CURRENT_TIMESTAMP, 0)");
             return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, e);
             return false;
         }
+    }
+    
+    public boolean addRoomToRoomList(String name, Integer numberOfBeds, Boolean privateBathroom) {
+        try {
+            con.createStatement().execute("INSERT INTO Room(name, numberOfBeds, privateBathroom) VALUES ('"+name+"', "+numberOfBeds+", "+privateBathroom+")");
+            return true;
+        } catch (SQLException e) {
+            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, e);
+            return false;
+        }
+    }
+    
+    public ObservableList<Room> getRoomList() throws SQLException {
+        ObservableList<Room> list = FXCollections.observableArrayList();
+        try (Statement stmt = con.createStatement()){
+            ResultSet rs = stmt.executeQuery("SELECT name, numberOfBeds, privateBathroom FROM APP.ROOM");
+            while (rs.next()) {                
+                String name = rs.getString("name");
+                Integer numberOfBeds = rs.getInt("numberOfBeds");
+                Boolean privateBathroom = rs.getBoolean("privateBathroom");
+                list.add(new Room(name, numberOfBeds, privateBathroom));
+            }
+        }
+        return list;
     }
     
     public ObservableList<OperationHistory> getOperationHistoryList() throws SQLException {

@@ -11,10 +11,11 @@
       <fx:include source="fragments/menuBar.fxml" />
       <AnchorPane fx:id="main" layoutY="85.0" prefHeight="690.0" prefWidth="1280.0">
          <children>
-            <TableView prefHeight="260.0" prefWidth="1280.0">
+            <TableView fx:id="roomTableView" prefHeight="260.0" prefWidth="1280.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="name" prefWidth="75.0" text="Nazwa" />
+                <TableColumn fx:id="numberOfBeds" prefWidth="75.0" text="Liczba pokoi" />
+                  <TableColumn fx:id="privateBathroom" prefWidth="75.0" text="Prywatna łazienka" />
               </columns>
             </TableView>
             <Button fx:id="addRoomButton" layoutX="600.0" layoutY="333.0" mnemonicParsing="false" onAction="#addRoomAction" text="Dodaj pokój" />

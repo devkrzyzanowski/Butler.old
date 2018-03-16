@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -72,6 +73,11 @@ public class loginController {
                     setPage(event, "ClientBasePage");
                 } else {
                     System.out.println("Error login");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Look, an Error Dialog");
+            alert.setContentText("Błąd połączenia z bazą danych");
+            alert.showAndWait();
                 }
                 //TODO init
             } catch (SQLException ex) {

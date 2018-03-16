@@ -39,7 +39,7 @@ public class OperationHistoryController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       model = butler.Butler.model;
+        model = butler.Butler.model;
        model.addToOperationHistory("testowanie histori operacji", "adminik");
         try {
             operationTableView.setItems(model.getOperationHistoryList());

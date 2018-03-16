@@ -1,14 +1,19 @@
-Wed Mar 14 01:43:35 CET 2018 : Serwer sieciowy Apache Derby - 10.10.2.0 - (1582446) uruchomiony i gotowy do zaakceptowania po³¹czeñ na porcie 1527 w {3} 
+Thu Mar 15 23:52:37 CET 2018 : Serwer sieciowy Apache Derby - 10.10.2.0 - (1582446) uruchomiony i gotowy do zaakceptowania po³¹czeñ na porcie 1527 w {3} 
 ----------------------------------------------------------------
-Wed Mar 14 01:43:35 CET 2018:
- Uruchamianie wersji The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446) systemu Derby: instancja a816c00e-0162-21f6-5737-ffff9da2e155
-w katalogu bazy danych D:\GitHub\Butler\NetBeans\Butler\src\db\ButlerDB sun.misc.Launcher$AppClassLoader@1d44bcfa 
+Thu Mar 15 23:52:37 CET 2018:
+ Uruchamianie wersji The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446) systemu Derby: instancja a816c00e-0162-2bdd-7918-ffffa7ad8972
+w katalogu bazy danych C:\Users\uwxyy\Documents\GitHub\Butler\NetBeans\Butler\src\db\ButlerDB sun.misc.Launcher$AppClassLoader@1d44bcfa 
 
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_144-b01
-user.dir=E:\Program Files\glassfish-4.1.1\javadb
-os.name=Windows 8
+user.dir=C:\Program Files\glassfish-4.1.1\javadb
+os.name=Windows 10
 os.arch=amd64
-os.version=6.2
-derby.system.home=D:\GitHub\Butler\NetBeans\Butler\src\db
+os.version=10.0
+derby.system.home=C:\Users\uwxyy\Documents\GitHub\Butler\NetBeans\Butler\src\db
 Uruchomiono program ³aduj¹cy klasê bazy danych - derby.database.classpath=''
+----------------------------------------------------------------
+Fri Mar 16 01:05:35 CET 2018: Shutting down Derby engine
+----------------------------------------------------------------
+Fri Mar 16 01:05:35 CET 2018:
+Wy³¹czanie instancji a816c00e-0162-2bdd-7918-ffffa7ad8972
