@@ -1,7 +1,7 @@
-Thu Mar 15 23:52:37 CET 2018 : Serwer sieciowy Apache Derby - 10.10.2.0 - (1582446) uruchomiony i gotowy do zaakceptowania po³¹czeñ na porcie 1527 w {3} 
+Fri Mar 16 13:55:00 CET 2018 : Serwer sieciowy Apache Derby - 10.10.2.0 - (1582446) uruchomiony i gotowy do zaakceptowania po³¹czeñ na porcie 1527 w {3} 
 ----------------------------------------------------------------
-Thu Mar 15 23:52:37 CET 2018:
- Uruchamianie wersji The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446) systemu Derby: instancja a816c00e-0162-2bdd-7918-ffffa7ad8972
+Fri Mar 16 13:55:01 CET 2018:
+ Uruchamianie wersji The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446) systemu Derby: instancja a816c00e-0162-2ee0-b3b4-ffffa7ad8972
 w katalogu bazy danych C:\Users\uwxyy\Documents\GitHub\Butler\NetBeans\Butler\src\db\ButlerDB sun.misc.Launcher$AppClassLoader@1d44bcfa 
 
 java.vendor=Oracle Corporation
@@ -13,7 +13,4 @@ os.version=10.0
 derby.system.home=C:\Users\uwxyy\Documents\GitHub\Butler\NetBeans\Butler\src\db
 Uruchomiono program ³aduj¹cy klasê bazy danych - derby.database.classpath=''
 ----------------------------------------------------------------
-Fri Mar 16 01:05:35 CET 2018: Shutting down Derby engine
-----------------------------------------------------------------
-Fri Mar 16 01:05:35 CET 2018:
-Wy³¹czanie instancji a816c00e-0162-2bdd-7918-ffffa7ad8972
+Fri Mar 16 14:39:54 CET 2018: Shutting down Derby engine

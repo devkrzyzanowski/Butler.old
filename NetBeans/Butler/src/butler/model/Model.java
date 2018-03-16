@@ -112,7 +112,7 @@ public class Model {
      * @param user
      * @return true on successfully add or false on fail
      */
-    public boolean addToOperationHistory(String message, String user){
+    public boolean addToOperationHistory(String message, String user) throws SQLException {
         try {
             con.createStatement().execute("INSERT INTO Operation(operation, date, dbUser_idDbUser) VALUES ('"+message+"', CURRENT_TIMESTAMP, 0)");
             return true;

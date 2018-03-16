@@ -5,6 +5,7 @@
 package butler.controller.dialogs;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,7 +31,11 @@ public class addRoomController implements Initializable {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
-        @FXML private void addRoom(ActionEvent event) {
-            butler.Butler.model.addRoomToRoomList("test", 4, Boolean.TRUE);
+        @FXML private void addRoom(ActionEvent event) throws SQLException {
+            if(butler.Butler.model.addRoomToRoomList("test", 4, Boolean.TRUE)) {
+                butler.Butler.model.addToOperationHistory("Pomyślnie dodano test do listy pokoi", butler.Butler.model.getUserName());
+            } else {
+                butler.Butler.model.addToOperationHistory("Błąd dodawania test do listy pokoi", butler.Butler.model.getUserName());
+            }
         }
 }

@@ -8,7 +8,6 @@ import butler.model.Model;
 import butler.utils.OperationHistory;
 import java.net.URL;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -22,7 +21,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 /**
@@ -40,7 +38,6 @@ public class OperationHistoryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         model = butler.Butler.model;
-       model.addToOperationHistory("testowanie histori operacji", "adminik");
         try {
             operationTableView.setItems(model.getOperationHistoryList());
         } catch (SQLException ex) {
