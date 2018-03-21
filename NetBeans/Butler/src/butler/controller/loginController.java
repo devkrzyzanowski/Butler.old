@@ -23,6 +23,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -64,6 +65,15 @@ public class loginController {
     @FXML private void handleMinimizeButton(ActionEvent event) {
         Stage stage = (Stage) minimizeButton.getScene().getWindow();
         stage.setIconified(true);
+    }
+    @FXML private void addDataBaseStructure(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/butler/view/dialogs/addNewDataBaseStructure.fxml"));
+        Scene scene = new Scene(root);
+        scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setScene(scene);
+        stage.show();
     }
     
     @FXML private void handleLoginButton(ActionEvent event) throws IOException {

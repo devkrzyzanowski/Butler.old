@@ -108,6 +108,25 @@ public class Model {
     
     /**
      * 
+     * @param address
+     * @param port
+     * @param userName
+     * @param password
+     * @return true on successfully connect to DB or false on fail
+     */
+    public boolean tryConnectionToDataBase(String address, String port, String dbName, String userName, String password){
+        //TODO change String password to char[] password
+        try {
+            con = DriverManager.getConnection("jdbc:derby://" + address + ":" + port + "/" + dbName + "; User=" + userName + "; Pass=" +  password);
+            con.close();
+            return true;
+        } catch ( SQLException e){
+            return false;
+        }
+    }
+    
+    /**
+     * 
      * @param message
      * @param user
      * @return true on successfully add or false on fail

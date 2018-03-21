@@ -70,7 +70,7 @@
                         <Insets right="6.0" />
                      </padding>
                   </Label>
-                  <Hyperlink layoutX="130.0" layoutY="109.0" text="Dodaj nową bazę" textFill="#388df4" />
+                  <Hyperlink fx:id="addDataBaseStructureButton" layoutX="130.0" layoutY="109.0" onAction="#addDataBaseStructure" text="Dodaj nową bazę" textFill="#388df4" />
                </children>
             </AnchorPane>
             <Button fx:id="exitButton1" layoutX="342.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleExitButton" prefHeight="22.0" prefWidth="50.0" style="-fx-background-radius: 0; -fx-background-color: #1e1e1e;" textFill="#cdcdcd">
