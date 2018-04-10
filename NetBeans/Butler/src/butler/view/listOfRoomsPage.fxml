@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #444444;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.listOfRoomsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #444444;" xmlns="http://javafx.com/javafx/8.0.161" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.listOfRoomsController">
    <children>
       <fx:include layoutY="25.0" source="fragments/menu.fxml" />
       <fx:include source="fragments/menuBar.fxml" />
@@ -13,10 +13,20 @@
          <children>
             <TableView fx:id="roomTableView" prefHeight="260.0" prefWidth="1280.0">
               <columns>
-                <TableColumn fx:id="name" prefWidth="75.0" text="Nazwa" />
-                <TableColumn fx:id="numberOfBeds" prefWidth="75.0" text="Liczba pokoi" />
-                  <TableColumn fx:id="privateBathroom" prefWidth="75.0" text="Prywatna łazienka" />
+                <TableColumn fx:id="roomNameTableColumn" prefWidth="75.0" text="Nazwa" />
+                <TableColumn fx:id="numberOfSingleBedsTableColumn" prefWidth="174.0" text="Łóżka pojedyńcze" />
+                  <TableColumn fx:id="numberOfDoubleBedsTableColumn" prefWidth="166.0" text="Łóżka podwójne" />
+                  <TableColumn fx:id="numberOfExtraBedsTableColumn" prefWidth="181.0" text="Dostawki" />
+                  <TableColumn fx:id="floorNumberTableColumn" minWidth="0.0" prefWidth="58.0" text="Piętro" />
+                  <TableColumn fx:id="buildingTableColumn" prefWidth="71.0" text="Budynek" />
+                  <TableColumn fx:id="priceOfRoomTableColumn" prefWidth="187.0" text="Cena za pokój" />
+                  <TableColumn fx:id="priceOfAdultTableColumn" prefWidth="108.0" text="Cena za osobę dorosłą" />
+                  <TableColumn fx:id="priceOfMinorTableColumn" prefWidth="108.0" text="Cena za dziecko" />
+                  <TableColumn fx:id="extraDescriptionTableColumn" prefWidth="124.0" text="Dodatkowy opis" />
               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
             <Button fx:id="addRoomButton" layoutX="600.0" layoutY="333.0" mnemonicParsing="false" onAction="#addRoomAction" text="Dodaj pokój" />
          </children></AnchorPane>

@@ -5,6 +5,7 @@
  */
 package butler.model;
 
+import butler.utils.Client;
 import butler.utils.OperationHistory;
 import butler.utils.Room;
 import java.sql.Connection;
@@ -140,26 +141,89 @@ public class Model {
             return false;
         }
     }
-    
-    public boolean addRoomToRoomList(String name, Integer numberOfBeds, Boolean privateBathroom) {
+        public boolean addRoomToDataBase(Room room) {
         try {
-            con.createStatement().execute("INSERT INTO Room(name, numberOfBeds, privateBathroom) VALUES ('"+name+"', "+numberOfBeds+", "+privateBathroom+")");
+            con.createStatement().execute("INSERT INTO Room(room_name, number_of_single_beds,"
+                    + " number_of_double_beds, number_of_extra_beds, floor_number,"
+                    + " price_of_room, price_of_adult, price_of_minor, small_description,"
+                    + " big_description, extra_description, building ) "
+                    + "VALUES ('"+room.getRoomName()+"', "+room.getNumberOfSingleBeds()
+                    +","+room.getNumberOfDoubleBeds()+","+room.getNumberOfExtraBeds()
+                    +","+room.getFloorNumber()+","+room.getPriceOfRoom()
+                    +","+room.getPriceOfAdult()+","+room.getPriceOfMinor()
+                    +",'"+room.getSmallDescription()+"','"+room.getBigDescription()
+                    +"','"+room.getExtraDescription()+"', '"+room.getBuilding()+"')");
             return true;
         } catch (SQLException e) {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, e);
             return false;
         }
     }
+        
+        public boolean addClientToDataBase(Client client) {
+            try {
+                con.createStatement().execute("INSERT INTO Client(first_name,"
+                        + " last_name, city, street, home_number, flat_number,"
+                        + " zip_code, contact_phone_number, email) VALUES "
+                        + "('"+client.getFirstName()+"','"+client.getLastName()
+                        +"','"+client.getCity()+"','"+client.getStreet()
+                        +"',"+client.getHomeNumber()+","+client.getFlatNumber()
+                        +","+client.getZipCode()+","+client.getContactPhoneNumber()
+                        +",'"+client.getEmail()+"')");
+                return true;
+            } catch (SQLException e) {
+                Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, e);
+                return false;
+            }
+        }
     
+    public ObservableList<Client> getClientList() throws SQLException {
+        ObservableList<Client> list = FXCollections.observableArrayList();
+        try (Statement stmt = con.createStatement()){
+            ResultSet rs = stmt.executeQuery("SELECT * FROM APP.CLIENT");
+            while (rs.next()) {                
+                Integer id = rs.getInt("idClient");
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String city = rs.getString("city");
+                String street = rs.getString("street");
+                Integer homeNumber = rs.getInt("home_number");
+                Integer flatNumber = rs.getInt("flat_number");
+                Integer zipCode = rs.getInt("zip_code");
+                Integer contactPhoneNumber = rs.getInt("contact_phone_number");
+                String email = rs.getString("email");
+                list.add(new Client(id, firstName, lastName, city, street,
+                        homeNumber, flatNumber, zipCode, contactPhoneNumber,
+                        email));
+            }
+        }
+        return list;        
+    }
+        
     public ObservableList<Room> getRoomList() throws SQLException {
         ObservableList<Room> list = FXCollections.observableArrayList();
         try (Statement stmt = con.createStatement()){
-            ResultSet rs = stmt.executeQuery("SELECT name, numberOfBeds, privateBathroom FROM APP.ROOM");
+            ResultSet rs = stmt.executeQuery("SELECT room_name, number_of_single_beds,"
+                    + " number_of_double_beds, number_of_extra_beds, floor_number,"
+                    + " price_of_room, price_of_adult, price_of_minor, small_description,"
+                    + " big_description, extra_description, building FROM APP.ROOM");
             while (rs.next()) {                
-                String name = rs.getString("name");
-                Integer numberOfBeds = rs.getInt("numberOfBeds");
-                Boolean privateBathroom = rs.getBoolean("privateBathroom");
-                list.add(new Room(name, numberOfBeds, privateBathroom));
+                String roomName = rs.getString("room_name");
+                Integer numberOfSingleBeds = rs.getInt("number_of_single_beds");
+                Integer numberOfDoubleBeds = rs.getInt("number_of_double_beds");
+                Integer numberOfExtraBeds = rs.getInt("number_of_extra_beds");
+                Integer floorNumber = rs.getInt("floor_number");
+                Double priceOfRoom = rs.getDouble("price_of_room");
+                Double priceOfAdult = rs.getDouble("price_of_adult");
+                Double priceOfMinor = rs.getDouble("price_of_minor");
+                String smallDescription = rs.getString("small_description");
+                String bigDescription = rs.getString("big_description");
+                String extraDescription = rs.getString("extra_description");
+                String building = rs.getString("building");
+                list.add(new Room(roomName, numberOfSingleBeds, numberOfDoubleBeds,
+                        numberOfExtraBeds, floorNumber, priceOfRoom, priceOfAdult,
+                        priceOfMinor, smallDescription, bigDescription, extraDescription,
+                        building));
             }
         }
         return list;
@@ -221,30 +285,7 @@ public class Model {
     public String getUserName(){
         return DBUser;
     }
-    
-    /**
-     * addClient
-     * @param firstName
-     * @param lastName
-     * @param voivodeship
-     * @param Town
-     * @param Street
-     * @param houseNumber (this number can contain letters)
-     * @param flatNumber (this number can contain letters)
-     * @param phoneNumber
-     * @param homeNumber
-     * @param email
-     * @return true if successfully add client to DB or false if fail
-     */
-    public boolean addClient(
-            String firstName, String lastName, 
-            String voivodeship, String Town, 
-            String Street, String houseNumber, 
-            String flatNumber, Double phoneNumber,
-            Double homeNumber, String email){
-        //TODO create
-        return false;
-    }
+
 
     public String getConnectedUserNick() {
         if (!connectedUserNick.isEmpty()){

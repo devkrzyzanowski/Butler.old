@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #444444;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.FXMLDocumentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #444444;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.BookingScheduleController">
    <children>
       <fx:include layoutY="25.0" source="fragments/menu.fxml" />
       <fx:include source="fragments/menuBar.fxml" />
-      <AnchorPane fx:id="main" layoutY="85.0" prefHeight="690.0" prefWidth="1280.0" />
+      <AnchorPane fx:id="main" layoutY="85.0" prefHeight="690.0" prefWidth="1280.0">
+         <children>
+            <TableView prefHeight="690.0" prefWidth="540.0">
+              <columns>
+                <TableColumn prefWidth="106.0" text="Od" />
+                <TableColumn prefWidth="143.0" text="Do" />
+                  <TableColumn prefWidth="93.0" text="Pokój" />
+                  <TableColumn prefWidth="75.0" text="Klient" />
+              </columns>
+            </TableView>
+            <Button fx:id="addReservationButton" layoutX="614.0" layoutY="64.0" mnemonicParsing="false" onAction="#addReservation" text="Dodaj rezerwację" />
+            <Button fx:id="removeReservationButton" layoutX="614.0" layoutY="105.0" mnemonicParsing="false" onAction="#removeReservation" text="Usuń rezerwację" />
+            <Button fx:id="modifyReservationButton" layoutX="614.0" layoutY="147.0" mnemonicParsing="false" onAction="#modifyReservation" text="Modyfikuj rezerwację" />
+         </children></AnchorPane>
       <fx:include layoutY="775.0" source="fragments/footer.fxml" />
    </children>
 </AnchorPane>

@@ -34,22 +34,31 @@ public class listOfRoomsController implements Initializable {
 
     @FXML private Button addRoomButton;
     @FXML private TableView<Room> roomTableView;
-    @FXML private TableColumn<Room, String> name;
-    @FXML private TableColumn<Room, Integer> numberOfBeds;
-    @FXML private TableColumn<Room, Boolean> privateBathroom;
+    @FXML private TableColumn<Room, String> roomNameTableColumn, buildingTableColumn, extraDescriptionTableColumn;
+    @FXML private TableColumn<Room, Integer> numberOfSingleBedsTableColumn, numberOfDoubleBedsTableColumn, numberOfExtraBedsTableColumn, floorNumberTableColumn; //FIRST
+    @FXML private TableColumn<Room, Double> priceOfRoomTableColumn, priceOfAdultTableColumn, priceOfMinorTableColumn;
     Model model;
    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = butler.Butler.model;
-        name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        numberOfBeds.setCellValueFactory(new PropertyValueFactory<>("numberOfBeds"));
-        privateBathroom.setCellValueFactory(new PropertyValueFactory<>("privateBathroom"));
+        roomNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("roomName"));
+        numberOfSingleBedsTableColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfSingleBeds"));
+        numberOfDoubleBedsTableColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfDoubleBeds"));
+        numberOfExtraBedsTableColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfExtraBeds"));
+        floorNumberTableColumn.setCellValueFactory(new PropertyValueFactory<>("floorNumber"));
+        buildingTableColumn.setCellValueFactory(new PropertyValueFactory<>("building"));
+        priceOfRoomTableColumn.setCellValueFactory(new PropertyValueFactory<>("priceOfRoom"));
+        priceOfAdultTableColumn.setCellValueFactory(new PropertyValueFactory<>("priceOfAdult"));
+        priceOfMinorTableColumn.setCellValueFactory(new PropertyValueFactory<>("priceOfMinor"));
+        extraDescriptionTableColumn.setCellValueFactory(new PropertyValueFactory<>("extraDescription"));
+
         try {
             roomTableView.setItems(model.getRoomList());
         } catch (SQLException ex) {
             Logger.getLogger(OperationHistoryController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
    
     

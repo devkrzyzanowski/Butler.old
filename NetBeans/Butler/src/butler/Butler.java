@@ -23,9 +23,9 @@ public class Butler extends Application {
     public void start(Stage stage) throws Exception {
         model = new Model();
         Parent root = FXMLLoader.load(getClass().getResource("view/LoginPage.fxml"));
-        stage.initStyle(StageStyle.TRANSPARENT);
+        //stage.initStyle(StageStyle.TRANSPARENT);
         Scene scene = new Scene(root);
-        scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+        //scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
         stage.setScene(scene);
         stage.show();
     }

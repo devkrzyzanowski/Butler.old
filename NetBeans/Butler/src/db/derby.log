@@ -1,19 +1,6 @@
-Wed Mar 14 01:43:35 CET 2018 : Serwer sieciowy Apache Derby - 10.10.2.0 - (1582446) uruchomiony i gotowy do zaakceptowania po³¹czeñ na porcie 1527 w {3} 
-----------------------------------------------------------------
-Wed Mar 14 01:43:35 CET 2018:
- Uruchamianie wersji The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446) systemu Derby: instancja a816c00e-0162-21f6-5737-ffff9da2e155
-w katalogu bazy danych D:\GitHub\Butler\NetBeans\Butler\src\db\ButlerDB sun.misc.Launcher$AppClassLoader@1d44bcfa 
-
-java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_144-b01
-user.dir=E:\Program Files\glassfish-4.1.1\javadb
-os.name=Windows 8
-os.arch=amd64
-os.version=6.2
-derby.system.home=D:\GitHub\Butler\NetBeans\Butler\src\db
-Uruchomiono program ³aduj¹cy klasê bazy danych - derby.database.classpath=''
-Sat Mar 17 03:29:00 CET 2018 Thread[DRDAConnThread_9,5,main] Cleanup action starting
-java.sql.SQLException: Nie znaleziono bazy danych 'butlerDBf'.
+Tue Apr 10 19:16:06 CEST 2018 : Serwer sieciowy Apache Derby - 10.10.2.0 - (1582446) uruchomiony i gotowy do zaakceptowania po³¹czeñ na porcie 1527 w {3} 
+Tue Apr 10 19:16:07 CEST 2018 Thread[DRDAConnThread_2,5,main] Cleanup action starting
+java.sql.SQLException: Nie znaleziono bazy danych 'sample'.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
@@ -33,12 +20,12 @@ java.sql.SQLException: Nie znaleziono bazy danych 'butlerDBf'.
 	at org.apache.derby.impl.drda.DRDAConnThread.parseDRDAConnection(Unknown Source)
 	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
 	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
-Caused by: java.sql.SQLException: Nie znaleziono bazy danych 'butlerDBf'.
+Caused by: java.sql.SQLException: Nie znaleziono bazy danych 'sample'.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
 	... 19 more
 ============= begin nested exception, level (1) ===========
-java.sql.SQLException: Nie znaleziono bazy danych 'butlerDBf'.
+java.sql.SQLException: Nie znaleziono bazy danych 'sample'.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
@@ -62,4 +49,17 @@ java.sql.SQLException: Nie znaleziono bazy danych 'butlerDBf'.
 	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
 ============= end nested exception, level (1) ===========
 Cleanup action completed
-Sat Mar 17 03:29:01 CET 2018 Thread[DRDAConnThread_9,5,main] (DATABASE = butlerDBf), (DRDAID = {134}), Nie znaleziono bazy danych 'butlerDBf'.
+Tue Apr 10 19:16:07 CEST 2018 Thread[DRDAConnThread_2,5,main] (DATABASE = sample), (DRDAID = {1}), Nie znaleziono bazy danych 'sample'.
+----------------------------------------------------------------
+Tue Apr 10 19:16:24 CEST 2018:
+ Uruchamianie wersji The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446) systemu Derby: instancja a816c00e-0162-b08e-b755-ffff9da2e155
+w katalogu bazy danych D:\GitHub\Butler\NetBeans\Butler\src\db\ButlerDB sun.misc.Launcher$AppClassLoader@1d44bcfa 
+
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_144-b01
+user.dir=E:\Program Files\glassfish-4.1.1\javadb
+os.name=Windows 8
+os.arch=amd64
+os.version=6.2
+derby.system.home=D:\GitHub\Butler\NetBeans\Butler\src\db
+Uruchomiono program ³aduj¹cy klasê bazy danych - derby.database.classpath=''

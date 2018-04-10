@@ -29,8 +29,7 @@ import javafx.util.StringConverter;
  */
 public class OperationHistoryController implements Initializable {
     @FXML private TableView<OperationHistory> operationTableView;
-    @FXML private TableColumn<OperationHistory, String> operation, user;
-    @FXML private TableColumn<OperationHistory, String> date;
+    @FXML private TableColumn<OperationHistory, String> operation, user, date;
     @FXML private DatePicker datePickerFrom, datePickerTo;
     @FXML private Button showDataButton, printDataButton;
     Model model;
