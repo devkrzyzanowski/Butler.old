@@ -6,6 +6,7 @@
 package butler.model;
 
 import butler.utils.Client;
+import butler.utils.ExtraItems;
 import butler.utils.OperationHistory;
 import butler.utils.Room;
 import java.sql.Connection;
@@ -18,8 +19,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 
 /**
  *
@@ -220,10 +219,11 @@ public class Model {
                 String bigDescription = rs.getString("big_description");
                 String extraDescription = rs.getString("extra_description");
                 String building = rs.getString("building");
+                ExtraItems e = new ExtraItems();
                 list.add(new Room(roomName, numberOfSingleBeds, numberOfDoubleBeds,
                         numberOfExtraBeds, floorNumber, priceOfRoom, priceOfAdult,
                         priceOfMinor, smallDescription, bigDescription, extraDescription,
-                        building));
+                        building,  e));
             }
         }
         return list;

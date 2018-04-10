@@ -2,21 +2,24 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.ListSelectionView?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #555555;" xmlns="http://javafx.com/javafx/8.0.161" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.dialogs.addRoomController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #555555;" xmlns="http://javafx.com/javafx/8.0.161" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.dialogs.addRoomController">
    <children>
       <Button fx:id="cancelButton" layoutX="731.0" layoutY="561.0" mnemonicParsing="false" onAction="#cancelAction" text="Anuluj" />
       <Button fx:id="addRoomButton" layoutX="600.0" layoutY="561.0" mnemonicParsing="false" onAction="#addRoom" prefHeight="25.0" prefWidth="121.0" text="Dodaj" />
-      <AnchorPane fx:id="topPane" onMouseDragged="#onMouseDragging" onMousePressed="#onMousePressed" prefHeight="60.0" prefWidth="806.0" style="-fx-background-color: #333333;">
+      <AnchorPane fx:id="topPane" onMouseDragged="#onMouseDragging" onMousePressed="#onMousePressed" prefHeight="60.0" prefWidth="1200.0" style="-fx-background-color: #333333;">
          <children>
             <Label layoutX="14.0" layoutY="4.0" prefHeight="53.0" prefWidth="464.0" text="Dodaj pokój" textAlignment="CENTER" textFill="#d7d7d7">
                <font>
@@ -28,30 +31,51 @@
             </Label>
          </children></AnchorPane>
       <Hyperlink layoutX="7.0" layoutY="575.0" text="Pomoc" />
-      <TextField fx:id="nameTextField" layoutX="151.0" layoutY="77.0" />
-      <TextField fx:id="floorNumberTextField" layoutX="151.0" layoutY="232.0" />
-      <TextField fx:id="priceOfRoomTextField" layoutX="632.0" layoutY="69.0" />
-      <TextField fx:id="priceOfAdultTextField" layoutX="632.0" layoutY="110.0" />
-      <Label layoutX="106.0" layoutY="81.0" text="Nazwa" textFill="#d7d7d7" />
-      <Label layoutX="14.0" layoutY="122.0" text="ilość pojedyńczych łóżek" textFill="#d7d7d7" />
-      <Label layoutX="67.0" layoutY="194.0" text="ilość dostawek" textFill="#d7d7d7" />
-      <Label layoutX="108.0" layoutY="236.0" text="piętro" textFill="#d7d7d7" />
-      <Label layoutX="554.0" layoutY="73.0" text="cena za dobę" textFill="#d7d7d7" />
-      <Label layoutX="18.0" layoutY="159.0" text="ilość podwójnych łóżek" textFill="#d7d7d7" />
-      <Label layoutX="505.0" layoutY="114.0" text="cena za osobę dorosłą" textFill="#d7d7d7" />
-      <TextField fx:id="priceOfMinorTextField" layoutX="632.0" layoutY="147.0" />
-      <Label layoutX="539.0" layoutY="151.0" text="cena za dziecko" textFill="#d7d7d7" />
-      <TextField fx:id="smallDescriptionTextField" layoutX="151.0" layoutY="275.0" />
-      <Label layoutX="88.0" layoutY="279.0" text="krótki opis" textFill="#d7d7d7" />
-      <TextArea fx:id="bigDescriptionTextArea" layoutX="151.0" layoutY="312.0" prefHeight="200.0" prefWidth="200.0" />
-      <Label layoutX="83.0" layoutY="312.0" text="dłuższy opis" textFill="#d7d7d7" />
-      <TextField fx:id="buildingTextField" layoutX="356.0" layoutY="232.0" />
-      <Label layoutX="304.0" layoutY="236.0" text="budynek" textFill="#d7d7d7" />
-      <ChoiceBox fx:id="numberOfSingleBedsChoiceBox" layoutX="150.0" layoutY="118.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="numberOfDoubleBedsChoiceBox" layoutX="150.0" layoutY="155.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="numberOfExtraBedsChoiceBox" layoutX="150.0" layoutY="190.0" prefWidth="150.0" />
-      <ComboBox layoutX="316.0" layoutY="119.0" prefWidth="150.0" />
-      <TextArea fx:id="extraDescriptionTextArea" layoutX="581.0" layoutY="312.0" prefHeight="200.0" prefWidth="200.0" />
-      <Label layoutX="482.0" layoutY="312.0" text="dodatkowy opis :" textFill="#d7d7d7" />
+      <TextArea fx:id="bigDescriptionTextArea" layoutX="841.0" layoutY="67.0" prefHeight="97.0" prefWidth="333.0" />
+      <Label layoutX="764.0" layoutY="79.0" text="dłuższy opis" textFill="#d7d7d7" />
+      <Label layoutX="735.0" layoutY="197.0" text="dodatkowy opis :" textFill="#d7d7d7" />
+      <TextArea fx:id="extraDescriptionTextArea" layoutX="841.0" layoutY="188.0" prefHeight="97.0" prefWidth="333.0" />
+      <ListSelectionView fx:id="extraListSelectionView" layoutX="735.0" layoutY="300.0" style="-fx-background-color: #ffffff;" />
+      <GridPane layoutX="15.0" layoutY="67.0" prefHeight="237.0" prefWidth="578.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Nazwa" textFill="#d7d7d7" />
+            <TextField fx:id="roomNameTextField" GridPane.columnIndex="1" />
+            <ChoiceBox fx:id="numberOfSingleBedsChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="ilość pojedyńczych łóżek" textFill="#d7d7d7" GridPane.rowIndex="1" />
+            <ChoiceBox fx:id="numberOfDoubleBedsChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="ilość podwójnych łóżek" textFill="#d7d7d7" GridPane.rowIndex="2" />
+            <Label text="ilość dostawek" textFill="#d7d7d7" GridPane.rowIndex="3" />
+            <ChoiceBox fx:id="numberOfExtraBedsChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="piętro" textFill="#d7d7d7" GridPane.rowIndex="4" />
+            <TextField fx:id="floorNumberTextField" prefHeight="25.0" prefWidth="35.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="budynek" textFill="#d7d7d7" GridPane.rowIndex="5" />
+            <TextField fx:id="buildingTextField" prefHeight="25.0" prefWidth="102.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label text="krótki opis" textFill="#d7d7d7" GridPane.rowIndex="6" />
+            <TextField fx:id="smallDescriptionTextField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label text="cena za dobę" textFill="#d7d7d7" GridPane.columnIndex="2" />
+            <TextField fx:id="priceOfRoomTextField" GridPane.columnIndex="3" />
+            <Label text="cena za osobę dorosłą" textFill="#d7d7d7" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="priceOfMinorTextField" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <TextField fx:id="priceOfAdultTextField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label text="cena za dziecko" textFill="#d7d7d7" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Metraż" textAlignment="RIGHT" textFill="#d7d7d7" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <TextField fx:id="yardageTextField" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
    </children>
 </Pane>

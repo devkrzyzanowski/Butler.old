@@ -30,12 +30,25 @@ public class Room {
     private StringProperty bigDescription = new SimpleStringProperty();
     private StringProperty extraDescription = new SimpleStringProperty();
     private StringProperty building = new SimpleStringProperty();
+    private BooleanProperty balcon = new SimpleBooleanProperty();
+    private BooleanProperty beachScreen = new SimpleBooleanProperty();
+    private BooleanProperty blanket = new SimpleBooleanProperty();
+    private BooleanProperty sunbed = new SimpleBooleanProperty();
+    private BooleanProperty tv = new SimpleBooleanProperty();
+    private BooleanProperty wiFi = new SimpleBooleanProperty();
+    private BooleanProperty individualEntrance = new SimpleBooleanProperty();
+    private BooleanProperty friendlyAnimal = new SimpleBooleanProperty();
+    private BooleanProperty tableware = new SimpleBooleanProperty();
+    private BooleanProperty lamp = new SimpleBooleanProperty();
     
     
     public Room(String roomName, Integer numberOfSingleBeds, Integer numberOfDoubleBeds,
                 Integer numberOfExtraBeds, Integer floorNumber, Double priceOfRoom,
                 Double priceOfAdult, Double priceOfMinor, String smallDescription,
-                String bigDescription, String extraDescription, String building){
+                String bigDescription, String extraDescription, String building, 
+                Boolean balcon, Boolean beachScreen, Boolean blanket, Boolean sunbed, 
+                Boolean tv, Boolean wiFi, Boolean individualEntrance, 
+                Boolean friendlyAnimal, Boolean tableware){
         this.roomName.set(roomName);
         this.numberOfSingleBeds.set(numberOfSingleBeds);
         this.numberOfDoubleBeds.set(numberOfDoubleBeds);
@@ -47,6 +60,42 @@ public class Room {
         this.smallDescription.set(smallDescription);
         this.bigDescription.set(bigDescription);
         this.extraDescription.set(extraDescription);
+        this.balcon.set(balcon);
+        this.beachScreen.set(beachScreen);
+        this.blanket.set(blanket);
+        this.sunbed.set(sunbed);
+        this.tv.set(tv);
+        this.wiFi.set(wiFi);
+        this.individualEntrance.set(individualEntrance);
+        this.friendlyAnimal.set(friendlyAnimal);
+        this.tableware.set(tableware);
+    }
+    
+        public Room(String roomName, Integer numberOfSingleBeds, Integer numberOfDoubleBeds,
+                Integer numberOfExtraBeds, Integer floorNumber, Double priceOfRoom,
+                Double priceOfAdult, Double priceOfMinor, String smallDescription,
+                String bigDescription, String extraDescription, String building, 
+                ExtraItems eI){
+        this.roomName.set(roomName);
+        this.numberOfSingleBeds.set(numberOfSingleBeds);
+        this.numberOfDoubleBeds.set(numberOfDoubleBeds);
+        this.numberOfExtraBeds.set(numberOfExtraBeds);
+        this.floorNumber.set(floorNumber);
+        this.priceOfRoom.set(priceOfRoom);
+        this.priceOfAdult.set(priceOfAdult);
+        this.priceOfMinor.set(priceOfMinor);
+        this.smallDescription.set(smallDescription);
+        this.bigDescription.set(bigDescription);
+        this.extraDescription.set(extraDescription);
+//        this.balcon.set(eI.getBalcon());
+//        this.beachScreen.set(eI.getBeachScreen());
+//        this.blanket.set(eI.getBlanket());
+//        this.sunbed.set(eI.getSunbed());
+//        this.tv.set(eI.getTv());
+//        this.wiFi.set(eI.getWiFi());
+//        this.individualEntrance.set(eI.getIndividualEntrance());
+//        this.friendlyAnimal.set(eI.getFriendlyAnimal());
+//        this.tableware.set(eI.getTableware());
     }
 
     public String getRoomName() {
