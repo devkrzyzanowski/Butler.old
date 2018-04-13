@@ -8,17 +8,26 @@ package butler.utils;
  *
  * @author Michał
  */
-public class BooleanObject {
+public class AdditionalRoomItem {
     private String name;
     private Boolean val;
-    private Integer id;
+    private final Integer id;
     
-    public BooleanObject(Integer id, String name, Boolean val){
+    public AdditionalRoomItem(Integer id, String name, Boolean val){
         this.id = id;
         this.name = name;
         this.val = val;
     }
 
+    @Override
+        public String toString(){
+        return name;
+    }
+        
+    public Integer getId() {
+        return id;
+    }
+    
     public String getName() {
         return name;
     }

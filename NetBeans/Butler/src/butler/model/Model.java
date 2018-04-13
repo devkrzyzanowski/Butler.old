@@ -5,8 +5,9 @@
  */
 package butler.model;
 
+import butler.utils.AdditionalRoomItem;
 import butler.utils.Client;
-import butler.utils.ExtraItems;
+import butler.utils.AdditionalRoomItems;
 import butler.utils.OperationHistory;
 import butler.utils.Room;
 import java.sql.Connection;
@@ -145,13 +146,19 @@ public class Model {
             con.createStatement().execute("INSERT INTO Room(room_name, number_of_single_beds,"
                     + " number_of_double_beds, number_of_extra_beds, floor_number,"
                     + " price_of_room, price_of_adult, price_of_minor, small_description,"
-                    + " big_description, extra_description, building ) "
+                    + " big_description, extra_description, building, balcon, "
+                    + " beach_screen, blanket, sunbed, tv, wi_fi, individual_entrance,"
+                    + " friendly_animal, kettle, tableware, table_lamp ) "
                     + "VALUES ('"+room.getRoomName()+"', "+room.getNumberOfSingleBeds()
                     +","+room.getNumberOfDoubleBeds()+","+room.getNumberOfExtraBeds()
                     +","+room.getFloorNumber()+","+room.getPriceOfRoom()
                     +","+room.getPriceOfAdult()+","+room.getPriceOfMinor()
                     +",'"+room.getSmallDescription()+"','"+room.getBigDescription()
-                    +"','"+room.getExtraDescription()+"', '"+room.getBuilding()+"')");
+                    +"','"+room.getExtraDescription()+"','"+room.getBuilding()
+                    +"',"+room.getBalcon()+","+room.getBeachScreen()+","+room.getBlanket()
+                    +","+room.getSunbed()+","+room.getTv()+","+room.getWiFi()
+                    +","+room.getIndividualEntrance()+","+room.getFriendlyAnimal()+","+room.getKettle()
+                    +","+room.getTableware()+","+room.getTableLamp()+")");
             return true;
         } catch (SQLException e) {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, e);
@@ -202,10 +209,7 @@ public class Model {
     public ObservableList<Room> getRoomList() throws SQLException {
         ObservableList<Room> list = FXCollections.observableArrayList();
         try (Statement stmt = con.createStatement()){
-            ResultSet rs = stmt.executeQuery("SELECT room_name, number_of_single_beds,"
-                    + " number_of_double_beds, number_of_extra_beds, floor_number,"
-                    + " price_of_room, price_of_adult, price_of_minor, small_description,"
-                    + " big_description, extra_description, building FROM APP.ROOM");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM APP.ROOM");
             while (rs.next()) {                
                 String roomName = rs.getString("room_name");
                 Integer numberOfSingleBeds = rs.getInt("number_of_single_beds");
@@ -219,11 +223,23 @@ public class Model {
                 String bigDescription = rs.getString("big_description");
                 String extraDescription = rs.getString("extra_description");
                 String building = rs.getString("building");
-                ExtraItems e = new ExtraItems();
+                Boolean balcon = rs.getBoolean("balcon");
+                Boolean beachScreen = rs.getBoolean("beach_screen");
+                Boolean blanket = rs.getBoolean("blanket");
+                Boolean sunbed = rs.getBoolean("sunbed");
+                Boolean tv = rs.getBoolean("tv");
+                Boolean wiFi = rs.getBoolean("wi_fi");
+                Boolean individualEntrance = rs.getBoolean("individual_entrance");
+                Boolean friendlyAnimal = rs.getBoolean("friendly_animal");
+                Boolean kettle = rs.getBoolean("kettle");
+                Boolean tableware = rs.getBoolean("tableware");
+                Boolean tableLamp = rs.getBoolean("table_lamp");
+                AdditionalRoomItems e = new AdditionalRoomItems();
                 list.add(new Room(roomName, numberOfSingleBeds, numberOfDoubleBeds,
                         numberOfExtraBeds, floorNumber, priceOfRoom, priceOfAdult,
                         priceOfMinor, smallDescription, bigDescription, extraDescription,
-                        building,  e));
+                        building, balcon, beachScreen, blanket, sunbed, tv, wiFi,
+                        individualEntrance, friendlyAnimal, kettle, tableware, tableLamp));
             }
         }
         return list;

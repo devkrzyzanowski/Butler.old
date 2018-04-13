@@ -14,5 +14,16 @@ CREATE TABLE APP.ROOM
     big_description VARCHAR(255),
     extra_description VARCHAR(45),
     building VARCHAR(45),
+    balcon BOOLEAN,
+    beach_screen BOOLEAN,
+    blanket BOOLEAN,
+    sunbed BOOLEAN,
+    tv BOOLEAN,
+    wi_fi BOOLEAN,
+    individual_entrance BOOLEAN,
+    friendly_animal BOOLEAN,
+    kettle BOOLEAN,
+    tableware BOOLEAN,
+    table_lamp BOOLEAN,
     CONSTRAINT room_primary_key PRIMARY KEY (idRoom)
 );
