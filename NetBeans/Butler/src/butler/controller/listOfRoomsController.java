@@ -65,9 +65,9 @@ public class listOfRoomsController implements Initializable {
     @FXML private void addRoomAction(ActionEvent event) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("/butler/view/dialogs/addRoomDialog.fxml"));
         Scene scene = new Scene(root);
-        scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+//        scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
         Stage stage = new Stage();
-        stage.initStyle(StageStyle.TRANSPARENT);
+//        stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
         stage.show();
     }    

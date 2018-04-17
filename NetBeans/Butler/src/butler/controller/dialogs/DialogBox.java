@@ -20,6 +20,7 @@ class DialogBox {
     private double xOffset = 0;
     private double yOffset = 0;
     
+    
     @FXML protected void onMouseDragging(MouseEvent event){
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setX(event.getScreenX() - xOffset);
@@ -35,4 +36,6 @@ class DialogBox {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
+
+
 }

@@ -11,15 +11,19 @@
       <fx:include source="fragments/menuBar.fxml" />
       <AnchorPane fx:id="main" layoutY="85.0" prefHeight="690.0" prefWidth="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <TableView fx:id="clientTableView" prefHeight="690.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="280.0">
+            <TableView fx:id="clientTableView" prefHeight="690.0" prefWidth="1060.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="220.0">
               <columns>
                 <TableColumn fx:id="firstName" prefWidth="75.0" text="Imię" />
                 <TableColumn fx:id="lastName" prefWidth="75.0" text="Nazwisko" />
-                  <TableColumn fx:id="city" prefWidth="105.0" text="Miasto" />
-                  <TableColumn fx:id="zipCode" prefWidth="75.0" text="Kod pocztowy" />
-                  <TableColumn fx:id="street" prefWidth="45.0" text="Ulica" />
-                  <TableColumn fx:id="homeNumber" prefWidth="75.0" text="Nr. domu" />
-                  <TableColumn fx:id="flatNumber" prefWidth="75.0" text="Nr. mieszkania" />
+                  <TableColumn prefWidth="75.0" text="Adres">
+                     <columns>
+                        <TableColumn fx:id="city" prefWidth="105.0" text="Miasto" />
+                        <TableColumn fx:id="zipCode" prefWidth="75.0" text="Kod pocztowy" />
+                        <TableColumn fx:id="street" prefWidth="45.0" text="Ulica" />
+                        <TableColumn fx:id="homeNumber" prefWidth="75.0" text="Nr. domu" />
+                        <TableColumn fx:id="flatNumber" prefWidth="75.0" text="Nr. mieszkania" />
+                     </columns>
+                  </TableColumn>
                   <TableColumn fx:id="contactPhoneNumber" prefWidth="128.0" text="Numer kontaktowy" />
                   <TableColumn fx:id="email" prefWidth="150.0" text="email" />
               </columns>
@@ -27,7 +31,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Button fx:id="addClientButton" layoutX="1056.0" layoutY="41.0" mnemonicParsing="false" onAction="#openAddClientDialog" text="Dodaj klienta" AnchorPane.rightAnchor="138.0" />
+            <Button fx:id="addClientButton" layoutX="1056.0" layoutY="41.0" mnemonicParsing="false" onAction="#openAddClientDialog" text="Dodaj klienta" AnchorPane.rightAnchor="120.0" />
          </children></AnchorPane>
       <fx:include layoutY="775.0" source="fragments/footer.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
    </children>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Model">
+  <ClassDiagramComponents>
+    <Class name="Model" package="butler.model" visibility="public" xPosition="456.0" yPosition="128.0">
+      <Fields>
+        <Field name="DBAddress" type="String" visibility="private" isFinal="true"/>
+        <Field name="DBUser" type="String" visibility="private" isFinal="true"/>
+        <Field name="DBPassword" type="String" visibility="private" isFinal="true"/>
+        <Field name="DBDriver" type="String" visibility="private" isFinal="true"/>
+        <Field name="connectedUserNick" type="String" visibility="private"/>
+        <Field name="con" type="Connection" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="connectToDataBase" returnType="boolean" visibility="public">
+          <Argument type="String" name="login"/>
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="getNickById" returnType="String" visibility="public"/>
+        <Method name="encryptPassword" returnType="String" visibility="private">
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="closeConnection" returnType="boolean" visibility="public"/>
+        <Method name="tryConnectionToDataBase" returnType="boolean" visibility="public">
+          <Argument type="String" name="address"/>
+          <Argument type="String" name="port"/>
+          <Argument type="String" name="dbName"/>
+          <Argument type="String" name="userName"/>
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="addToOperationHistory" returnType="boolean" visibility="public">
+          <Argument type="String" name="message"/>
+          <Argument type="String" name="user"/>
+        </Method>
+        <Method name="addRoomToDataBase" returnType="boolean" visibility="public">
+          <Argument type="Room" name="room"/>
+        </Method>
+        <Method name="addClientToDataBase" returnType="boolean" visibility="public">
+          <Argument type="Client" name="client"/>
+        </Method>
+        <Method name="getClientList" returnType="ObservableList&lt;Client&gt;" visibility="public"/>
+        <Method name="getRoomList" returnType="ObservableList&lt;Room&gt;" visibility="public"/>
+        <Method name="getOperationHistoryList" returnType="ObservableList&lt;OperationHistory&gt;" visibility="public"/>
+        <Method name="getOperationHistoryListFromTo" returnType="ObservableList&lt;OperationHistory&gt;" visibility="public">
+          <Argument type="LocalDate" name="dateFrom"/>
+          <Argument type="LocalDate" name="dateTo"/>
+        </Method>
+        <Method name="registerUser" returnType="boolean" visibility="public">
+          <Argument type="String" name="login"/>
+          <Argument type="String" name="password"/>
+          <Argument type="String" name="password2"/>
+          <Argument type="String" name="email"/>
+          <Argument type="boolean" name="regulationsAccepted"/>
+        </Method>
+        <Method name="getDataBaseName" returnType="String" visibility="public"/>
+        <Method name="getUserName" returnType="String" visibility="public"/>
+        <Method name="getConnectedUserNick" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations/>
+</ClassDiagram>

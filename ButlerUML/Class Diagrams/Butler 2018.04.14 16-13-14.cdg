@@ -1,0 +1,798 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Butler">
+  <ClassDiagramComponents>
+    <Class name="Butler" package="butler" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="model" type="Model" visibility="public" isStatic="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="start" returnType="void" visibility="public">
+          <Argument type="Stage" name="stage"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="BookingScheduleController" package="butler.controller" visibility="public" xPosition="246.0" yPosition="20.0">
+      <Fields>
+        <Field name="main" type="AnchorPane" visibility="private"/>
+        <Field name="addReservationButton" type="Button" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="initialize" returnType="void" visibility="public">
+          <Argument type="URL" name="location"/>
+          <Argument type="ResourceBundle" name="resources"/>
+        </Method>
+        <Method name="addReservation" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="removeReservation" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="modifyReservation" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ClientBaseController" package="butler.controller" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Fields>
+        <Field name="clientTableView" type="TableView&lt;Client&gt;" visibility="private"/>
+        <Field name="firstName" type="TableColumn&lt;Client, String&gt;" visibility="private"/>
+        <Field name="homeNumber" type="TableColumn&lt;Client, Integer&gt;" visibility="private"/>
+        <Field name="model" type="Model" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="initialize" returnType="void" visibility="public">
+          <Argument type="URL" name="location"/>
+          <Argument type="ResourceBundle" name="resources"/>
+        </Method>
+        <Method name="openAddClientDialog" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="addClientController" package="butler.controller.dialogs" visibility="public" xPosition="920.0" yPosition="20.0">
+      <Fields>
+        <Field name="addClientButton" type="Button" visibility="private"/>
+        <Field name="firstNameTextField" type="TextField" visibility="private"/>
+        <Field name="lastNameTextField" type="TextField" visibility="private"/>
+        <Field name="cityTextField" type="TextField" visibility="private"/>
+        <Field name="streetTextField" type="TextField" visibility="private"/>
+        <Field name="homeNumberTextField" type="TextField" visibility="private"/>
+        <Field name="flatNumberTextField" type="TextField" visibility="private"/>
+        <Field name="zipCodeTextField" type="TextField" visibility="private"/>
+        <Field name="contactPhoneNumberTextField" type="TextField" visibility="private"/>
+        <Field name="emailTextField" type="TextField" visibility="private"/>
+        <Field name="model" type="Model" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="initialize" returnType="void" visibility="public">
+          <Argument type="URL" name="location"/>
+          <Argument type="ResourceBundle" name="resources"/>
+        </Method>
+        <Method name="addClient" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="addNewDataBaseStructureController" package="butler.controller.dialogs" visibility="public" xPosition="1220.0" yPosition="20.0">
+      <Fields>
+        <Field name="cancelButton" type="Button" visibility="private"/>
+        <Field name="dbAddressTextField" type="TextField" visibility="private"/>
+        <Field name="dbPasswordPasswordField" type="PasswordField" visibility="private"/>
+        <Field name="testConnectionResult" type="Label" visibility="private"/>
+        <Field name="dbTypeComboBox" type="ComboBox" visibility="private"/>
+        <Field name="dbTypes" type="ObservableList&lt;String&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="initialize" returnType="void" visibility="public">
+          <Argument type="URL" name="location"/>
+          <Argument type="ResourceBundle" name="resources"/>
+        </Method>
+        <Method name="addStructure" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="testConnection" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="addReservationController" package="butler.controller.dialogs" visibility="public" xPosition="1520.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="initialize" returnType="void" visibility="public">
+          <Argument type="URL" name="location"/>
+          <Argument type="ResourceBundle" name="resources"/>
+        </Method>
+        <Method name="addReservation" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="addRoomController" package="butler.controller.dialogs" visibility="public" xPosition="1820.0" yPosition="20.0">
+      <Fields>
+        <Field name="roomNameTextField" type="TextField" visibility="private"/>
+        <Field name="numberOfSingleBedsChoiceBox" type="ChoiceBox&lt;Integer&gt;" visibility="private"/>
+        <Field name="numberOfDoubleBedsChoiceBox" type="ChoiceBox&lt;Integer&gt;" visibility="private"/>
+        <Field name="numberOfExtraBedsChoiceBox" type="ChoiceBox&lt;Integer&gt;" visibility="private"/>
+        <Field name="floorNumberTextField" type="TextField" visibility="private"/>
+        <Field name="buildingTextField" type="TextField" visibility="private"/>
+        <Field name="smallDescriptionTextField" type="TextField" visibility="private"/>
+        <Field name="bigDescriptionTextArea" type="TextArea" visibility="private"/>
+        <Field name="extraDescriptionTextArea" type="TextArea" visibility="private"/>
+        <Field name="priceOfRoomTextField" type="TextField" visibility="private"/>
+        <Field name="priceOfAdultTextField" type="TextField" visibility="private"/>
+        <Field name="priceOfMinorTextField" type="TextField" visibility="private"/>
+        <Field name="model" type="Model" visibility="private"/>
+        <Field name="intList" type="ObservableList&lt;Integer&gt;" visibility="private"/>
+        <Field name="extraListSelectionView" type="ListSelectionView&lt;AdditionalRoomItem&gt;" visibility="private"/>
+        <Field name="additionalRoomItems" type="AdditionalRoomItems" visibility="package"/>
+        <Field name="selectedItems" type="ObservableList&lt;AdditionalRoomItem&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="initialize" returnType="void" visibility="public">
+          <Argument type="URL" name="location"/>
+          <Argument type="ResourceBundle" name="resources"/>
+        </Method>
+        <Method name="addRoom" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="DialogBox" package="butler.controller.dialogs" visibility="public" xPosition="2120.0" yPosition="20.0">
+      <Fields>
+        <Field name="cancelButton" type="Button" visibility="package"/>
+        <Field name="xOffset" type="double" visibility="private"/>
+        <Field name="yOffset" type="double" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="onMouseDragging" returnType="void" visibility="protected">
+          <Argument type="MouseEvent" name="event"/>
+        </Method>
+        <Method name="onMousePressed" returnType="void" visibility="protected">
+          <Argument type="MouseEvent" name="event"/>
+        </Method>
+        <Method name="cancelAction" returnType="void" visibility="protected">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="FooterController" package="butler.controller.fragments" visibility="public" xPosition="20.0" yPosition="420.0">
+      <Fields>
+        <Field name="nameOfConnectedDB" type="Label" visibility="package"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="initialize" returnType="void" visibility="public">
+          <Argument type="URL" name="location"/>
+          <Argument type="ResourceBundle" name="resources"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="MenuBarController" package="butler.controller.fragments" visibility="public" xPosition="320.0" yPosition="420.0">
+      <Fields>
+        <Field name="xOffset" type="double" visibility="private"/>
+        <Field name="yOffset" type="double" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="initialize" returnType="void" visibility="public">
+          <Argument type="URL" name="url"/>
+          <Argument type="ResourceBundle" name="rb"/>
+        </Method>
+        <Method name="onMouseDragged" returnType="void" visibility="private">
+          <Argument type="MouseEvent" name="event"/>
+        </Method>
+        <Method name="onMousePressed" returnType="void" visibility="private">
+          <Argument type="MouseEvent" name="event"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="MenuController" package="butler.controller.fragments" visibility="public" xPosition="620.0" yPosition="420.0">
+      <Fields>
+        <Field name="bookingScheduleButton" type="Button" visibility="package"/>
+        <Field name="buttons" type="ArrayList&lt;Button&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="initialize" returnType="void" visibility="public">
+          <Argument type="URL" name="location"/>
+          <Argument type="ResourceBundle" name="resources"/>
+        </Method>
+        <Method name="setScreenToBookingSchedule" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="setScreenToClientBase" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="setScreenToListOfRooms" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="setScreenToStatistics" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="setScreenToPriceOfRooms" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="setScreenToSettings" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="setScreenToInstitution" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="setScreenToOperationHistory" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="onMouseEntered" returnType="void" visibility="private">
+          <Argument type="MouseEvent" name="event"/>
+        </Method>
+        <Method name="setSelected" returnType="void" visibility="private">
+          <Argument type="Integer" name="index"/>
+        </Method>
+        <Method name="setPage" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+          <Argument type="String" name="path"/>
+          <Argument type="Integer" name="index"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="FXMLDocumentController" package="butler.controller" visibility="public" xPosition="920.0" yPosition="420.0">
+      <Fields>
+        <Field name="exitButton" type="Button" visibility="private"/>
+        <Field name="minimizeButton" type="Button" visibility="private"/>
+        <Field name="xOffset" type="double" visibility="private"/>
+        <Field name="yOffset" type="double" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="initialize" returnType="void" visibility="public">
+          <Argument type="URL" name="url"/>
+          <Argument type="ResourceBundle" name="rb"/>
+        </Method>
+        <Method name="handleExitButton" returnType="void" visibility="private"/>
+        <Method name="handleMinimizeButton" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="onMouseDragging" returnType="void" visibility="private">
+          <Argument type="MouseEvent" name="event"/>
+        </Method>
+        <Method name="onMousePressed" returnType="void" visibility="private">
+          <Argument type="MouseEvent" name="event"/>
+        </Method>
+        <Method name="setScreenToRegisterPage" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="setScreenToLoginPage" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="handleLoginButton" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="handleRegisterButton" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="setScreenBookingSchedule" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="setScreenStatistics" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="setScreenClientBase" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="setScreenOperationHistory" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="showRegulations" returnType="void" visibility="package"/>
+        <Method name="setPage" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+          <Argument type="String" name="path"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="listOfRoomsController" package="butler.controller" visibility="public" xPosition="1220.0" yPosition="420.0">
+      <Fields>
+        <Field name="addRoomButton" type="Button" visibility="private"/>
+        <Field name="roomTableView" type="TableView&lt;Room&gt;" visibility="private"/>
+        <Field name="roomNameTableColumn" type="TableColumn&lt;Room, String&gt;" visibility="private"/>
+        <Field name="numberOfSingleBedsTableColumn" type="TableColumn&lt;Room, Integer&gt;" visibility="private"/>
+        <Field name="priceOfRoomTableColumn" type="TableColumn&lt;Room, Double&gt;" visibility="private"/>
+        <Field name="model" type="Model" visibility="package"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="initialize" returnType="void" visibility="public">
+          <Argument type="URL" name="location"/>
+          <Argument type="ResourceBundle" name="resources"/>
+        </Method>
+        <Method name="addRoomAction" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="loginController" package="butler.controller" visibility="public" xPosition="1520.0" yPosition="420.0">
+      <Fields>
+        <Field name="exitButton" type="Button" visibility="private"/>
+        <Field name="minimizeButton" type="Button" visibility="private"/>
+        <Field name="loginTextField" type="TextField" visibility="private"/>
+        <Field name="passwordTextField" type="PasswordField" visibility="private"/>
+        <Field name="xOffset" type="double" visibility="private"/>
+        <Field name="yOffset" type="double" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="initialize" returnType="void" visibility="public">
+          <Argument type="URL" name="url"/>
+          <Argument type="ResourceBundle" name="rb"/>
+        </Method>
+        <Method name="onMouseDragging" returnType="void" visibility="private">
+          <Argument type="MouseEvent" name="event"/>
+        </Method>
+        <Method name="onMousePressed" returnType="void" visibility="private">
+          <Argument type="MouseEvent" name="event"/>
+        </Method>
+        <Method name="setScreenToRegisterPage" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="handleExitButton" returnType="void" visibility="private"/>
+        <Method name="handleMinimizeButton" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="addDataBaseStructure" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="handleLoginButton" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="showRegulations" returnType="void" visibility="package"/>
+        <Method name="setPage" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+          <Argument type="String" name="path"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="OperationHistoryController" package="butler.controller" visibility="public" xPosition="1820.0" yPosition="420.0">
+      <Fields>
+        <Field name="operationTableView" type="TableView&lt;OperationHistory&gt;" visibility="private"/>
+        <Field name="operation" type="TableColumn&lt;OperationHistory, String&gt;" visibility="private"/>
+        <Field name="datePickerFrom" type="DatePicker" visibility="private"/>
+        <Field name="showDataButton" type="Button" visibility="private"/>
+        <Field name="model" type="Model" visibility="package"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="initialize" returnType="void" visibility="public">
+          <Argument type="URL" name="url"/>
+          <Argument type="ResourceBundle" name="rb"/>
+        </Method>
+        <Method name="showData" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="printData" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="setDatePickerDisplayMethod" returnType="void" visibility="private">
+          <Argument type="DatePicker" name="datePicker"/>
+          <Argument type="String" name="displayMethod"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Model" package="butler.model" visibility="public" xPosition="2120.0" yPosition="420.0">
+      <Fields>
+        <Field name="DBAddress" type="String" visibility="private" isFinal="true"/>
+        <Field name="DBUser" type="String" visibility="private" isFinal="true"/>
+        <Field name="DBPassword" type="String" visibility="private" isFinal="true"/>
+        <Field name="DBDriver" type="String" visibility="private" isFinal="true"/>
+        <Field name="connectedUserNick" type="String" visibility="private"/>
+        <Field name="con" type="Connection" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="connectToDataBase" returnType="boolean" visibility="public">
+          <Argument type="String" name="login"/>
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="getNickById" returnType="String" visibility="public"/>
+        <Method name="encryptPassword" returnType="String" visibility="private">
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="closeConnection" returnType="boolean" visibility="public"/>
+        <Method name="tryConnectionToDataBase" returnType="boolean" visibility="public">
+          <Argument type="String" name="address"/>
+          <Argument type="String" name="port"/>
+          <Argument type="String" name="dbName"/>
+          <Argument type="String" name="userName"/>
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="addToOperationHistory" returnType="boolean" visibility="public">
+          <Argument type="String" name="message"/>
+          <Argument type="String" name="user"/>
+        </Method>
+        <Method name="addRoomToDataBase" returnType="boolean" visibility="public">
+          <Argument type="Room" name="room"/>
+        </Method>
+        <Method name="addClientToDataBase" returnType="boolean" visibility="public">
+          <Argument type="Client" name="client"/>
+        </Method>
+        <Method name="getClientList" returnType="ObservableList&lt;Client&gt;" visibility="public"/>
+        <Method name="getRoomList" returnType="ObservableList&lt;Room&gt;" visibility="public"/>
+        <Method name="getOperationHistoryList" returnType="ObservableList&lt;OperationHistory&gt;" visibility="public"/>
+        <Method name="getOperationHistoryListFromTo" returnType="ObservableList&lt;OperationHistory&gt;" visibility="public">
+          <Argument type="LocalDate" name="dateFrom"/>
+          <Argument type="LocalDate" name="dateTo"/>
+        </Method>
+        <Method name="registerUser" returnType="boolean" visibility="public">
+          <Argument type="String" name="login"/>
+          <Argument type="String" name="password"/>
+          <Argument type="String" name="password2"/>
+          <Argument type="String" name="email"/>
+          <Argument type="boolean" name="regulationsAccepted"/>
+        </Method>
+        <Method name="getDataBaseName" returnType="String" visibility="public"/>
+        <Method name="getUserName" returnType="String" visibility="public"/>
+        <Method name="getConnectedUserNick" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="AdditionalRoomItem" package="butler.utils" visibility="public" xPosition="20.0" yPosition="820.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="val" type="Boolean" visibility="private"/>
+        <Field name="id" type="Integer" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Integer" name="id"/>
+          <Argument type="String" name="name"/>
+          <Argument type="Boolean" name="val"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="getId" returnType="Integer" visibility="public"/>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getVal" returnType="Boolean" visibility="public"/>
+        <Method name="setVal" returnType="void" visibility="public">
+          <Argument type="Boolean" name="val"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="AdditionalRoomItems" package="butler.utils" visibility="public" xPosition="320.0" yPosition="820.0">
+      <Fields>
+        <Field name="additionalRoomItems" type="ObservableList&lt;AdditionalRoomItem&gt;" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getAdditionalRoomItems" returnType="ObservableList&lt;AdditionalRoomItem&gt;" visibility="public"/>
+        <Method name="setAdditionalRoomItems" returnType="void" visibility="public">
+          <Argument type="ObservableList&lt;AdditionalRoomItem&gt;" name="additionalRoomItems"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Booking" package="butler.utils" visibility="public" xPosition="620.0" yPosition="820.0">
+      <Fields>
+        <Field name="id" type="IntegerProperty" visibility="private"/>
+        <Field name="startOfReservationDate" type="StringProperty" visibility="private"/>
+        <Field name="endOfReservationDate" type="StringProperty" visibility="private"/>
+        <Field name="roomId" type="IntegerProperty" visibility="private"/>
+        <Field name="paymentStatus" type="IntegerProperty" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getId" returnType="IntegerProperty" visibility="public"/>
+        <Method name="getStartOfReservationDate" returnType="StringProperty" visibility="public"/>
+        <Method name="setStartOfReservationDate" returnType="void" visibility="public">
+          <Argument type="StringProperty" name="startOfReservationDate"/>
+        </Method>
+        <Method name="getEndOfReservationDate" returnType="StringProperty" visibility="public"/>
+        <Method name="setEndOfReservationDate" returnType="void" visibility="public">
+          <Argument type="StringProperty" name="endOfReservationDate"/>
+        </Method>
+        <Method name="getRoomId" returnType="IntegerProperty" visibility="public"/>
+        <Method name="setRoomId" returnType="void" visibility="public">
+          <Argument type="IntegerProperty" name="roomId"/>
+        </Method>
+        <Method name="getPaymentStatus" returnType="IntegerProperty" visibility="public"/>
+        <Method name="setPaymentStatus" returnType="void" visibility="public">
+          <Argument type="IntegerProperty" name="paymentStatus"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Client" package="butler.utils" visibility="public" xPosition="820.0" yPosition="791.0">
+      <Fields>
+        <Field name="firstName" type="StringProperty" visibility="private"/>
+        <Field name="lastName" type="StringProperty" visibility="private"/>
+        <Field name="city" type="StringProperty" visibility="private"/>
+        <Field name="street" type="StringProperty" visibility="private"/>
+        <Field name="homeNumber" type="IntegerProperty" visibility="private"/>
+        <Field name="flatNumber" type="IntegerProperty" visibility="private"/>
+        <Field name="zipCode" type="IntegerProperty" visibility="private"/>
+        <Field name="contactPhoneNumber" type="IntegerProperty" visibility="private"/>
+        <Field name="email" type="StringProperty" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Integer" name="id"/>
+          <Argument type="String" name="firstName"/>
+          <Argument type="String" name="lastName"/>
+          <Argument type="String" name="city"/>
+          <Argument type="String" name="street"/>
+          <Argument type="Integer" name="homeNumber"/>
+          <Argument type="Integer" name="flatNumber"/>
+          <Argument type="Integer" name="zipCode"/>
+          <Argument type="Integer" name="contactPhoneNumber"/>
+          <Argument type="String" name="email"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getZipCode" returnType="Integer" visibility="public"/>
+        <Method name="setZipCode" returnType="void" visibility="public">
+          <Argument type="IntegerProperty" name="zipCode"/>
+        </Method>
+        <Method name="getFirstName" returnType="String" visibility="public"/>
+        <Method name="setFirstName" returnType="void" visibility="public">
+          <Argument type="StringProperty" name="firstName"/>
+        </Method>
+        <Method name="getLastName" returnType="String" visibility="public"/>
+        <Method name="setLastName" returnType="void" visibility="public">
+          <Argument type="StringProperty" name="lastName"/>
+        </Method>
+        <Method name="getCity" returnType="String" visibility="public"/>
+        <Method name="setCity" returnType="void" visibility="public">
+          <Argument type="StringProperty" name="city"/>
+        </Method>
+        <Method name="getStreet" returnType="String" visibility="public"/>
+        <Method name="setStreet" returnType="void" visibility="public">
+          <Argument type="StringProperty" name="street"/>
+        </Method>
+        <Method name="getHomeNumber" returnType="Integer" visibility="public"/>
+        <Method name="setHomeNumber" returnType="void" visibility="public">
+          <Argument type="IntegerProperty" name="homeNumber"/>
+        </Method>
+        <Method name="getFlatNumber" returnType="Integer" visibility="public"/>
+        <Method name="setFlatNumber" returnType="void" visibility="public">
+          <Argument type="IntegerProperty" name="flatNumber"/>
+        </Method>
+        <Method name="getContactPhoneNumber" returnType="Integer" visibility="public"/>
+        <Method name="setContactPhoneNumber" returnType="void" visibility="public">
+          <Argument type="IntegerProperty" name="contactPhoneNumber"/>
+        </Method>
+        <Method name="getEmail" returnType="String" visibility="public"/>
+        <Method name="setEmail" returnType="void" visibility="public">
+          <Argument type="StringProperty" name="email"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="DataBaseItem" package="butler.utils" visibility="public" xPosition="472.0" yPosition="231.0">
+      <Fields>
+        <Field name="id" type="Integer" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Integer" name="id"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getId" returnType="Integer" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="Integer" name="id"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="fincal" package="butler.utils" visibility="public" xPosition="1345.0" yPosition="915.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="OperationHistory" package="butler.utils" visibility="public" xPosition="1820.0" yPosition="820.0">
+      <Fields>
+        <Field name="operation" type="String" visibility="private"/>
+        <Field name="date" type="String" visibility="private"/>
+        <Field name="user" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="operation"/>
+          <Argument type="String" name="date"/>
+          <Argument type="String" name="user"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="setOperation" returnType="void" visibility="public">
+          <Argument type="String" name="operation"/>
+        </Method>
+        <Method name="setDate" returnType="void" visibility="public">
+          <Argument type="String" name="date"/>
+        </Method>
+        <Method name="setUser" returnType="void" visibility="public">
+          <Argument type="String" name="user"/>
+        </Method>
+        <Method name="getOperation" returnType="String" visibility="public"/>
+        <Method name="getDate" returnType="String" visibility="public"/>
+        <Method name="getUser" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Room" package="butler.utils" visibility="public" xPosition="2120.0" yPosition="820.0">
+      <Fields>
+        <Field name="roomName" type="StringProperty" visibility="private"/>
+        <Field name="numberOfSingleBeds" type="IntegerProperty" visibility="private"/>
+        <Field name="numberOfDoubleBeds" type="IntegerProperty" visibility="private"/>
+        <Field name="numberOfExtraBeds" type="IntegerProperty" visibility="private"/>
+        <Field name="floorNumber" type="IntegerProperty" visibility="private"/>
+        <Field name="priceOfRoom" type="DoubleProperty" visibility="private"/>
+        <Field name="priceOfAdult" type="DoubleProperty" visibility="private"/>
+        <Field name="priceOfMinor" type="DoubleProperty" visibility="private"/>
+        <Field name="smallDescription" type="StringProperty" visibility="private"/>
+        <Field name="bigDescription" type="StringProperty" visibility="private"/>
+        <Field name="extraDescription" type="StringProperty" visibility="private"/>
+        <Field name="building" type="StringProperty" visibility="private"/>
+        <Field name="balcon" type="BooleanProperty" visibility="private"/>
+        <Field name="beachScreen" type="BooleanProperty" visibility="private"/>
+        <Field name="blanket" type="BooleanProperty" visibility="private"/>
+        <Field name="sunbed" type="BooleanProperty" visibility="private"/>
+        <Field name="tv" type="BooleanProperty" visibility="private"/>
+        <Field name="wiFi" type="BooleanProperty" visibility="private"/>
+        <Field name="individualEntrance" type="BooleanProperty" visibility="private"/>
+        <Field name="friendlyAnimal" type="BooleanProperty" visibility="private"/>
+        <Field name="kettle" type="BooleanProperty" visibility="private"/>
+        <Field name="tableware" type="BooleanProperty" visibility="private"/>
+        <Field name="tableLamp" type="BooleanProperty" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="roomName"/>
+          <Argument type="Integer" name="numberOfSingleBeds"/>
+          <Argument type="Integer" name="numberOfDoubleBeds"/>
+          <Argument type="Integer" name="numberOfExtraBeds"/>
+          <Argument type="Integer" name="floorNumber"/>
+          <Argument type="Double" name="priceOfRoom"/>
+          <Argument type="Double" name="priceOfAdult"/>
+          <Argument type="Double" name="priceOfMinor"/>
+          <Argument type="String" name="smallDescription"/>
+          <Argument type="String" name="bigDescription"/>
+          <Argument type="String" name="extraDescription"/>
+          <Argument type="String" name="building"/>
+          <Argument type="Boolean" name="balcon"/>
+          <Argument type="Boolean" name="beachScreen"/>
+          <Argument type="Boolean" name="blanket"/>
+          <Argument type="Boolean" name="sunbed"/>
+          <Argument type="Boolean" name="tv"/>
+          <Argument type="Boolean" name="wiFi"/>
+          <Argument type="Boolean" name="individualEntrance"/>
+          <Argument type="Boolean" name="friendlyAnimal"/>
+          <Argument type="Boolean" name="kettle"/>
+          <Argument type="Boolean" name="tableware"/>
+          <Argument type="Boolean" name="tableLamp"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="roomName"/>
+          <Argument type="Integer" name="numberOfSingleBeds"/>
+          <Argument type="Integer" name="numberOfDoubleBeds"/>
+          <Argument type="Integer" name="numberOfExtraBeds"/>
+          <Argument type="Integer" name="floorNumber"/>
+          <Argument type="Double" name="priceOfRoom"/>
+          <Argument type="Double" name="priceOfAdult"/>
+          <Argument type="Double" name="priceOfMinor"/>
+          <Argument type="String" name="smallDescription"/>
+          <Argument type="String" name="bigDescription"/>
+          <Argument type="String" name="extraDescription"/>
+          <Argument type="String" name="building"/>
+          <Argument type="ObservableList&lt;AdditionalRoomItem&gt;" name="eI"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getRoomName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="StringProperty" name="roomName"/>
+        </Method>
+        <Method name="getNumberOfSingleBeds" returnType="Integer" visibility="public"/>
+        <Method name="setNumberOfSingleBeds" returnType="void" visibility="public">
+          <Argument type="IntegerProperty" name="numberOfSingleBeds"/>
+        </Method>
+        <Method name="getNumberOfDoubleBeds" returnType="Integer" visibility="public"/>
+        <Method name="setNumberOfDoubleBeds" returnType="void" visibility="public">
+          <Argument type="IntegerProperty" name="numberOfDoubleBeds"/>
+        </Method>
+        <Method name="getNumberOfExtraBeds" returnType="Integer" visibility="public"/>
+        <Method name="setNumberOfExtraBeds" returnType="void" visibility="public">
+          <Argument type="IntegerProperty" name="numberOfExtraBeds"/>
+        </Method>
+        <Method name="getFloorNumber" returnType="Integer" visibility="public"/>
+        <Method name="setFloorNumber" returnType="void" visibility="public">
+          <Argument type="IntegerProperty" name="floorNumber"/>
+        </Method>
+        <Method name="getPriceOfRoom" returnType="Double" visibility="public"/>
+        <Method name="setPriceOfRoom" returnType="void" visibility="public">
+          <Argument type="DoubleProperty" name="priceOfRoom"/>
+        </Method>
+        <Method name="getPriceOfAdult" returnType="Double" visibility="public"/>
+        <Method name="setPriceOfAdult" returnType="void" visibility="public">
+          <Argument type="DoubleProperty" name="priceOfAdult"/>
+        </Method>
+        <Method name="getBalcon" returnType="Boolean" visibility="public"/>
+        <Method name="getBeachScreen" returnType="Boolean" visibility="public"/>
+        <Method name="getBlanket" returnType="Boolean" visibility="public"/>
+        <Method name="getSunbed" returnType="Boolean" visibility="public"/>
+        <Method name="getTv" returnType="Boolean" visibility="public"/>
+        <Method name="getWiFi" returnType="Boolean" visibility="public"/>
+        <Method name="getIndividualEntrance" returnType="Boolean" visibility="public"/>
+        <Method name="getFriendlyAnimal" returnType="Boolean" visibility="public"/>
+        <Method name="getKettle" returnType="Boolean" visibility="public"/>
+        <Method name="getTableware" returnType="Boolean" visibility="public"/>
+        <Method name="getTableLamp" returnType="Boolean" visibility="public"/>
+        <Method name="getPriceOfMinor" returnType="Double" visibility="public"/>
+        <Method name="setPriceOfMinor" returnType="void" visibility="public">
+          <Argument type="DoubleProperty" name="priceOfMinor"/>
+        </Method>
+        <Method name="getSmallDescription" returnType="String" visibility="public"/>
+        <Method name="setSmallDescription" returnType="void" visibility="public">
+          <Argument type="StringProperty" name="smallDescription"/>
+        </Method>
+        <Method name="getBigDescription" returnType="String" visibility="public"/>
+        <Method name="setBigDescription" returnType="void" visibility="public">
+          <Argument type="StringProperty" name="bigDescription"/>
+        </Method>
+        <Method name="getExtraDescription" returnType="String" visibility="public"/>
+        <Method name="setExtraDescription" returnType="void" visibility="public">
+          <Argument type="StringProperty" name="extraDescription"/>
+        </Method>
+        <Method name="getBuilding" returnType="String" visibility="public"/>
+        <Method name="setBuilding" returnType="void" visibility="public">
+          <Argument type="StringProperty" name="building"/>
+        </Method>
+        <Method name="setAdditionalRoomItems" returnType="void" visibility="private">
+          <Argument type="ObservableList&lt;AdditionalRoomItem&gt;" name="eI"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="priceOfRoomTableColumn" source="butler.controller.listOfRoomsController" target="butler.utils.Room" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="roomNameTableColumn" source="butler.controller.listOfRoomsController" target="butler.utils.Room" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="butler.model.Model" target="butler.utils.Client" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="model" source="butler.controller.dialogs.addRoomController" target="butler.model.Model" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="butler.controller.dialogs.addNewDataBaseStructureController" target="butler.controller.dialogs.DialogBox"/>
+    <UseRelation source="butler.utils.Room" target="butler.utils.Room" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="model" source="butler.controller.OperationHistoryController" target="butler.model.Model" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="operation" source="butler.controller.OperationHistoryController" target="butler.utils.OperationHistory" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="butler.utils.Client" target="butler.utils.DataBaseItem"/>
+    <IsRelation name="is" source="butler.controller.dialogs.addReservationController" target="butler.controller.dialogs.DialogBox"/>
+    <IsRelation name="is" source="butler.controller.dialogs.addRoomController" target="butler.controller.dialogs.DialogBox"/>
+    <HasRelation name="model" source="butler.controller.dialogs.addClientController" target="butler.model.Model" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="model" source="butler.controller.listOfRoomsController" target="butler.model.Model" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="numberOfSingleBedsTableColumn" source="butler.controller.listOfRoomsController" target="butler.utils.Room" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="additionalRoomItems" source="butler.controller.dialogs.addRoomController" target="butler.utils.AdditionalRoomItems" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="selectedItems" source="butler.controller.dialogs.addRoomController" target="butler.utils.AdditionalRoomItem" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;AdditionalRoomItem&gt;"/>
+    <HasRelation name="roomTableView" source="butler.controller.listOfRoomsController" target="butler.utils.Room" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="butler.model.Model" target="butler.utils.OperationHistory" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="model" source="butler.Butler" target="butler.model.Model" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="operationTableView" source="butler.controller.OperationHistoryController" target="butler.utils.OperationHistory" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="extraListSelectionView" source="butler.controller.dialogs.addRoomController" target="butler.utils.AdditionalRoomItem" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ListSelectionView&lt;AdditionalRoomItem&gt;"/>
+    <UseRelation source="butler.model.Model" target="butler.utils.Room" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="firstName" source="butler.controller.ClientBaseController" target="butler.utils.Client" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="clientTableView" source="butler.controller.ClientBaseController" target="butler.utils.Client" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="additionalRoomItems" source="butler.utils.AdditionalRoomItems" target="butler.utils.AdditionalRoomItem" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;AdditionalRoomItem&gt;"/>
+    <UseRelation source="butler.utils.AdditionalRoomItems" target="butler.utils.Room" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="model" source="butler.controller.ClientBaseController" target="butler.model.Model" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="butler.controller.dialogs.addClientController" target="butler.controller.dialogs.DialogBox"/>
+    <HasRelation name="homeNumber" source="butler.controller.ClientBaseController" target="butler.utils.Client" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

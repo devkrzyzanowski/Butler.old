@@ -27,7 +27,7 @@ public class BookingScheduleController implements Initializable {
 
     @FXML private AnchorPane main;
     @FXML private Button addReservationButton, removeReservationButton, modifyReservationButton;
-    
+    @FXML private Button selectClientButton;
 
     
     @Override
@@ -49,4 +49,5 @@ public class BookingScheduleController implements Initializable {
         @FXML private void modifyReservation(ActionEvent event) {
 
     }
+
 }

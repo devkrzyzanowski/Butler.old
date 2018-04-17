@@ -19,6 +19,7 @@ import javafx.collections.ObservableList;
  * @author uwxyy
  */
 public class Room {
+    private IntegerProperty id = new SimpleIntegerProperty();
     private StringProperty roomName = new SimpleStringProperty();
     private IntegerProperty numberOfSingleBeds = new SimpleIntegerProperty();
     private IntegerProperty numberOfDoubleBeds = new SimpleIntegerProperty();
@@ -44,7 +45,7 @@ public class Room {
     private BooleanProperty tableLamp = new SimpleBooleanProperty();
     
     
-    public Room(String roomName, Integer numberOfSingleBeds, Integer numberOfDoubleBeds,
+    public Room(Integer id, String roomName, Integer numberOfSingleBeds, Integer numberOfDoubleBeds,
                 Integer numberOfExtraBeds, Integer floorNumber, Double priceOfRoom,
                 Double priceOfAdult, Double priceOfMinor, String smallDescription,
                 String bigDescription, String extraDescription, String building, 
@@ -76,6 +77,30 @@ public class Room {
         this.tableLamp.set(tableLamp);
     }
     
+        public Room(Integer id, String roomName, Integer numberOfSingleBeds, Integer numberOfDoubleBeds,
+                Integer numberOfExtraBeds, Integer floorNumber, Double priceOfRoom,
+                Double priceOfAdult, Double priceOfMinor, String smallDescription,
+                String bigDescription, String extraDescription, String building, 
+                ObservableList<AdditionalRoomItem> eI){
+        this.id.set(id);
+        this.roomName.set(roomName);
+        this.numberOfSingleBeds.set(numberOfSingleBeds);
+        this.numberOfDoubleBeds.set(numberOfDoubleBeds);
+        this.numberOfExtraBeds.set(numberOfExtraBeds);
+        this.floorNumber.set(floorNumber);
+        this.priceOfRoom.set(priceOfRoom);
+        this.priceOfAdult.set(priceOfAdult);
+        this.priceOfMinor.set(priceOfMinor);
+        this.setAdditionalRoomItems(eI);
+    }
+
+    public IntegerProperty getId() {
+        return id;
+    }
+
+    public void setId(IntegerProperty id) {
+        this.id = id;
+    }
         public Room(String roomName, Integer numberOfSingleBeds, Integer numberOfDoubleBeds,
                 Integer numberOfExtraBeds, Integer floorNumber, Double priceOfRoom,
                 Double priceOfAdult, Double priceOfMinor, String smallDescription,
@@ -90,6 +115,15 @@ public class Room {
         this.priceOfAdult.set(priceOfAdult);
         this.priceOfMinor.set(priceOfMinor);
         this.setAdditionalRoomItems(eI);
+    }
+        
+        @Override
+        public String toString(){
+        return roomName.getValue();
+    }
+        
+    public Room getRoom(){
+        return this;
     }
 
     public String getRoomName() {

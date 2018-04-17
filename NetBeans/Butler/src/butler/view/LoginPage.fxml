@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#onMouseDragging" onMousePressed="#onMousePressed" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #dfe2db;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.loginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#onMouseDragging" onMousePressed="#onMousePressed" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #dfe2db;" xmlns="http://javafx.com/javafx/8.0.161" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.loginController">
    <children>
       <AnchorPane prefHeight="375.0" prefWidth="200.0" style="-fx-background-color: #444444;">
          <children>
@@ -43,16 +43,13 @@
                         <Insets right="6.0" />
                      </padding>
                   </Label>
-                  <Button fx:id="button" contentDisplay="TOP" layoutX="260.0" layoutY="186.0" mnemonicParsing="false" onAction="#handleLoginButton" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #333333; -fx-background-radius: 2;" text="Zaloguj" textFill="#d0d0d0">
+                  <Button fx:id="button" contentDisplay="TOP" layoutX="260.0" layoutY="186.0" mnemonicParsing="false" onAction="#handleLoginButton" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #333333; -fx-background-radius: 0;" text="Zaloguj" textFill="#d0d0d0" textOverrun="CLIP">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
-                     <padding>
-                        <Insets left="-40.0" />
-                     </padding>
                   </Button>
                   <Hyperlink layoutX="81.0" layoutY="186.0" text="Przypomnij hasło" textFill="#388df4" />
                   <TextField fx:id="loginTextField" layoutX="130.0" layoutY="15.0" prefHeight="25.0" prefWidth="190.0" style="-fx-background-radius: 0;" />
@@ -73,31 +70,6 @@
                   <Hyperlink fx:id="addDataBaseStructureButton" layoutX="130.0" layoutY="109.0" onAction="#addDataBaseStructure" text="Dodaj nową bazę" textFill="#388df4" />
                </children>
             </AnchorPane>
-            <Button fx:id="exitButton1" layoutX="342.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleExitButton" prefHeight="22.0" prefWidth="50.0" style="-fx-background-radius: 0; -fx-background-color: #1e1e1e;" textFill="#cdcdcd">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <graphic>
-                  <FontAwesomeIconView fill="#d0d0d0" glyphName="CLOSE" size="16" />
-               </graphic>
-               <padding>
-                  <Insets left="-3.0" right="-3.0" />
-               </padding>
-            </Button>
-            <Button fx:id="minimizeButton" layoutX="292.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleMinimizeButton" prefHeight="22.0" prefWidth="50.0" style="-fx-background-radius: 0; -fx-background-color: #1e1e1e;" textFill="#cdcdcd">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <graphic>
-                  <FontAwesomeIconView fill="#d0d0d0" glyphName="WINDOW_MINIMIZE" size="16" />
-               </graphic>
-               <padding>
-                  <Insets left="-3.0" right="-3.0" />
-               </padding>
-            </Button>
             <Separator layoutY="120.0" prefWidth="400.0" />
             <Separator layoutY="359.0" prefWidth="400.0" />
          </children>

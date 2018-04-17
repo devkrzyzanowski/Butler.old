@@ -5,7 +5,6 @@
  */
 package butler.model;
 
-import butler.utils.AdditionalRoomItem;
 import butler.utils.Client;
 import butler.utils.AdditionalRoomItems;
 import butler.utils.OperationHistory;
@@ -41,12 +40,12 @@ public class Model {
     public Model(){
         try {
             Class.forName(DBDriver);
-        } catch (ClassNotFoundException cnfe) {
+        } catch (ClassNotFoundException ex) {
             System.err.println("Derby driver not found.");
         }
         try {
-            con = DriverManager.getConnection(DBAddress +DBUser + DBPassword);
-        } catch ( SQLException e){
+            con = DriverManager.getConnection(DBAddress + DBUser + DBPassword);
+        } catch ( SQLException ex){
             System.err.println("NIE POLACZONO");
         }
     }
@@ -210,7 +209,8 @@ public class Model {
         ObservableList<Room> list = FXCollections.observableArrayList();
         try (Statement stmt = con.createStatement()){
             ResultSet rs = stmt.executeQuery("SELECT * FROM APP.ROOM");
-            while (rs.next()) {                
+            while (rs.next()) {    
+                Integer id = rs.getInt(("idRoom"));
                 String roomName = rs.getString("room_name");
                 Integer numberOfSingleBeds = rs.getInt("number_of_single_beds");
                 Integer numberOfDoubleBeds = rs.getInt("number_of_double_beds");
@@ -235,7 +235,7 @@ public class Model {
                 Boolean tableware = rs.getBoolean("tableware");
                 Boolean tableLamp = rs.getBoolean("table_lamp");
                 AdditionalRoomItems e = new AdditionalRoomItems();
-                list.add(new Room(roomName, numberOfSingleBeds, numberOfDoubleBeds,
+                list.add(new Room(id, roomName, numberOfSingleBeds, numberOfDoubleBeds,
                         numberOfExtraBeds, floorNumber, priceOfRoom, priceOfAdult,
                         priceOfMinor, smallDescription, bigDescription, extraDescription,
                         building, balcon, beachScreen, blanket, sunbed, tv, wiFi,

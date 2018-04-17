@@ -47,8 +47,6 @@ public class addRoomController extends DialogBox implements Initializable {
         @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = butler.Butler.model;
-        
-        
         extraListSelectionView.getSourceItems().addAll(additionalRoomItems.getAdditionalRoomItems());
 //        for( BooleanObject bO : booleanObjectObservableList) {
 //            extraListSelectionView.getSourceItems().add(bO.getName());

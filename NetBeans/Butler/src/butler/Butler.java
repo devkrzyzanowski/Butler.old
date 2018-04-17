@@ -6,6 +6,7 @@
 package butler;
 
 import butler.model.Model;
+import java.util.ResourceBundle;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,11 +23,17 @@ public class Butler extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         model = new Model();
-        Parent root = FXMLLoader.load(getClass().getResource("view/LoginPage.fxml"));
+        ResourceBundle bundle = ResourceBundle.getBundle("resources.bundles.messages");
+        
+        FXMLLoader fXMLLoader = new FXMLLoader(this.getClass().getResource("view/LoginPage.fxml"));
+        fXMLLoader.setResources(bundle);
+        Parent root = fXMLLoader.load();
+        
         //stage.initStyle(StageStyle.TRANSPARENT);
         Scene scene = new Scene(root);
         //scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
         stage.setScene(scene);
+        stage.setTitle(bundle.getString("app.title") + " " + bundle.getString("app.version"));
         stage.show();
     }
 

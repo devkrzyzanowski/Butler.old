@@ -24,7 +24,7 @@
                   <Insets />
                </opaqueInsets>
             </Label>
-            <Button fx:id="bookingScheduleButton" mnemonicParsing="false" onAction="#setScreenToBookingSchedule" prefHeight="60.0" prefWidth="120.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Grafik Rezerwacji" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
+            <Button fx:id="bookingScheduleButton" mnemonicParsing="false" onAction="#setScreenToBookingSchedule" onMouseEntered="#onMouseEntered" prefHeight="60.0" prefWidth="120.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="Grafik Rezerwacji" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
                <graphic>
                   <FontAwesomeIconView fill="#d0d0d0" glyphName="CALENDAR" size="36" />
                </graphic>

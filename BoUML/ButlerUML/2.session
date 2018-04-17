@@ -1,0 +1,13 @@
+window_sizes 2560 1017 600 1954 965 0
+cleanlooks_style
+diagrams
+  active  usecasediagram_ref 128002 // useCaseDiagram
+    1746 961 110 Legal-Landscape 25 0
+end
+show_stereotypes
+selected 
+  package_ref 129 // ButlerUML
+open
+  usecaseview_ref 128002 // useCase
+end
+end

@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -70,6 +71,10 @@ public class MenuController implements Initializable {
     }    
     @FXML private void setScreenToOperationHistory(ActionEvent event) throws IOException, SQLException{
         setPage(event, "OperationHistoryPage", 7);
+    }
+    
+    @FXML private void onMouseEntered(MouseEvent event) {
+       
     }
         
     
