@@ -13,7 +13,8 @@ import javafx.beans.property.StringProperty;
  *
  * @author Michał
  */
-public class Client extends DataBaseItem {
+public class Client {
+    private final IntegerProperty id = new SimpleIntegerProperty();
     private StringProperty firstName = new SimpleStringProperty();
     private StringProperty lastName = new SimpleStringProperty();
     private StringProperty city = new SimpleStringProperty();
@@ -28,7 +29,7 @@ public class Client extends DataBaseItem {
                   String city, String street, Integer homeNumber,
                   Integer flatNumber, Integer zipCode,
                   Integer contactPhoneNumber, String email){
-        super(id);
+        this.id.set(id);
         this.firstName.set(firstName);
         this.lastName.set(lastName);
         this.city.set(city);
@@ -38,6 +39,23 @@ public class Client extends DataBaseItem {
         this.zipCode.set(zipCode);
         this.contactPhoneNumber.set(contactPhoneNumber);
         this.email.set(email);
+    }
+    public Client(String firstName, String lastName, 
+                  String city, String street, Integer homeNumber,
+                  Integer flatNumber, Integer zipCode,
+                  Integer contactPhoneNumber, String email){
+        this.firstName.set(firstName);
+        this.lastName.set(lastName);
+        this.city.set(city);
+        this.street.set(street);
+        this.homeNumber.set(homeNumber);
+        this.flatNumber.set(flatNumber);
+        this.zipCode.set(zipCode);
+        this.contactPhoneNumber.set(contactPhoneNumber);
+        this.email.set(email);
+    }    
+    public Integer getId(){
+        return id.getValue();
     }
 
     public Integer getZipCode() {

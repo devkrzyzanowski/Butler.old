@@ -7,6 +7,7 @@ package butler.model;
 
 import butler.utils.Client;
 import butler.utils.AdditionalRoomItems;
+import butler.utils.Booking;
 import butler.utils.OperationHistory;
 import butler.utils.Room;
 import java.sql.Connection;
@@ -14,6 +15,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -181,6 +183,32 @@ public class Model {
                 return false;
             }
         }
+        
+        public boolean addBookingToDataBase(Timestamp value, Timestamp value0, Integer selectedClientId, Integer selectedRoomId) {
+            try {
+                System.out.println(value);
+                con.createStatement().execute("INSERT INTO Booking(begin_of_booking, end_of_booking, Client_idClient, Room_idRoom) VALUES ('"+value+"', '"+value0+"', "+selectedClientId+", "+selectedRoomId+")");
+                return true;
+            } catch (SQLException e) {
+                return false;
+            }
+        }
+        
+    public ObservableList<Booking> getBookingList() throws SQLException {
+        ObservableList<Booking> list = FXCollections.observableArrayList();
+        try (Statement stmt = con.createStatement()){
+            ResultSet rs = stmt.executeQuery("SELECT * FROM APP.BOOKING");
+            while (rs.next()){
+            Integer id = rs.getInt("idBooking");
+            Timestamp beginOfBooking = rs.getTimestamp("begin_of_booking");
+            Timestamp endOfBooking = rs.getTimestamp("end_of_booking");
+            Integer clientId = rs.getInt("Client_idClient");
+            Integer roomId = rs.getInt("Room_idRoom");
+            list.add(new Booking(id, String.valueOf(beginOfBooking), String.valueOf(endOfBooking), clientId, roomId));
+            }
+        }
+        return list;
+    }
     
     public ObservableList<Client> getClientList() throws SQLException {
         ObservableList<Client> list = FXCollections.observableArrayList();
@@ -203,6 +231,49 @@ public class Model {
             }
         }
         return list;        
+    }
+    
+        public Room getRoomById(Integer roomId) throws SQLException {
+            Room returnedRoom = null;
+       try (Statement stmt = con.createStatement()) {
+           ResultSet rs = stmt.executeQuery("SELECT * FROM APP.ROOM WHERE idRoom = 2 ");
+            while (rs.next()) {               
+                Integer id = rs.getInt("idRoom");
+                System.out.println("DD" + id);
+                String roomName = rs.getString("room_name");
+                Integer numberOfSingleBeds = rs.getInt("number_of_single_beds");
+                Integer numberOfDoubleBeds = rs.getInt("number_of_double_beds");
+                Integer numberOfExtraBeds = rs.getInt("number_of_extra_beds");
+                Integer floorNumber = rs.getInt("floor_number");
+                Double priceOfRoom = rs.getDouble("price_of_room");
+                Double priceOfAdult = rs.getDouble("price_of_adult");
+                Double priceOfMinor = rs.getDouble("price_of_minor");
+                String smallDescription = rs.getString("small_description");
+                String bigDescription = rs.getString("big_description");
+                String extraDescription = rs.getString("extra_description");
+                String building = rs.getString("building");
+                Boolean balcon = rs.getBoolean("balcon");
+                Boolean beachScreen = rs.getBoolean("beach_screen");
+                Boolean blanket = rs.getBoolean("blanket");
+                Boolean sunbed = rs.getBoolean("sunbed");
+                Boolean tv = rs.getBoolean("tv");
+                Boolean wiFi = rs.getBoolean("wi_fi");
+                Boolean individualEntrance = rs.getBoolean("individual_entrance");
+                Boolean friendlyAnimal = rs.getBoolean("friendly_animal");
+                Boolean kettle = rs.getBoolean("kettle");
+                Boolean tableware = rs.getBoolean("tableware");
+                Boolean tableLamp = rs.getBoolean("table_lamp");
+                AdditionalRoomItems e = new AdditionalRoomItems();
+                returnedRoom = new Room(id, roomName, numberOfSingleBeds, numberOfDoubleBeds,
+                        numberOfExtraBeds, floorNumber, priceOfRoom, priceOfAdult,
+                        priceOfMinor, smallDescription, bigDescription, extraDescription,
+                        building, balcon, beachScreen, blanket, sunbed, tv, wiFi,
+                        individualEntrance, friendlyAnimal, kettle, tableware, tableLamp);
+            }
+       } catch (SQLException e){
+           System.out.println(e);
+       }
+       return returnedRoom;
     }
         
     public ObservableList<Room> getRoomList() throws SQLException {
@@ -310,7 +381,5 @@ public class Model {
             return null;
         }
     }
-
-
     
 }

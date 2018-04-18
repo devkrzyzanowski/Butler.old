@@ -46,7 +46,7 @@ public class addClientController extends DialogBox implements Initializable {
         Integer zipCode = Integer.valueOf(zipCodeTextField.getText());
         Integer contactPhoneNumber = Integer.valueOf(contactPhoneNumberTextField.getText());
         String email = emailTextField.getText();
-        Client client = new Client(null, firstName, lastName, city, street, homeNumber, flatNumber, zipCode, contactPhoneNumber, email);
+        Client client = new Client(firstName, lastName, city, street, homeNumber, flatNumber, zipCode, contactPhoneNumber, email);
         model.addClientToDataBase(client);
         cancelAction(event);
     }

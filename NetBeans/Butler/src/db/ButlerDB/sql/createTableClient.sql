@@ -10,6 +10,6 @@ CREATE TABLE APP.CLIENT
     flat_number INT,
     zip_code INT,
     contact_phone_number INT,
-    email VARCHAR(45)
-
+    email VARCHAR(45),
+    PRIMARY KEY (idClient)
 );

@@ -1,7 +1,7 @@
 DROP TABLE APP.ROOM;
 CREATE TABLE APP.ROOM
 (
-    idRoom INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    idRoom INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,
     room_name VARCHAR(45),
     number_of_single_beds INT,
     number_of_double_beds INT,
@@ -25,5 +25,4 @@ CREATE TABLE APP.ROOM
     kettle BOOLEAN,
     tableware BOOLEAN,
     table_lamp BOOLEAN,
-    CONSTRAINT room_primary_key PRIMARY KEY (idRoom)
 );

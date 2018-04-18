@@ -16,49 +16,74 @@ import javafx.beans.property.StringProperty;
  */
 public class Booking {
     private IntegerProperty id = new SimpleIntegerProperty();
-    private StringProperty startOfReservationDate = new SimpleStringProperty();
-    private StringProperty endOfReservationDate = new SimpleStringProperty();
-    private IntegerProperty roomId = new SimpleIntegerProperty();
-    private IntegerProperty paymentStatus = new SimpleIntegerProperty();
+    private StringProperty beginOfBooking = new SimpleStringProperty();
+    private StringProperty endOfBooking = new SimpleStringProperty();
+    private IntegerProperty idClient = new SimpleIntegerProperty();
+    private IntegerProperty idRoom = new SimpleIntegerProperty();
     
-    public Booking(){
-        
+    public Booking(Integer id, String beginOfBooking, String endOfBooking, Integer clientId, Integer roomId){
+        this.id.set(id);
+        this.beginOfBooking.set(beginOfBooking);
+        this.endOfBooking.set(endOfBooking);
+        this.idClient.set(clientId);
+        this.idRoom.set(roomId);
     }
 
     public IntegerProperty getId() {
         return id;
     }
 
-    public StringProperty getStartOfReservationDate() {
-        return startOfReservationDate;
+    public void setId(IntegerProperty id) {
+        this.id = id;
     }
 
-    public void setStartOfReservationDate(StringProperty startOfReservationDate) {
-        this.startOfReservationDate = startOfReservationDate;
+    public String getBeginOfBooking() {
+        return beginOfBooking.getValue();
     }
 
-    public StringProperty getEndOfReservationDate() {
-        return endOfReservationDate;
+    public void setBeginOfBooking(StringProperty beginOfBooking) {
+        this.beginOfBooking = beginOfBooking;
     }
 
-    public void setEndOfReservationDate(StringProperty endOfReservationDate) {
-        this.endOfReservationDate = endOfReservationDate;
+    public StringProperty getEndOfBooking() {
+        return endOfBooking;
+    }
+
+    public void setEndOfBooking(StringProperty endOfBooking) {
+        this.endOfBooking = endOfBooking;
+    }
+
+    public IntegerProperty getClientId() {
+        return idClient;
+    }
+
+    public IntegerProperty getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(IntegerProperty idClient) {
+        this.idClient = idClient;
+    }
+
+    public IntegerProperty getIdRoom() {
+        return idRoom;
+    }
+
+    public void setIdRoom(IntegerProperty idRoom) {
+        this.idRoom = idRoom;
+    }
+
+    public void setClientId(IntegerProperty clientId) {
+        this.idClient = clientId;
     }
 
     public IntegerProperty getRoomId() {
-        return roomId;
+        return idRoom;
     }
 
     public void setRoomId(IntegerProperty roomId) {
-        this.roomId = roomId;
+        this.idRoom = roomId;
     }
 
-    public IntegerProperty getPaymentStatus() {
-        return paymentStatus;
-    }
-
-    public void setPaymentStatus(IntegerProperty paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
     
 }

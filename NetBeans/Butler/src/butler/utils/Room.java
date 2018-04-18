@@ -53,6 +53,7 @@ public class Room {
                 Boolean tv, Boolean wiFi, Boolean individualEntrance, 
                 Boolean friendlyAnimal, Boolean kettle,
                 Boolean tableware, Boolean tableLamp){
+        this.id.set(id);
         this.roomName.set(roomName);
         this.numberOfSingleBeds.set(numberOfSingleBeds);
         this.numberOfDoubleBeds.set(numberOfDoubleBeds);
@@ -94,8 +95,8 @@ public class Room {
         this.setAdditionalRoomItems(eI);
     }
 
-    public IntegerProperty getId() {
-        return id;
+    public Integer getId() {
+        return id.getValue();
     }
 
     public void setId(IntegerProperty id) {

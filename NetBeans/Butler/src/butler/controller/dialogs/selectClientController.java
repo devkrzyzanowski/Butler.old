@@ -60,9 +60,6 @@ public class selectClientController extends DialogBox implements Initializable {
         zipCode.setCellValueFactory(new PropertyValueFactory<>("zipCode"));
         contactPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("contactPhoneNumber"));
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
-        clientTableView.getSelectionModel().select(2);
-
-        
     }
     
     public void close(){
@@ -85,7 +82,6 @@ public class selectClientController extends DialogBox implements Initializable {
         } else {
             return "BRAK";
         }
-        
     }
 
     TableView<Client> getTable() {

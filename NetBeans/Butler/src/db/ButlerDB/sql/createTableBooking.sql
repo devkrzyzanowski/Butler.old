@@ -1,11 +1,13 @@
 DROP TABLE APP.BOOKING;
 CREATE TABLE APP.BOOKING
 (
-    idBooking INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    idBooking INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,
+    begin_of_booking TIMESTAMP,
+    end_of_booking TIMESTAMP,
+    Client_idClient INT,
+    Room_idRoom INT,
     
-
-    CONSTRAINT booking_primay_key PRIMARY KEY (idBooking),
-    CONSTRAINT Booking_FKIndex1 FOREIGN KEY (Client_idClient) REFERENCES APP.CLIENT(idClient),
-    CONSTRAINT Booking_FKIndex2 FREIGN KEY (Bill_idBill) REFERENCES APP.BILL(idBill)
+    FOREIGN KEY (Client_idClient) REFERENCES CLIENT(idClient),
+    FOREIGN KEY (Room_idRoom) REFERENCES ROOM(idRoom)
 );
 
