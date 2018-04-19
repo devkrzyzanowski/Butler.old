@@ -233,6 +233,13 @@ public class Model {
         return list;        
     }
     
+    public void removeBookingById(Integer id) {
+        try {
+            con.createStatement().execute("DELETE FROM Booking WHERE idBooking = "+id+"");
+        } catch (Exception e) {
+        }
+    }
+    
         public Room getRoomById(Integer roomId) throws SQLException {
             Room returnedRoom = null;
        try (Statement stmt = con.createStatement()) {

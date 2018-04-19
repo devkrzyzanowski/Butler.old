@@ -13,7 +13,7 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #555555;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.dialogs.addReservationController">
    <children>
       <Button fx:id="cancelButton" layoutX="1136.0" layoutY="763.0" mnemonicParsing="false" onAction="#cancelAction" text="Anuluj" />
-      <Button fx:id="addButton" layoutX="948.0" layoutY="763.0" mnemonicParsing="false" onAction="#addReservation" prefHeight="25.0" prefWidth="121.0" text="Dodaj" />
+      <Button fx:id="addReservationButton" layoutX="948.0" layoutY="763.0" mnemonicParsing="false" onAction="#addReservation" prefHeight="25.0" prefWidth="121.0" text="Dodaj" />
       <AnchorPane fx:id="topPane" onMouseDragged="#onMouseDragging" onMousePressed="#onMousePressed" prefHeight="60.0" prefWidth="1200.0" style="-fx-background-color: #333333;">
          <children>
             <Label layoutX="14.0" layoutY="4.0" prefHeight="53.0" prefWidth="464.0" text="Dodaj rezerwację" textAlignment="CENTER" textFill="#d7d7d7">
@@ -33,7 +33,7 @@
       <Label layoutX="35.0" layoutY="88.0" text="Pokój : " textFill="#b9b9b9" />
       <Button fx:id="addN" layoutX="234.0" layoutY="301.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="121.0" text="Nowy klient" />
       <Label layoutX="35.0" layoutY="276.0" text="Rezerwacja na :" />
-      <TextField fx:id="selectClientTextField" editable="false" layoutX="35.0" layoutY="301.0" />
+      <TextField fx:id="selectClientTextField" editable="false" layoutX="35.0" layoutY="301.0" prefHeight="31.0" prefWidth="171.0" />
       <Button fx:id="selectClientButton" layoutX="234.0" layoutY="332.0" mnemonicParsing="false" onAction="#openSelectClientDialog" text="Wybierz klienta" />
       <TextField layoutX="407.0" layoutY="145.0" prefHeight="25.0" prefWidth="39.0" />
       <Label layoutX="396.0" layoutY="121.0" text="Liczba nocy" textFill="#b9b9b9" />

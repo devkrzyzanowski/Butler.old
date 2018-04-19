@@ -6,10 +6,9 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.Pane?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.fragments.MenuBarController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.fragments.MenuBarController">
    <children>
-      <MenuBar onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" prefHeight="25.0" prefWidth="1280.0">
+      <MenuBar maxHeight="32.0" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" prefHeight="32.0" prefWidth="1280.0">
         <menus>
           <Menu mnemonicParsing="false" text="Plik">
             <items>

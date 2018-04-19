@@ -9,6 +9,7 @@ import butler.utils.Booking;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,12 +18,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
 
 
 /**
@@ -42,11 +46,14 @@ public class BookingScheduleController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = butler.Butler.model;
+        bookingTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        bookingTableView.getSelectionModel().setCellSelectionEnabled(true);
         try {
             bookingTableView.setItems(model.getBookingList());
         } catch (SQLException ex) {
             
         }
+        
         beginBookingTableColumn.setCellValueFactory(new PropertyValueFactory<>("beginOfBooking"));
         toBookingTableColumn.setCellValueFactory(new PropertyValueFactory<>("endOfBooking"));
         roomTableColumn.setCellValueFactory(new PropertyValueFactory<>("idRoom"));
@@ -62,7 +69,10 @@ public class BookingScheduleController implements Initializable {
         stage.show();
     }
         @FXML private void removeReservation(ActionEvent event) {
-
+            if (!bookingTableView.getSelectionModel().isEmpty()) {
+                model.removeBookingById(bookingTableView.getSelectionModel().getSelectedItem().getId().getValue());
+            }
+            refresh();
     }
         @FXML private void modifyReservation(ActionEvent event) {
 

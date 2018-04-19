@@ -22,6 +22,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -36,6 +37,7 @@ public class addReservationController extends DialogBox implements Initializable
     
     @FXML TextField selectClientTextField, selectRoomTextField;
     @FXML DatePicker fromDatePicker, toDatePicker;
+    @FXML Button addReservationButton;
     private Client selectedClient;
     private Room selectedRoom;
     private Model model;
@@ -56,6 +58,7 @@ public class addReservationController extends DialogBox implements Initializable
     
     @FXML private void addReservation(ActionEvent event){
         sendReservationToDataBase();
+        close();
     }
     
     @FXML private void openSelectClientDialog(ActionEvent event) throws IOException{
@@ -94,5 +97,10 @@ public class addReservationController extends DialogBox implements Initializable
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
         stage.show();
+    }
+    
+        public void close(){
+        Stage stage = (Stage) addReservationButton.getScene().getWindow();
+        stage.close();        
     }
 }

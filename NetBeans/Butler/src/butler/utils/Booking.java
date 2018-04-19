@@ -4,7 +4,6 @@
  */
 package butler.utils;
 
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -45,28 +44,24 @@ public class Booking {
         this.beginOfBooking = beginOfBooking;
     }
 
-    public StringProperty getEndOfBooking() {
-        return endOfBooking;
+    public String getEndOfBooking() {
+        return endOfBooking.getValue();
     }
 
     public void setEndOfBooking(StringProperty endOfBooking) {
         this.endOfBooking = endOfBooking;
     }
 
-    public IntegerProperty getClientId() {
-        return idClient;
-    }
-
-    public IntegerProperty getIdClient() {
-        return idClient;
+    public Integer getIdClient() {
+        return idClient.getValue();
     }
 
     public void setIdClient(IntegerProperty idClient) {
         this.idClient = idClient;
     }
 
-    public IntegerProperty getIdRoom() {
-        return idRoom;
+    public Integer getIdRoom() {
+        return idRoom.getValue();
     }
 
     public void setIdRoom(IntegerProperty idRoom) {
@@ -84,6 +79,4 @@ public class Booking {
     public void setRoomId(IntegerProperty roomId) {
         this.idRoom = roomId;
     }
-
-    
 }
