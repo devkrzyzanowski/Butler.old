@@ -36,6 +36,4 @@ class DialogBox {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
-
-
 }

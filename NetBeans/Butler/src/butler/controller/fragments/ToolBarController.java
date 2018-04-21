@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -48,6 +49,23 @@ public class ToolBarController implements Initializable {
         buttons.add(institutionButton);
         buttons.add(operationHistoryButton);
         buttons.add(sendBugButton);
+        
+        for (Button b : buttons) {
+                    b.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+               b.setStyle("-fx-background-color: #999999;"
+                    + "-fx-background-radius: 0;");
+            }
+        });
+                b.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+               b.setStyle("-fx-background-color: #555555;"
+                    + "-fx-background-radius: 0;");
+            }
+        });
+        }
     }
     
     @FXML private void setScreenToBookingSchedule(ActionEvent event) throws IOException{
@@ -90,17 +108,14 @@ public class ToolBarController implements Initializable {
     }
     
     private void setPage(ActionEvent event, String path, Integer index) throws IOException{
-        
         bundle = ResourceBundle.getBundle("resources.bundles.messages", new Locale("pl"));
         FXMLLoader fXMLLoader = new FXMLLoader(this.getClass().getResource("/butler/view/"+path+".fxml"), bundle);
         Parent root = fXMLLoader.load();
-        
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         setSelected(index);
-        stage.show();
-        
+        stage.show();     
     }
     
 }

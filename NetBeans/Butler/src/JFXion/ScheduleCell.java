@@ -21,14 +21,30 @@ public class ScheduleCell extends Pane {
     private Integer bookingDays;
     private Model model;
     private String bgColor;
+    private Integer idBooking;
+    private Booking booking;
+
+    public Integer getIdBooking() {
+        return idBooking;
+    }
+
+    public void setIdBooking(Integer idBooking) {
+        this.idBooking = idBooking;
+    }
+
+    public Booking getBooking() {
+        return booking;
+    }
     
     
     public ScheduleCell(Integer idColumn, Integer idRow, Booking booking) {
+        this.booking = booking;
         this.idColumn = idColumn;
         this.idRow = idRow;
         this.setMinSize(120, 20);
         this.setPrefSize(120, 20);
         this.bookingDays = booking.getBookingDays();
+        this.idBooking = booking.getId().getValue();
         model = butler.Butler.model;
         switch (booking.getBookingStatus()){
             case 1 :bgColor = "blue";  break;

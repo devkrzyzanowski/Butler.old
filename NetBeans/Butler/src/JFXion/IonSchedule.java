@@ -5,16 +5,30 @@
  */
 package JFXion;
 
+import static butler.Butler.bundle;
+import butler.controller.dialogs.ModifyBookingController;
 import butler.model.Model;
 import butler.utils.Booking;
 import butler.utils.Room;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 /**
  *
@@ -47,6 +61,29 @@ public class IonSchedule extends ScrollPane {
         setUpData();
         draw();
         this.setContent(gridPane);
+        for (ScheduleCell sc : scheduleCells) {
+            sc.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                bundle = ResourceBundle.getBundle("resources.bundles.messages", new Locale("pl"));
+                FXMLLoader fXMLLoader = new FXMLLoader(this.getClass().getResource("/butler/view/dialogs/modifyBooking.fxml"), bundle);
+                Parent parent;
+                
+                try {
+                    parent = fXMLLoader.load();
+                    ModifyBookingController mdf = fXMLLoader.getController();
+                    mdf.init(sc.getBooking());
+                    Scene scene = new Scene(parent);
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(IonSchedule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                                
+            }
+        });
+        }
     }
     
     private void setUpData(){
