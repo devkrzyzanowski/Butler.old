@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#onMouseDragging" onMousePressed="#onMousePressed" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #dfe2db;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.loginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#onMouseDragging" onMousePressed="#onMousePressed" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #dfe2db;" xmlns="http://javafx.com/javafx/8.0.161" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.loginController">
    <children>
       <AnchorPane prefHeight="375.0" prefWidth="200.0" style="-fx-background-color: #444444;">
          <children>
@@ -51,14 +51,12 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Hyperlink layoutX="81.0" layoutY="186.0" text="Przypomnij hasło" textFill="#388df4" />
-                  <TextField fx:id="loginTextField" layoutX="130.0" layoutY="15.0" prefHeight="25.0" prefWidth="190.0" style="-fx-background-radius: 0;" />
-                  <PasswordField fx:id="passwordTextField" layoutX="130.0" layoutY="50.0" prefHeight="25.0" prefWidth="190.0" style="-fx-background-radius: 0;">
+                  <TextField fx:id="loginTextField" layoutX="130.0" layoutY="15.0" prefHeight="25.0" prefWidth="190.0" style="-fx-background-radius: 0;" text="admin" />
+                  <PasswordField fx:id="passwordTextField" layoutX="130.0" layoutY="50.0" prefHeight="25.0" prefWidth="190.0" style="-fx-background-radius: 0;" text="password">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </PasswordField>
-                  <Hyperlink fx:id="registerHyperLink" layoutX="81.0" layoutY="206.0" onAction="#setScreenToRegisterPage" text="Rejestracja" textFill="#388df4" />
                   <FontAwesomeIconView glyphName="LOCK" layoutX="106.0" layoutY="72.0" size="24" />
                   <FontAwesomeIconView fill="#d0d0d0" glyphName="SIGN_IN" layoutX="276.0" layoutY="125.0" size="36" />
                   <ChoiceBox layoutX="130.0" layoutY="85.0" prefWidth="190.0" />

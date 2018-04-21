@@ -6,6 +6,7 @@
 package butler;
 
 import butler.model.Model;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,13 +21,13 @@ import javafx.stage.StageStyle;
  */
 public class Butler extends Application {
     public static Model model;
+    public static ResourceBundle bundle;
     @Override
     public void start(Stage stage) throws Exception {
         model = new Model();
-        ResourceBundle bundle = ResourceBundle.getBundle("resources.bundles.messages");
-        
-        FXMLLoader fXMLLoader = new FXMLLoader(this.getClass().getResource("view/LoginPage.fxml"));
-        fXMLLoader.setResources(bundle);
+        Locale.setDefault(new Locale("pl"));
+        bundle = ResourceBundle.getBundle("resources.bundles.messages", new Locale("pl"));
+        FXMLLoader fXMLLoader = new FXMLLoader(this.getClass().getResource("view/LoginPage.fxml"), bundle);
         Parent root = fXMLLoader.load();
         
         //stage.initStyle(StageStyle.TRANSPARENT);

@@ -98,7 +98,10 @@ public class loginController {
 
     }  
     private void setPage(ActionEvent event, String path) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("/butler/view/"+path+".fxml"));
+        ResourceBundle bundle = ResourceBundle.getBundle("resources.bundles.messages");
+        FXMLLoader fXMLLoader = new FXMLLoader(getClass().getResource("/butler/view/"+path+".fxml"), bundle);
+
+        Parent root = fXMLLoader.load();
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);

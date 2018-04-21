@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,9 +52,10 @@ public class addReservationController extends DialogBox implements Initializable
     }
     
     private void sendReservationToDataBase(){
-        Timestamp ts = new Timestamp(System.currentTimeMillis());
-        System.out.println(selectedRoom.getRoomName()+"pp");
-        model.addBookingToDataBase(ts, ts, selectedClient.getId(), selectedRoom.getId());
+        Timestamp ts = Timestamp.valueOf(fromDatePicker.getValue().atStartOfDay());
+        Timestamp ts2 = Timestamp.valueOf(toDatePicker.getValue().atStartOfDay());
+        
+        model.addBookingToDataBase(ts, ts2, selectedClient.getId(), selectedRoom.getId());
     }
     
     @FXML private void addReservation(ActionEvent event){

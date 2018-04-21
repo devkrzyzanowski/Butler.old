@@ -194,7 +194,7 @@ public class Model {
             }
         }
         
-    public ObservableList<Booking> getBookingList() throws SQLException {
+    public ObservableList<Booking> getBookingList() {
         ObservableList<Booking> list = FXCollections.observableArrayList();
         try (Statement stmt = con.createStatement()){
             ResultSet rs = stmt.executeQuery("SELECT * FROM APP.BOOKING");
@@ -204,10 +204,36 @@ public class Model {
             Timestamp endOfBooking = rs.getTimestamp("end_of_booking");
             Integer clientId = rs.getInt("Client_idClient");
             Integer roomId = rs.getInt("Room_idRoom");
-            list.add(new Booking(id, String.valueOf(beginOfBooking), String.valueOf(endOfBooking), clientId, roomId));
+            Integer bookingStatus = rs.getInt("booking_status");
+            list.add(new Booking(id, String.valueOf(beginOfBooking), String.valueOf(endOfBooking), clientId, roomId, bookingStatus));
             }
-        }
+        } catch (SQLException e) {System.out.println(e);}
         return list;
+    }
+   
+        public Client getClientById(Integer idClient) {
+            Client returnedClient = null;
+       try (Statement stmt = con.createStatement()) {
+           ResultSet rs = stmt.executeQuery("SELECT * FROM APP.CLIENT WHERE idClient = "+idClient+" ");
+            while (rs.next()) {                
+                Integer id = rs.getInt("idClient");
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String city = rs.getString("city");
+                String street = rs.getString("street");
+                Integer homeNumber = rs.getInt("home_number");
+                Integer flatNumber = rs.getInt("flat_number");
+                Integer zipCode = rs.getInt("zip_code");
+                Integer contactPhoneNumber = rs.getInt("contact_phone_number");
+                String email = rs.getString("email");
+                returnedClient = new Client(id, firstName, lastName, city, street,
+                        homeNumber, flatNumber, zipCode, contactPhoneNumber,
+                        email);
+            }
+       } catch (SQLException e){
+           System.out.println(e);
+       }
+       return returnedClient;
     }
     
     public ObservableList<Client> getClientList() throws SQLException {
@@ -243,7 +269,7 @@ public class Model {
         public Room getRoomById(Integer roomId) throws SQLException {
             Room returnedRoom = null;
        try (Statement stmt = con.createStatement()) {
-           ResultSet rs = stmt.executeQuery("SELECT * FROM APP.ROOM WHERE idRoom = 2 ");
+           ResultSet rs = stmt.executeQuery("SELECT * FROM APP.ROOM WHERE idRoom = "+roomId+" ");
             while (rs.next()) {               
                 Integer id = rs.getInt("idRoom");
                 System.out.println("DD" + id);
@@ -283,7 +309,7 @@ public class Model {
        return returnedRoom;
     }
         
-    public ObservableList<Room> getRoomList() throws SQLException {
+    public ObservableList<Room> getRoomList() {
         ObservableList<Room> list = FXCollections.observableArrayList();
         try (Statement stmt = con.createStatement()){
             ResultSet rs = stmt.executeQuery("SELECT * FROM APP.ROOM");
@@ -319,8 +345,35 @@ public class Model {
                         building, balcon, beachScreen, blanket, sunbed, tv, wiFi,
                         individualEntrance, friendlyAnimal, kettle, tableware, tableLamp));
             }
-        }
+        } catch (SQLException e){ System.out.println(e); }
         return list;
+    }
+    
+    private boolean timeBeetwen(Timestamp time, Timestamp after, Timestamp before) {
+        return (time.after(after) && time.before(before));
+    }
+    
+    public String roomOwnedBy(Integer idRoom, Timestamp ts) {
+        String s = "";
+        try (Statement stmt = con.createStatement()) {
+            ResultSet rs = stmt.executeQuery("SELECT begin_of_booking, end_of_booking, Client_idClient FROM APP.BOOKING WHERE Room_idRoom = " + idRoom + "");
+        while (rs.next()) {
+            Timestamp beginOfBooking = rs.getTimestamp("begin_of_booking");
+            Timestamp endOfBooking = rs.getTimestamp("end_of_booking");
+            Integer idClient = rs.getInt("Client_idClient");
+            System.out.println(idClient);
+            if (timeBeetwen(ts, beginOfBooking, endOfBooking)) {
+                try (Statement stmt2 = con.createStatement()) {
+                    ResultSet rs2 = stmt2.executeQuery("SELECT first_name, last_name FROM APP.CLIENT WHERE idClient = " + idClient + "");
+                    while (rs2.next()) {
+                        System.out.println("w");
+                        s = rs2.getString("first_name") + " " + rs2.getString("last_name");
+                    }
+                } catch (SQLException e) {System.out.println(e);}
+            }
+        }
+        } catch (SQLException e){System.out.println(e);}
+        return s;
     }
     
     public ObservableList<OperationHistory> getOperationHistoryList() throws SQLException {
@@ -387,6 +440,5 @@ public class Model {
         } else {
             return null;
         }
-    }
-    
+    } 
 }

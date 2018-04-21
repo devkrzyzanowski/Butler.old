@@ -4,6 +4,7 @@
  */
 package butler.utils;
 
+import java.sql.Timestamp;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -19,15 +20,42 @@ public class Booking {
     private StringProperty endOfBooking = new SimpleStringProperty();
     private IntegerProperty idClient = new SimpleIntegerProperty();
     private IntegerProperty idRoom = new SimpleIntegerProperty();
+    private IntegerProperty bookingDays = new SimpleIntegerProperty();
+    private IntegerProperty bookingStatus = new SimpleIntegerProperty();
     
-    public Booking(Integer id, String beginOfBooking, String endOfBooking, Integer clientId, Integer roomId){
+    public Booking(Integer id, String beginOfBooking, String endOfBooking, Integer clientId, Integer roomId, Integer bookingStatus){
         this.id.set(id);
         this.beginOfBooking.set(beginOfBooking);
         this.endOfBooking.set(endOfBooking);
         this.idClient.set(clientId);
         this.idRoom.set(roomId);
+        this.bookingStatus.set(bookingStatus);
+        Timestamp begin = Timestamp.valueOf(beginOfBooking);
+        Timestamp end = Timestamp.valueOf(endOfBooking);        
+        this.bookingDays.set(Math.toIntExact(Long.valueOf(  (end.getTime() - begin.getTime()) / 86400000l)));
+    }
+    
+    public Integer getBookingStatus() {
+        return bookingStatus.getValue();
+    }
+    
+    public void setBookingStatus(Integer bookingStatus) {
+        this.bookingStatus.setValue(bookingStatus);
     }
 
+    public Integer getBookingDays() {
+        return bookingDays.getValue();
+    }
+
+    public void setBookingDays(Integer bookingDays) {
+        this.bookingDays.setValue(bookingDays);
+    }
+
+    @Override
+    public String toString(){
+        return "Id rezerwacji : " + id.getValue().toString();
+    }
+    
     public IntegerProperty getId() {
         return id;
     }

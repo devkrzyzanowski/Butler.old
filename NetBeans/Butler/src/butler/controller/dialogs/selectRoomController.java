@@ -35,11 +35,7 @@ public class selectRoomController extends DialogBox implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = butler.Butler.model;
-        try {
-            roomTableView.setItems(model.getRoomList());
-        } catch (SQLException e){
-            System.out.println(e);
-        }
+        roomTableView.setItems(model.getRoomList());
         roomNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("roomName"));
         buildingTableColumn.setCellValueFactory(new PropertyValueFactory<>("building"));
         extraDescriptionTableColumn.setCellValueFactory(new PropertyValueFactory<>("extraDescription"));

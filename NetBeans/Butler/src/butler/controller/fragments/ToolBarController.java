@@ -4,11 +4,13 @@
  */
 package butler.controller.fragments;
 
+import static butler.Butler.bundle;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,7 +27,7 @@ import javafx.stage.Stage;
  *
  * @author Michał
  */
-public class MenuController implements Initializable {
+public class ToolBarController implements Initializable {
 
     @FXML
     Button bookingScheduleButton, clientBaseButton, listOfRoomsButton,
@@ -88,7 +90,11 @@ public class MenuController implements Initializable {
     }
     
     private void setPage(ActionEvent event, String path, Integer index) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("/butler/view/"+path+".fxml"));
+        
+        bundle = ResourceBundle.getBundle("resources.bundles.messages", new Locale("pl"));
+        FXMLLoader fXMLLoader = new FXMLLoader(this.getClass().getResource("/butler/view/"+path+".fxml"), bundle);
+        Parent root = fXMLLoader.load();
+        
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
