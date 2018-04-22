@@ -4,9 +4,12 @@
  */
 package butler.controller.dialogs;
 
+import JFXion.IonSchedule;
+import butler.controller.BookingScheduleController;
 import butler.utils.Booking;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,6 +26,9 @@ import javafx.stage.StageStyle;
 public class ModifyBookingController extends DialogBox implements Initializable {
     private Booking booking;
     @FXML private Label label;
+    private IonSchedule ion;
+    public ModifyBookingController () {
+    }
     
 
     
@@ -30,8 +36,6 @@ public class ModifyBookingController extends DialogBox implements Initializable 
     public void initialize(URL location, ResourceBundle resources) {
 
     }
-    
-    
 //            Stage stage = new Stage();            
 //        FXMLLoader fXMLLoader = new FXMLLoader(getClass().getResource("/butler/view/dialogs/selectRoomDialog.fxml"));
 //        Parent parent = (Parent) fXMLLoader.load();
@@ -49,8 +53,16 @@ public class ModifyBookingController extends DialogBox implements Initializable 
 //        stage.setScene(scene);
 //        stage.show();
 
-    public void init(Booking booking) {
+    public void init(Booking booking, IonSchedule ion) {
+        this.ion = ion;
         this.booking = booking;
         label.setText(String.valueOf(booking.getBookingDays()));
+    }
+    
+    @FXML private void removeReservation(ActionEvent event) {
+        butler.Butler.model.removeBookingById(booking.getId().getValue());
+        Stage stage = (Stage) label.getScene().getWindow();
+        ion.update();
+        stage.close();
     }
 }

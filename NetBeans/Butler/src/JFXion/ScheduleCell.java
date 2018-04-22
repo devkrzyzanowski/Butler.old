@@ -6,7 +6,9 @@ package JFXion;
 
 import butler.model.Model;
 import butler.utils.Booking;
+import javafx.event.EventHandler;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
@@ -20,22 +22,9 @@ public class ScheduleCell extends Pane {
     private Label text;
     private Integer bookingDays;
     private Model model;
-    private String bgColor;
+    private Color bgColor;
     private Integer idBooking;
     private Booking booking;
-
-    public Integer getIdBooking() {
-        return idBooking;
-    }
-
-    public void setIdBooking(Integer idBooking) {
-        this.idBooking = idBooking;
-    }
-
-    public Booking getBooking() {
-        return booking;
-    }
-    
     
     public ScheduleCell(Integer idColumn, Integer idRow, Booking booking) {
         this.booking = booking;
@@ -46,22 +35,55 @@ public class ScheduleCell extends Pane {
         this.bookingDays = booking.getBookingDays();
         this.idBooking = booking.getId().getValue();
         model = butler.Butler.model;
+        
         switch (booking.getBookingStatus()){
-            case 1 :bgColor = "blue";  break;
-            case 2 :bgColor = "green";  break;
-            case 3 :bgColor = "yellow";  break;
-            case 4 :bgColor = "orange";  break;
-            default : bgColor = "red"; break;
+            case 1 :bgColor = Color.BLUE;  break;
+            case 2 :bgColor = Color.GREEN;  break;
+            case 3 :bgColor = Color.YELLOW;  break;
+            case 4 :bgColor = Color.ORANGE;  break;
+            default : bgColor = Color.RED; break;
         }
-        text = new Label(model.getClientById(booking.getIdClient()).getFirstName() + " " + model.getClientById(booking.getIdClient()).getFirstName() + "\n" + model.getClientById(booking.getIdClient()).getContactPhoneNumber());
-                this.setStyle("-fx-background-color: "+ bgColor +";"
+        this.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                String col = String.valueOf(bgColor.darker()).substring(2, 8);
+                setStyle("-fx-background-color: #"+ col +";"
                 + " -fx-border-width : 1px;"
-                + " -fx-border-color: lightgrey grey grey lightgrey;"
-        );
+                + " -fx-border-color: lightgrey grey grey lightgrey;");                
+            }
+        });
+        this.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                String col = String.valueOf(bgColor.brighter()).substring(2, 8);
+                setStyle("-fx-background-color: #"+ col +";"
+                + " -fx-border-width : 1px;"
+                + " -fx-border-color: lightgrey grey grey lightgrey;");                
+            }
+        });
+        String col = String.valueOf(bgColor).substring(2, 8);
+        text = new Label(model.getClientById(booking.getIdClient()).getFirstName()
+                + " " + model.getClientById(booking.getIdClient()).getFirstName()
+                + "\n" + model.getClientById(booking.getIdClient()).getContactPhoneNumber());
+                this.setStyle("-fx-background-color: #"+ col +";"
+                + " -fx-border-width : 1px;"
+                + " -fx-border-color: lightgrey grey grey lightgrey;");
         text.setLayoutX(14);
         text.setLayoutY(2);
         this.getChildren().add(text);
         addListeners();
+    }
+    
+     public Integer getIdBooking() {
+        return idBooking;
+    }
+
+    public void setIdBooking(Integer idBooking) {
+        this.idBooking = idBooking;
+    }
+
+    public Booking getBooking() {
+        return booking;
     }
 
     public Integer getBookingDays() {

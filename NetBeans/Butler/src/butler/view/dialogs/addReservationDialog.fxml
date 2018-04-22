@@ -4,40 +4,89 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Bloom?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="600.0" style="-fx-background-color: #555555;" xmlns="http://javafx.com/javafx/8.0.161" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.dialogs.addReservationController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/8.0.161" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.dialogs.addReservationController">
    <children>
-      <Button fx:id="cancelButton" layoutX="439.0" layoutY="411.0" mnemonicParsing="false" onAction="#cancelAction" text="Anuluj" />
-      <Button fx:id="addReservationButton" layoutX="295.0" layoutY="415.0" mnemonicParsing="false" onAction="#addReservation" prefHeight="25.0" prefWidth="121.0" text="Dodaj" />
-      <AnchorPane fx:id="topPane" onMouseDragged="#onMouseDragging" onMousePressed="#onMousePressed" prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #333333;">
+      <Button fx:id="cancelButton" layoutX="824.0" layoutY="561.0" mnemonicParsing="false" onAction="#cancelAction" text="Anuluj" />
+      <Button fx:id="addReservationButton" layoutX="691.0" layoutY="561.0" mnemonicParsing="false" onAction="#addReservation" prefHeight="25.0" prefWidth="121.0" text="Dodaj" />
+      <Hyperlink layoutX="2.0" layoutY="575.0" text="Pomoc" />
+      <Pane layoutX="14.0" layoutY="81.0" prefHeight="120.0" prefWidth="380.0" style="-fx-background-color: #dddddd;">
          <children>
-            <Label layoutX="14.0" layoutY="4.0" prefHeight="53.0" prefWidth="313.0" text="Dodaj rezerwację" textAlignment="CENTER" textFill="#d7d7d7">
+            <Label layoutX="190.0" layoutY="50.0" text="Do :" />
+            <Label layoutX="13.0" layoutY="50.0" text="Od :" />
+            <DatePicker fx:id="fromDatePicker" layoutX="14.0" layoutY="67.0" />
+            <DatePicker fx:id="toDatePicker" layoutX="190.0" layoutY="67.0" />
+            <Label layoutX="302.0" layoutY="27.0" text="Liczba nocy" />
+            <TextField layoutX="257.0" layoutY="23.0" prefHeight="25.0" prefWidth="39.0" />
+            <Label layoutX="11.0" layoutY="6.0" text="Okres pobytu">
                <font>
-                  <Font size="36.0" />
+                  <Font name="System Bold" size="12.0" />
                </font>
-               <effect>
-                  <Bloom />
-               </effect>
             </Label>
-         </children></AnchorPane>
-      <Label layoutX="24.0" layoutY="121.0" text="Od :" textFill="#b9b9b9" />
-      <Hyperlink layoutX="225.0" layoutY="414.0" text="Pomoc" />
-      <Label layoutX="212.0" layoutY="121.0" text="Do :" textFill="#b9b9b9" />
-      <DatePicker fx:id="fromDatePicker" layoutX="29.0" layoutY="145.0" />
-      <DatePicker fx:id="toDatePicker" layoutX="225.0" layoutY="176.0" />
-      <Label layoutX="35.0" layoutY="88.0" text="Pokój : " textFill="#b9b9b9" />
-      <Button fx:id="addN" layoutX="234.0" layoutY="301.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="121.0" text="Nowy klient" />
-      <Label layoutX="35.0" layoutY="276.0" text="Rezerwacja na :" />
-      <TextField fx:id="selectClientTextField" editable="false" layoutX="35.0" layoutY="301.0" prefHeight="31.0" prefWidth="171.0" />
-      <Button fx:id="selectClientButton" layoutX="234.0" layoutY="332.0" mnemonicParsing="false" onAction="#openSelectClientDialog" text="Wybierz klienta" />
-      <TextField layoutX="407.0" layoutY="145.0" prefHeight="25.0" prefWidth="39.0" />
-      <Label layoutX="396.0" layoutY="121.0" text="Liczba nocy" textFill="#b9b9b9" />
-      <TextField fx:id="selectRoomTextField" layoutX="86.0" layoutY="83.0" />
-      <Button fx:id="selectRoomButton" layoutX="284.0" layoutY="83.0" mnemonicParsing="false" onAction="#openSelectRoomDialog" text="Wybierz pokój" />
+         </children>
+      </Pane>
+      <Pane layoutX="14.0" layoutY="14.0" prefHeight="60.0" prefWidth="380.0" style="-fx-background-color: #dddddd;">
+         <children>
+            <Button fx:id="selectRoomButton" layoutX="260.0" layoutY="18.0" mnemonicParsing="false" onAction="#openSelectRoomDialog" prefHeight="25.0" prefWidth="106.0" text="Wybierz pokój" />
+            <Label layoutX="11.0" layoutY="22.0" text="Pokój : ">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="selectRoomTextField" layoutX="54.0" layoutY="18.0" prefHeight="25.0" prefWidth="200.0" />
+         </children>
+      </Pane>
+      <Pane layoutX="14.0" layoutY="208.0" prefHeight="120.0" prefWidth="380.0" style="-fx-background-color: #dddddd;">
+         <children>
+            <Button fx:id="addN" layoutX="14.0" layoutY="70.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="121.0" text="Nowy klient" />
+            <Label layoutX="5.0" layoutY="6.0" text="Rezerwacja na :">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="selectClientTextField" editable="false" layoutX="14.0" layoutY="36.0" prefHeight="25.0" prefWidth="171.0" />
+            <Button fx:id="selectClientButton" layoutX="190.0" layoutY="36.0" mnemonicParsing="false" onAction="#openSelectClientDialog" text="Wybierz klienta" />
+         </children>
+      </Pane>
+      <Pane layoutX="407.0" layoutY="14.0" prefHeight="510.0" prefWidth="479.0" style="-fx-background-color: #dddddd;">
+         <children>
+            <GridPane layoutX="14.0" layoutY="44.0" prefHeight="228.0" prefWidth="251.0" style="-fx-background-color: #cccccc;">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Liczba" GridPane.columnIndex="1" />
+                  <Label text="Cena" GridPane.columnIndex="2" />
+                  <Label text="Dorosłych" GridPane.rowIndex="1" />
+                  <Label text="Dzieci" GridPane.rowIndex="2" />
+                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Label text="Cena za dobę" GridPane.rowIndex="3" />
+                  <TextField GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="211.0" text="Ustaw cenę domyślną" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+               </children>
+            </GridPane>
+            <RadioButton layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="cena za dobę" />
+            <RadioButton layoutX="131.0" layoutY="14.0" mnemonicParsing="false" text="cena za osobo-dobę" />
+         </children>
+      </Pane>
    </children>
 </Pane>

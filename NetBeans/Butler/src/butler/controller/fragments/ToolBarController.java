@@ -23,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 /**
  *
@@ -111,8 +112,12 @@ public class ToolBarController implements Initializable {
         bundle = ResourceBundle.getBundle("resources.bundles.messages", new Locale("pl"));
         FXMLLoader fXMLLoader = new FXMLLoader(this.getClass().getResource("/butler/view/"+path+".fxml"), bundle);
         Parent root = fXMLLoader.load();
-        Scene scene = new Scene(root);
+        
+        Scene window = ((Node) event.getSource()).getScene();
+        System.out.println(window.getWidth()+"|"+window.getHeight());
+        Scene scene = new Scene(root, window.getWidth(), window.getHeight());
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        
         stage.setScene(scene);
         setSelected(index);
         stage.show();     

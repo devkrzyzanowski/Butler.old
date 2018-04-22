@@ -95,7 +95,7 @@ public class addReservationController extends DialogBox implements Initializable
         
         Scene scene = new Scene(parent);
         scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
-
+        
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
         stage.show();

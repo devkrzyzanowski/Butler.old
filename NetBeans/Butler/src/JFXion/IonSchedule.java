@@ -43,6 +43,7 @@ public class IonSchedule extends ScrollPane {
     private ObservableList<Room> roomList;
     private ObservableList<Booking> bookingList;
     private Model model;
+    
     public IonSchedule(ObservableList<Room> roomList, ObservableList<Booking> bookingList){
         this.model = butler.Butler.model;
         this.roomList = roomList;
@@ -53,37 +54,10 @@ public class IonSchedule extends ScrollPane {
         timeCells = new ArrayList<>();
         roomCells = new ArrayList<>();
         scheduleCells = new ArrayList<>();
-             
-//        for (NewCell nc : gridPaneList) {
-//            gridPane.add(nc, nc.getColumnIndex(), nc.getRowIndex(), nc.getColumnSpan(), nc.getRowSpan());
-//        }
-        
         setUpData();
         draw();
         this.setContent(gridPane);
-        for (ScheduleCell sc : scheduleCells) {
-            sc.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                bundle = ResourceBundle.getBundle("resources.bundles.messages", new Locale("pl"));
-                FXMLLoader fXMLLoader = new FXMLLoader(this.getClass().getResource("/butler/view/dialogs/modifyBooking.fxml"), bundle);
-                Parent parent;
-                
-                try {
-                    parent = fXMLLoader.load();
-                    ModifyBookingController mdf = fXMLLoader.getController();
-                    mdf.init(sc.getBooking());
-                    Scene scene = new Scene(parent);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException ex) {
-                    Logger.getLogger(IonSchedule.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                                
-            }
-        });
-        }
+        addListeners();
     }
     
     private void setUpData(){
@@ -92,21 +66,46 @@ public class IonSchedule extends ScrollPane {
         addSchedules(model.getBookingList(), timeCells, roomCells);        
     }
     
+    private void addListeners() {
+        scheduleCells.forEach((sc) -> {
+            sc.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    bundle = ResourceBundle.getBundle("resources.bundles.messages", new Locale("pl"));
+                    FXMLLoader fXMLLoader = new FXMLLoader(this.getClass().getResource("/butler/view/dialogs/modifyBooking.fxml"), bundle);
+                    Parent parent;
+                    try {
+                        parent = fXMLLoader.load();
+                        ModifyBookingController mdf = fXMLLoader.getController();
+                        mdf.init(sc.getBooking(), IonSchedule.this);
+                        Scene scene = new Scene(parent);
+                        Stage stage = new Stage();
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(IonSchedule.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                }
+            });
+        });
+    }
+    
     private void draw() {
         for (int i = 0; i <= roomCells.size(); i++) {
             for (int j = 0; j <= timeCells.size(); j++) {
                 gridPane.add(new NewCell(i, j), i, j);
             }
         }
-        for (RoomCell rc : roomCells) {
+        roomCells.forEach((rc) -> {
             gridPane.add(rc, rc.getIdColumn(), 0);
-        } 
-        for (TimeCell tc : timeCells) {
+        }); 
+        timeCells.forEach((tc) -> {
             gridPane.add(tc, 0, tc.getIdRow());
-        }
-        for (ScheduleCell sc : scheduleCells) {
+        });
+        scheduleCells.forEach((sc) -> {
             gridPane.add(sc, sc.getIdColumn(), sc.getIdRow(), 1, sc.getBookingDays());
-        }
+        });
     }
 
     
@@ -144,7 +143,7 @@ public class IonSchedule extends ScrollPane {
             if (rc.getIdRoom() == b.getIdRoom()) {
                 x = rc.getIdColumn();
             }
-        }            
+        }
             ScheduleCell sc = new ScheduleCell(x, y, b);
             scheduleCells.add(sc);
         }
@@ -153,6 +152,7 @@ public class IonSchedule extends ScrollPane {
     public void update() {
         gridPane.getChildren().clear();
         setUpData();
+        addListeners();
         draw();
     }
 }
