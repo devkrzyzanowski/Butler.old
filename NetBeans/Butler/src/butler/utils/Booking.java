@@ -21,26 +21,26 @@ public class Booking {
     private IntegerProperty idClient = new SimpleIntegerProperty();
     private IntegerProperty idRoom = new SimpleIntegerProperty();
     private IntegerProperty bookingDays = new SimpleIntegerProperty();
-    private IntegerProperty bookingStatus = new SimpleIntegerProperty();
+    private IntegerProperty idLegend = new SimpleIntegerProperty();
     
-    public Booking(Integer id, String beginOfBooking, String endOfBooking, Integer clientId, Integer roomId, Integer bookingStatus){
+    public Booking(Integer id, String beginOfBooking, String endOfBooking, Integer clientId, Integer roomId, Integer idLegend){
         this.id.set(id);
         this.beginOfBooking.set(beginOfBooking);
         this.endOfBooking.set(endOfBooking);
         this.idClient.set(clientId);
         this.idRoom.set(roomId);
-        this.bookingStatus.set(bookingStatus);
+        this.idLegend.set(idLegend);
         Timestamp begin = Timestamp.valueOf(beginOfBooking);
         Timestamp end = Timestamp.valueOf(endOfBooking);        
         this.bookingDays.set(Math.toIntExact(Long.valueOf(  (end.getTime() - begin.getTime()) / 86400000l)));
     }
     
-    public Integer getBookingStatus() {
-        return bookingStatus.getValue();
+    public Integer getIdLegend() {
+        return idLegend.getValue();
     }
     
-    public void setBookingStatus(Integer bookingStatus) {
-        this.bookingStatus.setValue(bookingStatus);
+    public void setIdLegend(Integer idLegend) {
+        this.idLegend.setValue(idLegend);
     }
 
     public Integer getBookingDays() {

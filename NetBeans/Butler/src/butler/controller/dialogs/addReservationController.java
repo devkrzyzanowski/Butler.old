@@ -6,6 +6,7 @@ package butler.controller.dialogs;
 
 import butler.model.Model;
 import butler.utils.Client;
+import butler.utils.Legend;
 import butler.utils.Room;
 import java.io.IOException;
 import java.net.URL;
@@ -39,6 +40,7 @@ public class addReservationController extends DialogBox implements Initializable
     @FXML TextField selectClientTextField, selectRoomTextField;
     @FXML DatePicker fromDatePicker, toDatePicker;
     @FXML Button addReservationButton;
+    @FXML ComboBox<Legend> selectStatusComboBox;
     private Client selectedClient;
     private Room selectedRoom;
     private Model model;
@@ -49,13 +51,14 @@ public class addReservationController extends DialogBox implements Initializable
         @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = butler.Butler.model;
+        selectStatusComboBox.setItems(model.getLegendList());
     }
     
     private void sendReservationToDataBase(){
         Timestamp ts = Timestamp.valueOf(fromDatePicker.getValue().atStartOfDay());
         Timestamp ts2 = Timestamp.valueOf(toDatePicker.getValue().atStartOfDay());
         
-        model.addBookingToDataBase(ts, ts2, selectedClient.getId(), selectedRoom.getId());
+        model.addBookingToDataBase(ts, ts2, selectedClient.getId(), selectedRoom.getId(), selectStatusComboBox.getSelectionModel().getSelectedItem().getIdLegend());
     }
     
     @FXML private void addReservation(ActionEvent event){

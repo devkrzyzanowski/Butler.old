@@ -8,6 +8,7 @@ package butler.model;
 import butler.utils.Client;
 import butler.utils.AdditionalRoomItems;
 import butler.utils.Booking;
+import butler.utils.Legend;
 import butler.utils.OperationHistory;
 import butler.utils.Room;
 import java.sql.Connection;
@@ -17,6 +18,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -30,8 +32,7 @@ public class Model {
     private final String DBAddress = "jdbc:derby://localhost:1527/ButlerDB;";
     private final String DBUser = "User=root;";
     private final String DBPassword = "Pass=;";
-    private final String DBDriver = "org.apache.derby.jdbc.ClientDriver";
-    
+    private final String DBDriver = "org.apache.derby.jdbc.EmbeddedDriver";   
     private String connectedUserNick;
     
     Connection con;
@@ -46,12 +47,15 @@ public class Model {
             System.err.println("Derby driver not found.");
         }
         try {
-            con = DriverManager.getConnection(DBAddress + DBUser + DBPassword);
+            con = DriverManager.getConnection("jdbc:derby:myDB; user=admin; password=password" );
+            Statement stm = con.createStatement();
+
+            System.out.println("Row has been inserted...");
         } catch ( SQLException ex){
-            System.err.println("NIE POLACZONO");
+            System.err.println(ex);
         }
-    }
-    
+
+}
     /**
      * 
      * @param login 
@@ -61,7 +65,7 @@ public class Model {
      */
     public boolean connectToDataBase(String login, String password) throws SQLException{
         try (Statement stmt = con.createStatement()) {
-            ResultSet rs = stmt.executeQuery("SELECT * FROM DBUser");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM APP.DBUser");
             while (rs.next()){
                 if (rs.getString("nick").equals(login)){
                     if (rs.getString("password").equals(password)){
@@ -71,6 +75,8 @@ public class Model {
                 }
             }
         } catch (NullPointerException e){
+            System.out.println("|");
+            e.printStackTrace();
             return false;
         }
         return false;
@@ -119,7 +125,7 @@ public class Model {
     public boolean tryConnectionToDataBase(String address, String port, String dbName, String userName, String password){
         //TODO change String password to char[] password
         try {
-            con = DriverManager.getConnection("jdbc:derby://" + address + ":" + port + "/" + dbName + "; User=" + userName + "; Pass=" +  password);
+            con = DriverManager.getConnection("jdbc:debry://" + address + ":" + port + "/" + dbName + "; User=" + userName + "; Pass=" +  password);
             con.close();
             return true;
         } catch ( SQLException e){
@@ -184,10 +190,10 @@ public class Model {
             }
         }
         
-        public boolean addBookingToDataBase(Timestamp value, Timestamp value0, Integer selectedClientId, Integer selectedRoomId) {
+        public boolean addBookingToDataBase(Timestamp value, Timestamp value0, Integer selectedClientId, Integer selectedRoomId, Integer selectedLegendId) {
             try {
                 System.out.println(value);
-                con.createStatement().execute("INSERT INTO Booking(begin_of_booking, end_of_booking, Client_idClient, Room_idRoom) VALUES ('"+value+"', '"+value0+"', "+selectedClientId+", "+selectedRoomId+")");
+                con.createStatement().execute("INSERT INTO Booking(begin_of_booking, end_of_booking, Client_idClient, Room_idRoom, Legend_idLegend) VALUES ('"+value+"', '"+value0+"', "+selectedClientId+", "+selectedRoomId+", "+selectedLegendId+")");
                 return true;
             } catch (SQLException e) {
                 return false;
@@ -204,14 +210,49 @@ public class Model {
             Timestamp endOfBooking = rs.getTimestamp("end_of_booking");
             Integer clientId = rs.getInt("Client_idClient");
             Integer roomId = rs.getInt("Room_idRoom");
-            Integer bookingStatus = rs.getInt("booking_status");
-            list.add(new Booking(id, String.valueOf(beginOfBooking), String.valueOf(endOfBooking), clientId, roomId, bookingStatus));
+            Integer legendId = rs.getInt("Legend_idLegend");
+            list.add(new Booking(id, String.valueOf(beginOfBooking), String.valueOf(endOfBooking), clientId, roomId, legendId));
             }
         } catch (SQLException e) {System.out.println(e);}
         return list;
     }
+    
+    public Legend getLegendById(Integer idLegend) {
+        Legend legend = null;
+        try (Statement stmt = con.createStatement()) {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM APP.LEGEND WHERE idLegend = "+idLegend+" ");
+            while (rs.next()) {                
+                Integer id = rs.getInt("idLegend");
+                String legendName = rs.getString("legend_name");
+                String color = rs.getString("color");
+                legend = new Legend(id, legendName, color);
+            }
+        } catch (SQLException e) {System.out.println(e);}
+        return legend;       
+    }
+    
+    public void setBookingStatus(Integer bookingId, Integer statusId) {
+        try {
+            con.createStatement().execute("UPDATE APP.BOOKING SET Legend_idLegend = "+statusId+" WHERE idBooking = "+bookingId+"");
+
+        } catch (SQLException e) {System.out.println(e);}        
+    }
+    
+    public ObservableList<Legend> getLegendList() {
+        ObservableList<Legend> legends = FXCollections.observableArrayList();
+        try (Statement stmt = con.createStatement()) {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM APP.LEGEND");
+            while (rs.next()) {                
+                Integer id = rs.getInt("idLegend");
+                String legendName = rs.getString("legend_name");
+                String color = rs.getString("color");
+                legends.add(new Legend(id, legendName, color));
+            }
+        } catch (SQLException e) {System.out.println(e);}
+        return legends;
+    }
    
-        public Client getClientById(Integer idClient) {
+    public Client getClientById(Integer idClient) {
             Client returnedClient = null;
        try (Statement stmt = con.createStatement()) {
            ResultSet rs = stmt.executeQuery("SELECT * FROM APP.CLIENT WHERE idClient = "+idClient+" ");
@@ -262,7 +303,7 @@ public class Model {
     public void removeBookingById(Integer id) {
         try {
             con.createStatement().execute("DELETE FROM Booking WHERE idBooking = "+id+"");
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
     }
     
@@ -312,7 +353,7 @@ public class Model {
     public ObservableList<Room> getRoomList() {
         ObservableList<Room> list = FXCollections.observableArrayList();
         try (Statement stmt = con.createStatement()){
-            ResultSet rs = stmt.executeQuery("SELECT * FROM APP.ROOM");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Room");
             while (rs.next()) {    
                 Integer id = rs.getInt(("idRoom"));
                 String roomName = rs.getString("room_name");
@@ -442,3 +483,4 @@ public class Model {
         }
     } 
 }
+

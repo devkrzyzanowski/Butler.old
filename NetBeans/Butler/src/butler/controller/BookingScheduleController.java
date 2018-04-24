@@ -7,6 +7,7 @@ package butler.controller;
 import JFXion.IonSchedule;
 import butler.model.Model;
 import butler.utils.Booking;
+import butler.utils.Legend;
 import butler.utils.LegendCell;
 import java.io.IOException;
 import java.net.URL;
@@ -65,19 +66,11 @@ public class BookingScheduleController implements Initializable {
         model = butler.Butler.model;
         legendGridPane = new GridPane();
         legendPane.getChildren().add(legendGridPane);
-        legendGridPane.addRow(0, new LegendCell("Rezerwacja rozliczona", Color.GREEN));
-        legendGridPane.addRow(1, new LegendCell("Rezerwacja + zaliczka", Color.GREENYELLOW));
-        legendGridPane.addRow(2, new LegendCell("Rezerwacja wstępna", Color.YELLOW));
-        legendGridPane.addRow(3, new LegendCell("Rezerwacja potwierdzona", Color.YELLOWGREEN));
-        legendGridPane.addRow(4, new LegendCell("Pobyt nierozliczony", Color.ORANGERED));
-        legendGridPane.addRow(5, new LegendCell("Pobyt rozliczony", Color.GREEN));
-        legendGridPane.addRow(6, new LegendCell("Pobyt nadpłata", Color.BROWN));
-        legendGridPane.addRow(7, new LegendCell("Pobyt + zaliczka", Color.ORANGE));
-        legendGridPane.addRow(8, new LegendCell("Klient nie przyjechał", Color.RED));
-        legendGridPane.addRow(9, new LegendCell("Zakończony nierozliczony", Color.RED));
-        legendGridPane.addRow(10, new LegendCell("Pobyt zakończony", Color.GREY));
-        legendGridPane.addRow(11, new LegendCell("Zakończony nadpłata", Color.BROWN));
-        
+        int i = 0;
+        for (Legend l : model.getLegendList()) {
+            legendGridPane.addRow(i, new LegendCell(l.getLegendName(), Color.web(l.getColor())));
+            i++;
+        }
  
         ionSchedule = new IonSchedule(model.getRoomList(), model.getBookingList());
         ionSchedule.setLayoutX(0);

@@ -6,8 +6,10 @@ CREATE TABLE APP.BOOKING
     end_of_booking TIMESTAMP,
     Client_idClient INT,
     Room_idRoom INT,
+    Legend_idLegend INT,
     
     FOREIGN KEY (Client_idClient) REFERENCES CLIENT(idClient),
-    FOREIGN KEY (Room_idRoom) REFERENCES ROOM(idRoom)
+    FOREIGN KEY (Room_idRoom) REFERENCES ROOM(idRoom),
+    FOREIGN KEY (Legend_idLegend) REFERENCES LEGEND(idLegend)
 );
 
