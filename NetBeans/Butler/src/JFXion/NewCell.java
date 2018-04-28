@@ -4,6 +4,8 @@
  */
 package JFXion;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 /**
@@ -13,6 +15,7 @@ import javafx.scene.layout.Pane;
 public class NewCell extends Pane {
     private Integer columnIndex, rowIndex;
     private Integer columnSpan, rowSpan;
+    private Boolean click = false;
     
     public NewCell(Integer columnIndex, Integer rowIndex){
         this.columnIndex = columnIndex;
@@ -26,6 +29,7 @@ public class NewCell extends Pane {
         + " -fx-border-color: lightgrey grey grey lightgrey;"
         );
     }
+    
 
     public Integer getColumnIndex() {
         return columnIndex;

@@ -24,7 +24,7 @@
                   <Insets />
                </opaqueInsets>
             </Label>
-            <Button fx:id="bookingScheduleButton" mnemonicParsing="false" onAction="#setScreenToBookingSchedule" onMouseEntered="#onMouseEntered" prefHeight="60.0" prefWidth="120.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="%toolBar.bookingSchedule" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
+            <Button fx:id="bookingScheduleButton" mnemonicParsing="false" onAction="#setScreenToBookingSchedule" prefHeight="60.0" prefWidth="120.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="%toolBar.bookingSchedule" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
                <graphic>
                   <FontAwesomeIconView fill="#d0d0d0" glyphName="CALENDAR" size="36" />
                </graphic>
@@ -56,7 +56,7 @@
                   <Insets left="1.0" right="1.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="priceOfRoomsButton" disable="true" maxHeight="60.0" minHeight="60.0" mnemonicParsing="false" onAction="#setScreenToPriceOfRooms" prefHeight="60.0" prefWidth="100.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="%toolBar.pricesOfRooms" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
+            <Button fx:id="priceOfRoomsButton" maxHeight="60.0" minHeight="60.0" mnemonicParsing="false" onAction="#setScreenToPriceOfRooms" prefHeight="60.0" prefWidth="100.0" style="-fx-background-radius: 0; -fx-background-color: #555555;" text="%toolBar.pricesOfRooms" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
                <graphic>
                   <FontAwesomeIconView fill="#d0d0d0" glyphName="USD" size="36" />
                </graphic>

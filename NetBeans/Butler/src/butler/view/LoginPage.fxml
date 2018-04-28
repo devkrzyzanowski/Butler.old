@@ -3,7 +3,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#onMouseDragging" onMousePressed="#onMousePressed" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #dfe2db;" xmlns="http://javafx.com/javafx/8.0.161" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.loginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #dfe2db;" xmlns="http://javafx.com/javafx/8.0.161" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.LoginController">
    <children>
       <AnchorPane prefHeight="375.0" prefWidth="200.0" style="-fx-background-color: #444444;">
          <children>
@@ -38,7 +38,7 @@
          <children>
             <AnchorPane layoutY="120.0" prefHeight="240.0" prefWidth="400.0" style="-fx-background-color: #d3d6cf;">
                <children>
-                  <Label layoutX="87.0" layoutY="18.0" text="Login :">
+                  <Label layoutX="87.0" layoutY="74.0" text="Login :">
                      <padding>
                         <Insets right="6.0" />
                      </padding>
@@ -51,21 +51,22 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <TextField fx:id="loginTextField" layoutX="130.0" layoutY="15.0" prefHeight="25.0" prefWidth="190.0" style="-fx-background-radius: 0;" text="admin" />
-                  <PasswordField fx:id="passwordTextField" layoutX="130.0" layoutY="50.0" prefHeight="25.0" prefWidth="190.0" style="-fx-background-radius: 0;" text="password">
+                  <TextField fx:id="loginTextField" layoutX="129.0" layoutY="70.0" prefHeight="25.0" prefWidth="190.0" style="-fx-background-radius: 0;" text="admin" />
+                  <PasswordField fx:id="passwordTextField" layoutX="129.0" layoutY="124.0" prefHeight="25.0" prefWidth="190.0" style="-fx-background-radius: 0;" text="password">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </PasswordField>
-                  <FontAwesomeIconView glyphName="LOCK" layoutX="106.0" layoutY="72.0" size="24" />
-                  <FontAwesomeIconView fill="#d0d0d0" glyphName="SIGN_IN" layoutX="276.0" layoutY="125.0" size="36" />
-                  <ChoiceBox layoutX="130.0" layoutY="85.0" prefWidth="190.0" />
-                  <Label layoutX="46.0" layoutY="89.0" text="Wybierz bazę :">
+                  <FontAwesomeIconView glyphName="LOCK" layoutX="108.0" layoutY="145.0" size="24" />
+                  <Label layoutX="46.0" layoutY="14.0" text="Wybierz bazę :">
                      <padding>
                         <Insets right="6.0" />
                      </padding>
                   </Label>
-                  <Hyperlink fx:id="addDataBaseStructureButton" layoutX="130.0" layoutY="109.0" onAction="#addDataBaseStructure" text="Dodaj nową bazę" textFill="#388df4" />
+                  <Hyperlink fx:id="addDataBaseStructureButton" layoutY="215.0" onAction="#addDataBaseStructure" text="Dodaj nową bazę" textFill="#388df4" />
+                  <TextField fx:id="dbNameTextField" layoutX="129.0" layoutY="10.0" prefHeight="25.0" prefWidth="190.0" text="C:\Users\MichalKrzyzanowski\Documents\GitHub\Butler\NetBeans\Butler\InstallTest" />
+                  <Button fx:id="selectDBButton" layoutX="211.0" layoutY="35.0" mnemonicParsing="false" onAction="#choser" prefHeight="19.0" prefWidth="108.0" text="Wybierz bazę" />
+                  <CheckBox layoutX="170.0" layoutY="95.0" mnemonicParsing="false" text="Zapamietaj użytkownika" />
                </children>
             </AnchorPane>
             <Separator layoutY="120.0" prefWidth="400.0" />

@@ -21,7 +21,7 @@ public class FooterController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         nameOfConnectedDB.setText(butler.Butler.model.getDataBaseName());
-        nameOfUserDB.setText(butler.Butler.model.getConnectedUserNick());
+        nameOfUserDB.setText(butler.Butler.USERNAME);
     }
     
 }

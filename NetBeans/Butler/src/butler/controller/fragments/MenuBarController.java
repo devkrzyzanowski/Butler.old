@@ -18,21 +18,8 @@ import javafx.stage.Stage;
  */
 public class MenuBarController implements Initializable {
     
-    private double xOffset = 0;
-    private double yOffset = 0;
-    
         @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     } 
-        @FXML private void onMouseDragged(MouseEvent event){
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setX(event.getScreenX() - xOffset);
-        stage.setY(event.getScreenY() - yOffset);
-    }
-    @FXML private void onMousePressed(MouseEvent event){
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        xOffset = event.getSceneX();
-        yOffset = event.getSceneY();
-    }
 }

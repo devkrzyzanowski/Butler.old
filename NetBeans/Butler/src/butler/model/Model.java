@@ -5,6 +5,7 @@
  */
 package butler.model;
 
+import butler.sql.SQLcommands;
 import butler.utils.Client;
 import butler.utils.AdditionalRoomItems;
 import butler.utils.Booking;
@@ -23,64 +24,288 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 /**
  *
  * @author Michał
  */
 public class Model {
-    private final String DBAddress = "jdbc:derby://localhost:1527/ButlerDB;";
-    private final String DBUser = "User=root;";
-    private final String DBPassword = "Pass=;";
-    private final String DBDriver = "org.apache.derby.jdbc.EmbeddedDriver";   
-    private String connectedUserNick;
+    private final String driver = "org.apache.derby.jdbc.EmbeddedDriver";
+    //private final String dbName = "testDB";
+    private final String connectionURL = "jdbc:derby:";
     
-    Connection con;
+    Connection con = null;
     
     /**
      * init Model
      */
     public Model(){
-        try {
-            Class.forName(DBDriver);
-        } catch (ClassNotFoundException ex) {
-            System.err.println("Derby driver not found.");
-        }
-        try {
-            con = DriverManager.getConnection("jdbc:derby:myDB; user=admin; password=password" );
-            Statement stm = con.createStatement();
 
-            System.out.println("Row has been inserted...");
-        } catch ( SQLException ex){
-            System.err.println(ex);
+    }
+    
+    public boolean loadDriver() {
+        boolean success = false;
+        try {
+            Class.forName(driver);
+            System.out.println(driver + " loaded.");
+            success = true;
+        } catch (ClassNotFoundException e) {
+            System.err.print("ClassNotFoundException: ");
+            System.err.println(e.getMessage());
+            System.out.println("\n Make sure your CLASSPATH variable " +
+                    "contains %DERBY_HOME%\\lib\\derby.jar (&{DERBY_HOME}/lib/derby.jar). \n");
+        } 
+        return success;
+    }
+    
+    public boolean startDataBase(String dbName) {
+        boolean success = false;
+        try {        
+            System.out.println("Trying to connect to " + connectionURL + dbName + ";");        
+            con = DriverManager.getConnection(connectionURL + dbName + ";");
+            System.out.println("Connected to database " + connectionURL + dbName + ";");
+            success = true;
+        } catch (SQLException e) {
+            System.out.println(e);
         }
+        return success;
+    }
+    
+    public void stopDataBase(Connection con) {
+        try {
+        con.close();
+        System.out.println("Closed connection");
+        } catch (SQLException e) {
+            System.out.println("stopDataBase : " + e);
+        }
+    }
+    private void shutdownDataBaseConfirm(String dbName) {
+        boolean SQLExc = false;
+        try {
+            DriverManager.getConnection("jdbc:derby: "+dbName+";shutdown=true");
+        } catch (SQLException e) {
+            SQLExc = (e.getSQLState().equals("XJ015")) ? true : false;
+        }
+        if (!SQLExc) {
+                 System.out.println("Database did not shut down normally");
+        } else {
+                 System.out.println("Database shut down normally");
+        }
+        System.gc();
+    }
+    
+    public boolean logInToDataBase(String nick, String password, String dbName) {
+        boolean success = false;
+        try {
+            String newURL = connectionURL +dbName+";user="+nick+";password="+password;
+            System.out.println("Trying to connect to : " + newURL + " | user = " +nick);
+            con = DriverManager.getConnection(newURL);
+            System.out.println("Connected to database " + dbName + " with access");
+            success = true;
+        } catch (SQLException e) {
+            System.out.println("TEST"+e);
+        }
+        return success;
+    }
+    
+    public boolean createDataBase(String dbName, String nick, String password) {
+        boolean success = false;
+        try {        
+            System.out.println("Trying to create " + connectionURL + dbName + ";create=true;");        
+            con = DriverManager.getConnection(connectionURL + dbName + ";create=true;");
+            System.out.println("Connected to database " + connectionURL + dbName + ";");
+            addReadWriteUser(con, nick, password);
+            turnOnBuiltInUsers(con);
+            System.out.println("0");            
+            Statement stmt = con.createStatement();
+            stmt.execute(SQLcommands.CREATE_CLIENT);
+            stmt.close();
+            System.out.println("1");            
+            stmt = con.createStatement();
+            stmt.execute(SQLcommands.CREATE_ROOM);
+            stmt.close();
+            System.out.println("2");
+            stmt = con.createStatement();
+            stmt.execute(SQLcommands.CREATE_LEGEND);
+            stmt.close();
+            System.out.println("3");            
+            stmt = con.createStatement();
+            stmt.execute(SQLcommands.CREATE_BOOKING);
+            stmt.close();
+            System.out.println("4");            
+            stmt = con.createStatement();
+            stmt.executeUpdate(SQLcommands.INSERT_LEGEND);
+            stmt.close();
+            System.out.println("5");            
+            //stmt.execute(SQLcommands.CREATE_OPERATION);
+            //stmt.execute(SQLcommands.CREATE_DBUSER);            
 
-}
+            con.close();
+            success = true;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return success;
+    }
+    
+    public void addReadOnlyUser(Connection con, String nick, String password){
+        System.out.println("Adding read-only user.");
+        try {
+            Statement s = con.createStatement();
+            s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
+                "'derby.user."+nick+"', '"+password+"')");
+            s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
+                "'derby.database.readOnlyAccessUsers', '"+nick+"')");
+            s.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    public void addReadWriteUser(Connection con, String nick, String password){
+        System.out.println("Adding read-write user.");
+        try {
+            Statement s = con.createStatement();
+            s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
+                "'derby.user."+nick+"', '"+password+"')");
+            s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
+                "'derby.database.fullAccessUsers', '"+nick+"')");
+            s.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
     /**
-     * 
-     * @param login 
-     * @param password
-     * @return true on successfully connect to db or false on fail
+     * Turn on built-in user authentication and user authorization.
+     *
+     * @param conn a connection to the database.
      * @throws java.sql.SQLException
      */
-    public boolean connectToDataBase(String login, String password) throws SQLException{
-        try (Statement stmt = con.createStatement()) {
-            ResultSet rs = stmt.executeQuery("SELECT * FROM APP.DBUser");
-            while (rs.next()){
-                if (rs.getString("nick").equals(login)){
-                    if (rs.getString("password").equals(password)){
-                        connectedUserNick = rs.getString("nick");
-                        return true;
-                    }
-                }
-            }
-        } catch (NullPointerException e){
-            System.out.println("|");
-            e.printStackTrace();
-            return false;
-        }
-        return false;
+    public static void turnOnBuiltInUsers(Connection conn) throws SQLException {
+        System.out.println("Turning on authentication.");
+        Statement s = conn.createStatement();
+
+        // Setting and Confirming requireAuthentication
+        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
+            "'derby.connection.requireAuthentication', 'true')");
+        ResultSet rs = s.executeQuery(
+            "VALUES SYSCS_UTIL.SYSCS_GET_DATABASE_PROPERTY(" +
+            "'derby.connection.requireAuthentication')");
+        rs.next();
+        System.out.println("Value of requireAuthentication is " +
+            rs.getString(1));
+        // Setting authentication scheme to Derby
+        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
+            "'derby.authentication.provider', 'BUILTIN')");
+
+        // Setting default connection mode to no access
+        // (user authorization)
+        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
+            "'derby.database.defaultConnectionMode', 'noAccess')");
+        // Confirming default connection mode
+        rs = s.executeQuery (
+            "VALUES SYSCS_UTIL.SYSCS_GET_DATABASE_PROPERTY(" +
+            "'derby.database.defaultConnectionMode')");
+        rs.next();
+        System.out.println("Value of defaultConnectionMode is " +
+            rs.getString(1));
+
+        // Confirming full-access users
+        rs = s.executeQuery(
+            "VALUES SYSCS_UTIL.SYSCS_GET_DATABASE_PROPERTY(" +
+            "'derby.database.fullAccessUsers')");
+        rs.next();
+        System.out.println("Value of fullAccessUsers is " + rs.getString(1));
+
+        // Confirming read-only users
+        rs = s.executeQuery(
+            "VALUES SYSCS_UTIL.SYSCS_GET_DATABASE_PROPERTY(" +
+            "'derby.database.readOnlyAccessUsers')");
+        rs.next();
+        System.out.println("Value of readOnlyAccessUsers is " +
+            rs.getString(1));
+
+        // We would set the following property to TRUE only
+        // when we were ready to deploy.
+        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
+            "'derby.database.propertiesOnly', 'false')");
+        //WATCH ON DEPLOY
+        s.close();
     }
+
+    /**
+     * Turn off built-in user authentication and user authorization.
+     *
+     * @param conn a connection to the database.
+     */
+    public static void turnOffBuiltInUsers (Connection conn) throws SQLException {
+        Statement s = conn.createStatement();
+        System.out.println("Turning off authentication.");
+
+        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
+            "'derby.connection.requireAuthentication', 'false')");
+        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
+            "'derby.authentication.provider', null)");
+        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
+            "'derby.user.sa', null)");
+        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
+            "'derby.user.guest', null)");
+        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
+            "'derby.user.mary', null)");
+        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
+            "'derby.database.defaultConnectionMode', 'fullAccess')");
+        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
+            "'derby.database.fullAccessUsers', null)");
+        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
+            "'derby.database.readOnlyAccessUsers', null)");
+        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
+            "'derby.database.propertiesOnly', 'false')");
+
+        // Confirming requireAuthentication
+        ResultSet rs = s.executeQuery(
+            "VALUES SYSCS_UTIL.SYSCS_GET_DATABASE_PROPERTY(" +
+            "'derby.connection.requireAuthentication')");
+        rs.next();
+        System.out.println("Value of requireAuthentication is " +
+            rs.getString(1));
+
+        // Confirming default connection mode
+        rs = s.executeQuery(
+            "VALUES SYSCS_UTIL.SYSCS_GET_DATABASE_PROPERTY(" +
+            "'derby.database.defaultConnectionMode')");
+        rs.next();
+        System.out.println("Value of defaultConnectionMode is " +
+            rs.getString(1));
+        System.out.println("Turned off all the user-related properties");
+        s.close();
+    }
+
+    /** Exception reporting methods
+     *   with special handling of SQLExceptions
+     */
+    static void errorPrint(Throwable e) {
+        if (e instanceof SQLException)
+            SQLExceptionPrint((SQLException)e);
+        else {
+            System.out.println("A non-SQL error occurred.");
+            e.printStackTrace();
+        }
+    }  // END errorPrint
+
+    //  Iterates through a stack of SQLExceptions
+    static void SQLExceptionPrint(SQLException sqle) {
+        while (sqle != null) {
+            System.out.println("\n---SQLException Caught---\n");
+            System.out.println("SQLState:   " + (sqle).getSQLState());
+            System.out.println("Severity: " + (sqle).getErrorCode());
+            System.out.println("Message:  " + (sqle).getMessage());
+            sqle.printStackTrace();
+            sqle = sqle.getNextException();
+        }
+    }  //  END SQLExceptionPrint
+    
     
     /**
      * 
@@ -141,7 +366,7 @@ public class Model {
      */
     public boolean addToOperationHistory(String message, String user) throws SQLException {
         try {
-            con.createStatement().execute("INSERT INTO Operation(operation, date, dbUser_idDbUser) VALUES ('"+message+"', CURRENT_TIMESTAMP, 0)");
+            con.createStatement().execute("INSERT INTO APP.OPERATION (operation, date, dbUser_idDbUser) VALUES ('"+message+"', CURRENT_TIMESTAMP, 0)");
             return true;
         } catch (SQLException e) {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, e);
@@ -150,7 +375,7 @@ public class Model {
     }
         public boolean addRoomToDataBase(Room room) {
         try {
-            con.createStatement().execute("INSERT INTO Room(room_name, number_of_single_beds,"
+            con.createStatement().execute("INSERT INTO APP.ROOM(room_name, number_of_single_beds,"
                     + " number_of_double_beds, number_of_extra_beds, floor_number,"
                     + " price_of_room, price_of_adult, price_of_minor, small_description,"
                     + " big_description, extra_description, building, balcon, "
@@ -175,7 +400,7 @@ public class Model {
         
         public boolean addClientToDataBase(Client client) {
             try {
-                con.createStatement().execute("INSERT INTO Client(first_name,"
+                con.createStatement().execute("INSERT INTO APP.CLIENT (first_name,"
                         + " last_name, city, street, home_number, flat_number,"
                         + " zip_code, contact_phone_number, email) VALUES "
                         + "('"+client.getFirstName()+"','"+client.getLastName()
@@ -191,16 +416,19 @@ public class Model {
         }
         
         public boolean addBookingToDataBase(Timestamp value, Timestamp value0, Integer selectedClientId, Integer selectedRoomId, Integer selectedLegendId) {
+            startDataBase("debug");
             try {
                 System.out.println(value);
-                con.createStatement().execute("INSERT INTO Booking(begin_of_booking, end_of_booking, Client_idClient, Room_idRoom, Legend_idLegend) VALUES ('"+value+"', '"+value0+"', "+selectedClientId+", "+selectedRoomId+", "+selectedLegendId+")");
+                con.createStatement().execute("INSERT INTO APP.BOOKING(begin_of_booking, end_of_booking, Client_idClient, Room_idRoom, Legend_idLegend) VALUES ('"+value+"', '"+value0+"', "+selectedClientId+", "+selectedRoomId+", "+selectedLegendId+")");
                 return true;
             } catch (SQLException e) {
+                System.out.println(e);
                 return false;
             }
         }
         
     public ObservableList<Booking> getBookingList() {
+        
         ObservableList<Booking> list = FXCollections.observableArrayList();
         try (Statement stmt = con.createStatement()){
             ResultSet rs = stmt.executeQuery("SELECT * FROM APP.BOOKING");
@@ -211,6 +439,7 @@ public class Model {
             Integer clientId = rs.getInt("Client_idClient");
             Integer roomId = rs.getInt("Room_idRoom");
             Integer legendId = rs.getInt("Legend_idLegend");
+                System.out.println(id + " id||" + beginOfBooking.toString() + " begin||" + endOfBooking.toString() + " end||" + clientId + " client||" + roomId + " room||" + legendId + " legend||" );
             list.add(new Booking(id, String.valueOf(beginOfBooking), String.valueOf(endOfBooking), clientId, roomId, legendId));
             }
         } catch (SQLException e) {System.out.println(e);}
@@ -302,7 +531,7 @@ public class Model {
     
     public void removeBookingById(Integer id) {
         try {
-            con.createStatement().execute("DELETE FROM Booking WHERE idBooking = "+id+"");
+            con.createStatement().execute("DELETE FROM APP.BOOKING WHERE idBooking = "+id+"");
         } catch (SQLException e) {
         }
     }
@@ -353,7 +582,7 @@ public class Model {
     public ObservableList<Room> getRoomList() {
         ObservableList<Room> list = FXCollections.observableArrayList();
         try (Statement stmt = con.createStatement()){
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Room");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM APP.ROOM");
             while (rs.next()) {    
                 Integer id = rs.getInt(("idRoom"));
                 String roomName = rs.getString("room_name");
@@ -468,19 +697,12 @@ public class Model {
     }
     
     public String getDataBaseName(){
-        return DBAddress;
+        return "test";
     }
     public String getUserName(){
-        return DBUser;
+        return "no implement";
     }
 
-
-    public String getConnectedUserNick() {
-        if (!connectedUserNick.isEmpty()){
-        return connectedUserNick;
-        } else {
-            return null;
-        }
-    } 
+    
 }
 

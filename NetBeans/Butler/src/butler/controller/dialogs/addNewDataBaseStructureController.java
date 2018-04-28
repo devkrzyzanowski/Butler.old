@@ -4,6 +4,7 @@
  */
 package butler.controller.dialogs;
 
+import butler.model.Model;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -24,24 +25,25 @@ import javafx.stage.Stage;
  */
 public class addNewDataBaseStructureController extends DialogBox implements Initializable {
     @FXML private Button cancelButton;
-    @FXML private TextField dbAddressTextField, dbNameTextField, dbPortTextField, dbUserNameTextField;
+    @FXML private TextField dbNameTextField, dbUserTextField;
     @FXML private PasswordField dbPasswordPasswordField;
     @FXML private Label testConnectionResult;
-    @FXML private ComboBox dbTypeComboBox;
+    private Model model;
     
     private ObservableList<String> dbTypes = FXCollections.observableArrayList("JavaDB", "MySQL", "Oracle", "MSSQL");
        
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        dbTypeComboBox.setItems(dbTypes);
+        model = butler.Butler.model;
     }
     @FXML
     private void addStructure(ActionEvent event){
-
+        model.loadDriver();
+        model.createDataBase(dbNameTextField.getText(), dbUserTextField.getText(), dbPasswordPasswordField.getText());
     }
     
     @FXML private void testConnection(ActionEvent event) {
-        if (butler.Butler.model.tryConnectionToDataBase(dbAddressTextField.getText(), dbPortTextField.getText(), dbNameTextField.getText(), dbUserNameTextField.getText(), dbPasswordPasswordField.getText())) {
+        if (true) {
             testConnectionResult.setText("UDANE");
             testConnectionResult.setStyle("-fx-background-color: #009900;");
         } else {

@@ -36,8 +36,8 @@ public class ScheduleCell extends Pane {
         this.bookingDays = booking.getBookingDays();
         this.idBooking = booking.getId().getValue();
         this.bgColor = Color.web(model.getLegendById(booking.getIdLegend()).getColor());
-
-        
+        System.out.println("test");
+ 
         this.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

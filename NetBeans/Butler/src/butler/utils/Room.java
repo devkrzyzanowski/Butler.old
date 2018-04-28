@@ -167,16 +167,16 @@ public class Room {
         this.floorNumber = floorNumber;
     }
 
-    public Double getPriceOfRoom() {
-        return priceOfRoom.getValue();
+    public String getPriceOfRoom() {
+        return priceOfRoom.getValue() + " zł";
     }
 
     public void setPriceOfRoom(DoubleProperty priceOfRoom) {
         this.priceOfRoom = priceOfRoom;
     }
 
-    public Double getPriceOfAdult() {
-        return priceOfAdult.getValue();
+    public String getPriceOfAdult() {
+        return priceOfAdult.getValue() + " zł";
     }
 
     public void setPriceOfAdult(DoubleProperty priceOfAdult) {
@@ -227,8 +227,8 @@ public class Room {
         return tableLamp.get();
     }
 
-    public Double getPriceOfMinor() {
-        return priceOfMinor.getValue();
+    public String getPriceOfMinor() {
+        return priceOfMinor.getValue() + " zł";
     }
 
     public void setPriceOfMinor(DoubleProperty priceOfMinor) {
