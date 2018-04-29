@@ -14,18 +14,16 @@ import butler.utils.OperationHistory;
 import butler.utils.Room;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 
 /**
  *
@@ -398,16 +396,30 @@ public class Model {
         }
     }
         
-        public boolean addClientToDataBase(Client client) {
+        public boolean addClientToDataBase(Client client){
+            
             try {
-                con.createStatement().execute("INSERT INTO APP.CLIENT (first_name,"
+                String sql = "INSERT INTO APP.CLIENT (first_name,"
                         + " last_name, city, street, home_number, flat_number,"
                         + " zip_code, contact_phone_number, email) VALUES "
                         + "('"+client.getFirstName()+"','"+client.getLastName()
                         +"','"+client.getCity()+"','"+client.getStreet()
                         +"',"+client.getHomeNumber()+","+client.getFlatNumber()
                         +","+client.getZipCode()+","+client.getContactPhoneNumber()
-                        +",'"+client.getEmail()+"')");
+                        +",'"+client.getEmail()+"')";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Creating 'Client' failed");
+            }
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    System.out.println(rs.getInt("idClient"));
+                  //  client.setId(rs.getInt("idClient"));
+                } else {
+                    throw new SQLException("Creating 'Client' failed, no ID obtained");
+                }
+            }
                 return true;
             } catch (SQLException e) {
                 Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, e);

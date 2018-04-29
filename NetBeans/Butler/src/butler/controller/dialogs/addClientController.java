@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  *
@@ -36,7 +37,7 @@ public class addClientController extends DialogBox implements Initializable {
         model = butler.Butler.model;
     }
     
-    @FXML private void addClient(ActionEvent event) {
+    public Client createClient(){
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
         String city = cityTextField.getText();
@@ -46,9 +47,24 @@ public class addClientController extends DialogBox implements Initializable {
         Integer zipCode = Integer.valueOf(zipCodeTextField.getText());
         Integer contactPhoneNumber = Integer.valueOf(contactPhoneNumberTextField.getText());
         String email = emailTextField.getText();
-        Client client = new Client(firstName, lastName, city, street, homeNumber, flatNumber, zipCode, contactPhoneNumber, email);
-        model.addClientToDataBase(client);
+        Client c = new Client(firstName, lastName, city, street, homeNumber, flatNumber, zipCode, contactPhoneNumber, email);
+        model.addClientToDataBase(c);
+        return c;
+    }
+    
+        public void close(){
+        Stage stage = (Stage) addClientButton.getScene().getWindow();
+        stage.close();        
+    }
+    
+    @FXML private void addClient(ActionEvent event) {
+        Client c = createClient();
+        model.addClientToDataBase(c);
         cancelAction(event);
+    }
+    
+    public Button getAddButton(){
+        return addClientButton;
     }
     
 }

@@ -46,7 +46,7 @@ public class StageManager {
         
     }
     
-    public void addModalStage(String fxml, Window owner) {
+    public void addModalStage(Window owner, String fxml) {
        loader = new FXMLLoader(this.getClass().getResource(fxml), bundle);
         Parent root = null;
         try {

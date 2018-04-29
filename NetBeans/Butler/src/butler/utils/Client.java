@@ -14,7 +14,7 @@ import javafx.beans.property.StringProperty;
  * @author Michał
  */
 public class Client {
-    private final IntegerProperty id = new SimpleIntegerProperty();
+    private IntegerProperty id = new SimpleIntegerProperty();
     private StringProperty firstName = new SimpleStringProperty();
     private StringProperty lastName = new SimpleStringProperty();
     private StringProperty city = new SimpleStringProperty();
@@ -54,6 +54,9 @@ public class Client {
         this.contactPhoneNumber.set(contactPhoneNumber);
         this.email.set(email);
     }    
+    public void setId(Integer id) {
+        this.id.set(id);
+    }
     public Integer getId(){
         return id.getValue();
     }

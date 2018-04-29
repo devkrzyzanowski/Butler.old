@@ -10,18 +10,15 @@ import butler.utils.Legend;
 import butler.utils.Room;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -83,6 +80,24 @@ public class addReservationController extends DialogBox implements Initializable
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
         stage.show();
+    }
+    @FXML private void openAddNewClientInReservation(ActionEvent event) throws IOException{
+        Stage stage = new Stage();            
+        FXMLLoader fXMLLoader = new FXMLLoader(getClass().getResource("/butler/view/dialogs/addClientDialog.fxml"));
+        Parent parent = (Parent) fXMLLoader.load();
+        addClientController aCC = fXMLLoader.getController();
+        aCC.getAddButton().setOnAction(e -> {
+            selectedClient = aCC.createClient();
+            selectClientTextField.setText(selectedClient.getFirstName() + " " + selectedClient.getLastName());
+            aCC.close();
+        });
+        
+        Scene scene = new Scene(parent);
+        scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+        
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setScene(scene);
+        stage.show();        
     }
     
     @FXML private void openSelectRoomDialog(ActionEvent event) throws IOException{

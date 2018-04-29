@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/8.0.161" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.dialogs.addReservationController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="butler.controller.dialogs.addReservationController">
    <children>
       <Button fx:id="cancelButton" layoutX="824.0" layoutY="561.0" mnemonicParsing="false" onAction="#cancelAction" text="Anuluj" />
       <Button fx:id="addReservationButton" layoutX="691.0" layoutY="561.0" mnemonicParsing="false" onAction="#addReservation" prefHeight="25.0" prefWidth="121.0" text="Dodaj" />
@@ -46,7 +46,7 @@
       </Pane>
       <Pane layoutX="14.0" layoutY="208.0" prefHeight="120.0" prefWidth="380.0" style="-fx-background-color: #dddddd;">
          <children>
-            <Button fx:id="addN" layoutX="14.0" layoutY="70.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="121.0" text="Nowy klient" />
+            <Button fx:id="addN" layoutX="14.0" layoutY="70.0" mnemonicParsing="false" onAction="#openAddNewClientInReservation" prefHeight="31.0" prefWidth="121.0" text="Nowy klient" />
             <Label layoutX="5.0" layoutY="6.0" text="Rezerwacja na :">
                <font>
                   <Font name="System Bold" size="12.0" />
