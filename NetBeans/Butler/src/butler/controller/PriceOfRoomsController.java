@@ -58,8 +58,7 @@ public class PriceOfRoomsController implements Initializable {
     }
     
     @FXML private void addReservation(ActionEvent event) {
-        butler.Butler.stageManager.addModalStage("/butler/view/dialogs/addReservationDialog.fxml",
-            ((Node) event.getSource()).getScene().getWindow());
+        butler.Butler.stageManager.addModalStage(((Node) event.getSource()).getScene().getWindow(), "/butler/view/dialogs/addReservationDialog.fxml");
         
     }
     

@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Sun Apr 29 16:42:14 CEST 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instance a816c00e-0163-11da-ad3a-000004e897b8 
-on database directory C:\Users\uwxyy\Documents\GitHub\Butler\NetBeans\Butler\InstallTest with class loader sun.misc.Launcher$AppClassLoader@55f96302 
-Loaded from file:/C:/Users/uwxyy/Documents/GitHub/Butler/NetBeans/Butler/dist/run452670984/lib/derby.jar
+Mon Apr 30 07:16:03 CEST 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instance a816c00e-0163-14fa-af1b-00000a7ae518 
+on database directory C:\Users\MichalKrzyzanowski\Documents\GitHub\Butler\NetBeans\Butler\InstallTest with class loader sun.misc.Launcher$AppClassLoader@3d4eac69 
+Loaded from file:/C:/Users/MichalKrzyzanowski/Documents/GitHub/Butler/NetBeans/Butler/dist/run181874352/lib/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_144-b01
-user.dir=C:\Users\uwxyy\Documents\GitHub\Butler\NetBeans\Butler
-os.name=Windows 10
+java.runtime.version=1.8.0_161-b12
+user.dir=C:\Users\MichalKrzyzanowski\Documents\GitHub\Butler\NetBeans\Butler
+os.name=Windows 8
 os.arch=amd64
-os.version=10.0
+os.version=6.2
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

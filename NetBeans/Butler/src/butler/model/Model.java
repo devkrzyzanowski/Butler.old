@@ -61,13 +61,14 @@ public class Model {
     public boolean startDataBase(String dbName) {
         boolean success = false;
         try {        
-            System.out.println("Trying to connect to " + connectionURL + dbName + ";");        
+            System.out.println("Trying to connect to " + connectionURL + dbName + "; shutdown=true;");        
             con = DriverManager.getConnection(connectionURL + dbName + ";");
-            System.out.println("Connected to database " + connectionURL + dbName + ";");
+            System.out.println("Connected to database " + connectionURL + dbName + "; shutdown=true;");
             success = true;
         } catch (SQLException e) {
             System.out.println(e);
         }
+        
         return success;
     }
     
@@ -97,7 +98,7 @@ public class Model {
     public boolean logInToDataBase(String nick, String password, String dbName) {
         boolean success = false;
         try {
-            String newURL = connectionURL +dbName+";user="+nick+";password="+password;
+            String newURL = connectionURL +dbName+";user="+nick+";password="+password+";";
             System.out.println("Trying to connect to : " + newURL + " | user = " +nick);
             con = DriverManager.getConnection(newURL);
             System.out.println("Connected to database " + dbName + " with access");
@@ -397,7 +398,7 @@ public class Model {
     }
         
         public boolean addClientToDataBase(Client client){
-            
+            String[] returnId = { "flat_number" };
             try {
                 String sql = "INSERT INTO APP.CLIENT (first_name,"
                         + " last_name, city, street, home_number, flat_number,"
@@ -414,8 +415,7 @@ public class Model {
             }
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {
-                    System.out.println(rs.getInt("idClient"));
-                  //  client.setId(rs.getInt("idClient"));
+                   client.setId(rs.getInt(1));
                 } else {
                     throw new SQLException("Creating 'Client' failed, no ID obtained");
                 }

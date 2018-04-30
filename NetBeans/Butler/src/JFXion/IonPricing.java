@@ -59,8 +59,8 @@ public class IonPricing extends ScrollPane {
     private void addListeners() {
         priceCells.forEach((sc) -> {
             sc.setOnMouseClicked((MouseEvent event) -> {
-                butler.Butler.stageManager.addModalStage("/butler/view/dialogs/modifyBooking.fxml",
-                        ((Node) event.getSource()).getScene().getWindow());
+                butler.Butler.stageManager.addModalStage(((Node) event.getSource()).getScene().getWindow(), 
+                        "/butler/view/dialogs/modifyBooking.fxml");
                 ModifyPricingController mdf = butler.Butler.stageManager.getLoader().getController();
                 mdf.init(sc.getBooking(), IonPricing.this);
             });
