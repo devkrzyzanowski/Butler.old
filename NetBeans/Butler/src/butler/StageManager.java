@@ -37,8 +37,9 @@ public class StageManager {
         } catch (IOException e) {
             System.out.println(e);
         }
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.setTitle(bundle.getString(title));
         stage.show();
     }

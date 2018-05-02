@@ -57,5 +57,4 @@ public class listOfRoomsController implements Initializable {
                 butler.Butler.stageManager.addModalStage((Stage) ((Node) event.getSource())
                 .getScene().getWindow(), "/butler/view/dialogs/addRoomDialog.fxml");
     }    
-   
 }

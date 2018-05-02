@@ -31,7 +31,6 @@ import javafx.collections.ObservableList;
  */
 public class Model {
     private final String driver = "org.apache.derby.jdbc.EmbeddedDriver";
-    //private final String dbName = "testDB";
     private final String connectionURL = "jdbc:derby:";
     
     Connection con = null;
@@ -83,7 +82,7 @@ public class Model {
     private void shutdownDataBaseConfirm(String dbName) {
         boolean SQLExc = false;
         try {
-            DriverManager.getConnection("jdbc:derby: "+dbName+";shutdown=true");
+            con = DriverManager.getConnection("jdbc:derby: "+dbName+";shutdown=true");
         } catch (SQLException e) {
             SQLExc = (e.getSQLState().equals("XJ015")) ? true : false;
         }
@@ -95,12 +94,18 @@ public class Model {
         System.gc();
     }
     
+    public void setDBAllocator (Integer val) throws SQLException {
+        Statement s = con.createStatement();
+        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY('derby.language.sequence.preallocator', '"+val+"')");
+    }
+    
     public boolean logInToDataBase(String nick, String password, String dbName) {
         boolean success = false;
         try {
-            String newURL = connectionURL +dbName+";user="+nick+";password="+password+";";
-            System.out.println("Trying to connect to : " + newURL + " | user = " +nick);
-            con = DriverManager.getConnection(newURL);
+            String newURL = "jdbc:derby:" + dbName + ";";
+            System.out.println("Trying to connect to : " + newURL);
+            con = DriverManager.getConnection(newURL, nick, password);
+            setDBAllocator(1);
             System.out.println("Connected to database " + dbName + " with access");
             success = true;
         } catch (SQLException e) {
@@ -113,7 +118,7 @@ public class Model {
         boolean success = false;
         try {        
             System.out.println("Trying to create " + connectionURL + dbName + ";create=true;");        
-            con = DriverManager.getConnection(connectionURL + dbName + ";create=true;");
+            con = DriverManager.getConnection("jdbc:derby:" + dbName + ";create=true;");
             System.out.println("Connected to database " + connectionURL + dbName + ";");
             addReadWriteUser(con, nick, password);
             turnOnBuiltInUsers(con);
@@ -149,10 +154,10 @@ public class Model {
         return success;
     }
     
-    public void addReadOnlyUser(Connection con, String nick, String password){
+    public void addReadOnlyUser(Connection conn, String nick, String password){
         System.out.println("Adding read-only user.");
         try {
-            Statement s = con.createStatement();
+            Statement s = conn.createStatement();
             s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
                 "'derby.user."+nick+"', '"+password+"')");
             s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
@@ -162,10 +167,10 @@ public class Model {
             System.out.println(e);
         }
     }
-    public void addReadWriteUser(Connection con, String nick, String password){
+    public void addReadWriteUser(Connection conn, String nick, String password){
         System.out.println("Adding read-write user.");
         try {
-            Statement s = con.createStatement();
+            Statement s = conn.createStatement();
             s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
                 "'derby.user."+nick+"', '"+password+"')");
             s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
@@ -326,11 +331,12 @@ public class Model {
     
     /**
      * 
+     * @param conn
      * @return true on successfuly close DB connection of false on fail
      */
-    public boolean closeConnection(){       
+    public boolean closeConnection(Connection conn){       
         try {
-            con.close();
+            conn.close();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
@@ -415,6 +421,7 @@ public class Model {
             }
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {
+                    System.out.println(rs.getInt(1));
                    client.setId(rs.getInt(1));
                 } else {
                     throw new SQLException("Creating 'Client' failed, no ID obtained");
@@ -537,6 +544,9 @@ public class Model {
                         homeNumber, flatNumber, zipCode, contactPhoneNumber,
                         email));
             }
+        }
+        for (Client c : list) {
+            System.out.println(c.getId() + "|" + c.getFirstName());
         }
         return list;        
     }

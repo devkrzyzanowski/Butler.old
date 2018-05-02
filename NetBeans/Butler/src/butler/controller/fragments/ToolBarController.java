@@ -81,7 +81,6 @@ public class ToolBarController implements Initializable {
     }
     
     private void setPage(ActionEvent event, String path) {
-        butler.Butler.stageManager.changeStage((Stage) ((Node) event.getSource())
-            .getScene().getWindow(), "/butler/view/"+path+".fxml");
+        butler.Butler.stageManager.changeStage((Stage) ((Node) event.getSource()).getScene().getWindow(), "/butler/view/"+path+".fxml");
     }  
 }

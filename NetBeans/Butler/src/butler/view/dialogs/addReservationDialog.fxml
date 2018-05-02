@@ -24,8 +24,8 @@
             <Label layoutX="13.0" layoutY="50.0" text="Od :" />
             <DatePicker fx:id="fromDatePicker" layoutX="14.0" layoutY="67.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" />
             <DatePicker fx:id="toDatePicker" layoutX="190.0" layoutY="67.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" />
-            <Label layoutX="302.0" layoutY="27.0" text="Liczba nocy" />
-            <TextField layoutX="257.0" layoutY="23.0" prefHeight="25.0" prefWidth="39.0" />
+            <Label layoutX="275.0" layoutY="17.0" text="Liczba nocy" />
+            <TextField fx:id="nightsNumberTextField" editable="false" layoutX="217.0" layoutY="12.0" prefHeight="25.0" prefWidth="39.0" />
             <Label layoutX="11.0" layoutY="6.0" text="Okres pobytu">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -35,13 +35,13 @@
       </Pane>
       <Pane layoutX="14.0" layoutY="14.0" prefHeight="60.0" prefWidth="380.0" style="-fx-background-color: #dddddd;">
          <children>
-            <Button fx:id="selectRoomButton" layoutX="260.0" layoutY="18.0" mnemonicParsing="false" onAction="#openSelectRoomDialog" prefHeight="25.0" prefWidth="106.0" text="Wybierz pokój" />
+            <Button fx:id="selectRoomButton" layoutX="216.0" layoutY="18.0" mnemonicParsing="false" onAction="#openSelectRoomDialog" prefHeight="31.0" prefWidth="150.0" text="Wybierz pokój" />
             <Label layoutX="11.0" layoutY="22.0" text="Pokój : ">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="selectRoomTextField" layoutX="54.0" layoutY="18.0" prefHeight="25.0" prefWidth="200.0" />
+            <TextField fx:id="selectRoomTextField" layoutX="54.0" layoutY="18.0" prefHeight="31.0" prefWidth="141.0" />
          </children>
       </Pane>
       <Pane layoutX="14.0" layoutY="208.0" prefHeight="120.0" prefWidth="380.0" style="-fx-background-color: #dddddd;">
@@ -58,11 +58,11 @@
       </Pane>
       <Pane layoutX="407.0" layoutY="14.0" prefHeight="314.0" prefWidth="479.0" style="-fx-background-color: #dddddd;">
          <children>
-            <GridPane layoutX="14.0" layoutY="44.0" prefHeight="228.0" prefWidth="278.0" style="-fx-background-color: #cccccc;">
+            <GridPane layoutX="14.0" layoutY="44.0" prefHeight="228.0" prefWidth="450.0" style="-fx-background-color: #cccccc;">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="38.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="259.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -74,7 +74,7 @@
                <children>
                   <Label text="Liczba" GridPane.columnIndex="1" />
                   <Label text="Cena" GridPane.columnIndex="2" />
-                  <Label text="Dorosłych" GridPane.rowIndex="1" />
+                  <Label text="Dorośli" GridPane.rowIndex="1" />
                   <Label text="Dzieci" GridPane.rowIndex="2" />
                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
@@ -86,7 +86,7 @@
                </children>
             </GridPane>
             <RadioButton layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="cena za dobę" />
-            <RadioButton layoutX="131.0" layoutY="14.0" mnemonicParsing="false" text="cena za osobo-dobę" />
+            <RadioButton layoutX="142.0" layoutY="14.0" mnemonicParsing="false" text="cena za osobo-dobę" />
          </children>
       </Pane>
       <Pane layoutX="14.0" layoutY="383.0" prefHeight="120.0" prefWidth="380.0" style="-fx-background-color: #dddddd;">

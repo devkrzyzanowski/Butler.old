@@ -32,7 +32,7 @@ public class Booking {
         this.idLegend.set(idLegend);
         Timestamp begin = Timestamp.valueOf(beginOfBooking);
         Timestamp end = Timestamp.valueOf(endOfBooking);        
-        this.bookingDays.set(Math.toIntExact(Long.valueOf(  (end.getTime() - begin.getTime()) / 86400000l)));
+        this.bookingDays.set(Math.toIntExact(Long.valueOf((end.getTime() - begin.getTime()) / 86400000l)));
     }
     
     public Integer getIdLegend() {
