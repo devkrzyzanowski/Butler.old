@@ -18,13 +18,13 @@ public class Butler extends Application {
     public static StageManager stageManager;
     public static String USERNAME;
 
-    public static String getUSERNAME() {
-        return USERNAME;
-    }
-
-    public static void setUSERNAME(String USERNAME) {
-        Butler.USERNAME = USERNAME;
-    }
+//    public static String getUSERNAME() {
+//        return USERNAME;
+//    }
+//
+//    public static void setUSERNAME(String USERNAME) {
+//        Butler.USERNAME = USERNAME;
+//    }
     
     @Override
     public void start(Stage stage) throws Exception {

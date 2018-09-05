@@ -14,7 +14,6 @@ import butler.utils.OperationHistory;
 import butler.utils.Room;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -32,6 +31,8 @@ import javafx.collections.ObservableList;
 public class Model {
     private final String driver = "org.apache.derby.jdbc.EmbeddedDriver";
     private final String connectionURL = "jdbc:derby:";
+    private RoomController roomController;
+    private ClientController clientController;
     
     Connection con = null;
     
@@ -39,7 +40,8 @@ public class Model {
      * init Model
      */
     public Model(){
-
+        roomController = new RoomController();
+        clientController = new ClientController();
     }
     
     public boolean loadDriver() {
@@ -67,14 +69,13 @@ public class Model {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        
         return success;
     }
     
     public void stopDataBase(Connection con) {
         try {
-        con.close();
-        System.out.println("Closed connection");
+            con.close();
+            System.out.println("Closed connection");
         } catch (SQLException e) {
             System.out.println("stopDataBase : " + e);
         }
@@ -96,7 +97,8 @@ public class Model {
     
     public void setDBAllocator (Integer val) throws SQLException {
         Statement s = con.createStatement();
-        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY('derby.language.sequence.preallocator', '"+val+"')");
+        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY"
+                + "('derby.language.sequence.preallocator', '"+val+"')");
     }
     
     public boolean logInToDataBase(String nick, String password, String dbName) {
@@ -114,11 +116,11 @@ public class Model {
         return success;
     }
     
-    public boolean createDataBase(String dbName, String nick, String password) {
+    public boolean createDataBase(String dir, String dbName, String nick, String password) {
         boolean success = false;
         try {        
-            System.out.println("Trying to create " + connectionURL + dbName + ";create=true;");        
-            con = DriverManager.getConnection("jdbc:derby:" + dbName + ";create=true;");
+            System.out.println("Trying to create " + connectionURL + dir + dbName + ";create=true;");        
+            con = DriverManager.getConnection("jdbc:derby:" + dir + "\\" + dbName + ";create=true;");
             System.out.println("Connected to database " + connectionURL + dbName + ";");
             addReadWriteUser(con, nick, password);
             turnOnBuiltInUsers(con);
@@ -198,8 +200,7 @@ public class Model {
             "VALUES SYSCS_UTIL.SYSCS_GET_DATABASE_PROPERTY(" +
             "'derby.connection.requireAuthentication')");
         rs.next();
-        System.out.println("Value of requireAuthentication is " +
-            rs.getString(1));
+        System.out.println("Value of requireAuthentication is " + rs.getString(1));
         // Setting authentication scheme to Derby
         s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
             "'derby.authentication.provider', 'BUILTIN')");
@@ -236,53 +237,6 @@ public class Model {
         s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
             "'derby.database.propertiesOnly', 'false')");
         //WATCH ON DEPLOY
-        s.close();
-    }
-
-    /**
-     * Turn off built-in user authentication and user authorization.
-     *
-     * @param conn a connection to the database.
-     */
-    public static void turnOffBuiltInUsers (Connection conn) throws SQLException {
-        Statement s = conn.createStatement();
-        System.out.println("Turning off authentication.");
-
-        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
-            "'derby.connection.requireAuthentication', 'false')");
-        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
-            "'derby.authentication.provider', null)");
-        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
-            "'derby.user.sa', null)");
-        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
-            "'derby.user.guest', null)");
-        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
-            "'derby.user.mary', null)");
-        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
-            "'derby.database.defaultConnectionMode', 'fullAccess')");
-        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
-            "'derby.database.fullAccessUsers', null)");
-        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
-            "'derby.database.readOnlyAccessUsers', null)");
-        s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(" +
-            "'derby.database.propertiesOnly', 'false')");
-
-        // Confirming requireAuthentication
-        ResultSet rs = s.executeQuery(
-            "VALUES SYSCS_UTIL.SYSCS_GET_DATABASE_PROPERTY(" +
-            "'derby.connection.requireAuthentication')");
-        rs.next();
-        System.out.println("Value of requireAuthentication is " +
-            rs.getString(1));
-
-        // Confirming default connection mode
-        rs = s.executeQuery(
-            "VALUES SYSCS_UTIL.SYSCS_GET_DATABASE_PROPERTY(" +
-            "'derby.database.defaultConnectionMode')");
-        rs.next();
-        System.out.println("Value of defaultConnectionMode is " +
-            rs.getString(1));
-        System.out.println("Turned off all the user-related properties");
         s.close();
     }
 
@@ -346,25 +300,6 @@ public class Model {
     
     /**
      * 
-     * @param address
-     * @param port
-     * @param userName
-     * @param password
-     * @return true on successfully connect to DB or false on fail
-     */
-    public boolean tryConnectionToDataBase(String address, String port, String dbName, String userName, String password){
-        //TODO change String password to char[] password
-        try {
-            con = DriverManager.getConnection("jdbc:debry://" + address + ":" + port + "/" + dbName + "; User=" + userName + "; Pass=" +  password);
-            con.close();
-            return true;
-        } catch ( SQLException e){
-            return false;
-        }
-    }
-    
-    /**
-     * 
      * @param message
      * @param user
      * @return true on successfully add or false on fail
@@ -378,60 +313,12 @@ public class Model {
             return false;
         }
     }
-        public boolean addRoomToDataBase(Room room) {
-        try {
-            con.createStatement().execute("INSERT INTO APP.ROOM(room_name, number_of_single_beds,"
-                    + " number_of_double_beds, number_of_extra_beds, floor_number,"
-                    + " price_of_room, price_of_adult, price_of_minor, small_description,"
-                    + " big_description, extra_description, building, balcon, "
-                    + " beach_screen, blanket, sunbed, tv, wi_fi, individual_entrance,"
-                    + " friendly_animal, kettle, tableware, table_lamp ) "
-                    + "VALUES ('"+room.getRoomName()+"', "+room.getNumberOfSingleBeds()
-                    +","+room.getNumberOfDoubleBeds()+","+room.getNumberOfExtraBeds()
-                    +","+room.getFloorNumber()+","+room.getPriceOfRoom()
-                    +","+room.getPriceOfAdult()+","+room.getPriceOfMinor()
-                    +",'"+room.getSmallDescription()+"','"+room.getBigDescription()
-                    +"','"+room.getExtraDescription()+"','"+room.getBuilding()
-                    +"',"+room.getBalcon()+","+room.getBeachScreen()+","+room.getBlanket()
-                    +","+room.getSunbed()+","+room.getTv()+","+room.getWiFi()
-                    +","+room.getIndividualEntrance()+","+room.getFriendlyAnimal()+","+room.getKettle()
-                    +","+room.getTableware()+","+room.getTableLamp()+")");
-            return true;
-        } catch (SQLException e) {
-            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, e);
-            return false;
-        }
+        public Integer addRoomToDataBase(Room room) {
+            return roomController.add(room, con);
     }
         
-        public boolean addClientToDataBase(Client client){
-            String[] returnId = { "flat_number" };
-            try {
-                String sql = "INSERT INTO APP.CLIENT (first_name,"
-                        + " last_name, city, street, home_number, flat_number,"
-                        + " zip_code, contact_phone_number, email) VALUES "
-                        + "('"+client.getFirstName()+"','"+client.getLastName()
-                        +"','"+client.getCity()+"','"+client.getStreet()
-                        +"',"+client.getHomeNumber()+","+client.getFlatNumber()
-                        +","+client.getZipCode()+","+client.getContactPhoneNumber()
-                        +",'"+client.getEmail()+"')";
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            int affectedRows = ps.executeUpdate();
-            if (affectedRows == 0) {
-                throw new SQLException("Creating 'Client' failed");
-            }
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) {
-                    System.out.println(rs.getInt(1));
-                   client.setId(rs.getInt(1));
-                } else {
-                    throw new SQLException("Creating 'Client' failed, no ID obtained");
-                }
-            }
-                return true;
-            } catch (SQLException e) {
-                Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, e);
-                return false;
-            }
+        public Integer addClientToDataBase(Client client){
+            return clientController.add(client, con);
         }
         
         public boolean addBookingToDataBase(Timestamp value, Timestamp value0, Integer selectedClientId, Integer selectedRoomId, Integer selectedLegendId) {
@@ -719,7 +606,7 @@ public class Model {
     }
     
     public String getDataBaseName(){
-        return "test";
+        return "no implement";
     }
     public String getUserName(){
         return "no implement";

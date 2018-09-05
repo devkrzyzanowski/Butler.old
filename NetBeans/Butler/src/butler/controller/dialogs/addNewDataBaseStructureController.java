@@ -5,6 +5,7 @@
 package butler.controller.dialogs;
 
 import butler.model.Model;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -12,11 +13,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 /**
@@ -25,21 +28,36 @@ import javafx.stage.Stage;
  */
 public class addNewDataBaseStructureController extends DialogBox implements Initializable {
     @FXML private Button cancelButton;
-    @FXML private TextField dbNameTextField, dbUserTextField;
+    @FXML private TextField directoryTextField, dbNameTextField, dbUserTextField;
     @FXML private PasswordField dbPasswordPasswordField;
     @FXML private Label testConnectionResult;
     private Model model;
     
     private ObservableList<String> dbTypes = FXCollections.observableArrayList("JavaDB", "MySQL", "Oracle", "MSSQL");
+    @FXML private Button addButton;
+    @FXML private Button testConnectionButton;
+    @FXML private Button selectDirectoryButton;
        
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = butler.Butler.model;
     }
-    @FXML
-    private void addStructure(ActionEvent event){
+    
+    @FXML private void addStructure(ActionEvent event){
         model.loadDriver();
-        model.createDataBase(dbNameTextField.getText(), dbUserTextField.getText(), dbPasswordPasswordField.getText());
+        model.createDataBase(directoryTextField.getText(), dbNameTextField.getText(), dbUserTextField.getText(), dbPasswordPasswordField.getText());
+    }
+    
+    @FXML    private void selectDirectory(ActionEvent event) {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File selectedDirectory = 
+                directoryChooser.showDialog(((Node) event.getSource()).getScene().getWindow());
+                 
+        if(selectedDirectory == null) {
+            directoryTextField.setText("No Directory selected");
+        } else {
+            directoryTextField.setText(selectedDirectory.getAbsolutePath());
+        }
     }
     
     @FXML private void testConnection(ActionEvent event) {
@@ -51,6 +69,5 @@ public class addNewDataBaseStructureController extends DialogBox implements Init
             testConnectionResult.setStyle("-fx-background-color: #990000;");            
         }
     }
-    
 
 }

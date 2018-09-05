@@ -37,8 +37,8 @@
             <Label text="Użytkownik : " textFill="#555555" GridPane.rowIndex="2" />
             <Label text="Hasło : " textFill="#555555" GridPane.rowIndex="3" />
             <Label text="Adres bazy :" textFill="#555555" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="167.0" text="Wybierz miejsce docelowe" GridPane.columnIndex="2" />
-            <TextField GridPane.columnIndex="1" />
+            <Button fx:id="selectDirectoryButton" mnemonicParsing="false" onAction="#selectDirectory" prefHeight="25.0" prefWidth="167.0" text="Wybierz miejsce docelowe" GridPane.columnIndex="2" />
+            <TextField fx:id="directoryTextField" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </children>

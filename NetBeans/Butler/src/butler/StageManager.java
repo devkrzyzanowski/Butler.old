@@ -39,14 +39,14 @@ public class StageManager {
         }
         Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
         stage.setScene(scene);
-        stage.centerOnScreen();
         stage.setTitle(bundle.getString(title));
         stage.show();
     }
-    public void addStage(String fxml, Window owner) {
-        
-    }
-    
+    public void changeStage(Stage stage, String fxml, Integer width, Integer height) {
+        changeStage(stage, fxml);
+        stage.setWidth(width);
+        stage.setHeight(height);
+    }    
     public void addModalStage(Window owner, String fxml) {
        loader = new FXMLLoader(this.getClass().getResource(fxml), bundle);
         Parent root = null;

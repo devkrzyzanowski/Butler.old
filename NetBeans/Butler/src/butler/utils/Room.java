@@ -19,6 +19,7 @@ import javafx.collections.ObservableList;
  * @author uwxyy
  */
 public class Room {
+    private Room_extra room_extra;
     private IntegerProperty id = new SimpleIntegerProperty();
     private StringProperty roomName = new SimpleStringProperty();
     private IntegerProperty numberOfSingleBeds = new SimpleIntegerProperty();
@@ -32,17 +33,7 @@ public class Room {
     private StringProperty bigDescription = new SimpleStringProperty();
     private StringProperty extraDescription = new SimpleStringProperty();
     private StringProperty building = new SimpleStringProperty();
-    private BooleanProperty balcon = new SimpleBooleanProperty();
-    private BooleanProperty beachScreen = new SimpleBooleanProperty();
-    private BooleanProperty blanket = new SimpleBooleanProperty();
-    private BooleanProperty sunbed = new SimpleBooleanProperty();
-    private BooleanProperty tv = new SimpleBooleanProperty();
-    private BooleanProperty wiFi = new SimpleBooleanProperty();
-    private BooleanProperty individualEntrance = new SimpleBooleanProperty();
-    private BooleanProperty friendlyAnimal = new SimpleBooleanProperty();
-    private BooleanProperty kettle = new SimpleBooleanProperty();
-    private BooleanProperty tableware = new SimpleBooleanProperty();
-    private BooleanProperty tableLamp = new SimpleBooleanProperty();
+
     
     
     public Room(Integer id, String roomName, Integer numberOfSingleBeds, Integer numberOfDoubleBeds,
@@ -53,6 +44,7 @@ public class Room {
                 Boolean tv, Boolean wiFi, Boolean individualEntrance, 
                 Boolean friendlyAnimal, Boolean kettle,
                 Boolean tableware, Boolean tableLamp){
+        room_extra = new Room_extra();
         this.id.set(id);
         this.roomName.set(roomName);
         this.numberOfSingleBeds.set(numberOfSingleBeds);
@@ -65,17 +57,18 @@ public class Room {
         this.smallDescription.set(smallDescription);
         this.bigDescription.set(bigDescription);
         this.extraDescription.set(extraDescription);
-        this.balcon.set(balcon);
-        this.beachScreen.set(beachScreen);
-        this.blanket.set(blanket);
-        this.sunbed.set(sunbed);
-        this.tv.set(tv);
-        this.wiFi.set(wiFi);
-        this.individualEntrance.set(individualEntrance);
-        this.friendlyAnimal.set(friendlyAnimal);
-        this.kettle.set(kettle);
-        this.tableware.set(tableware);
-        this.tableLamp.set(tableLamp);
+        this.building.set(building);
+        room_extra.setBalcon(balcon);
+        room_extra.setBeachScreen(beachScreen);
+        room_extra.setBlanket(blanket);
+        room_extra.setSunbed(sunbed);
+        room_extra.setTv(tv);
+        room_extra.setWiFi(wiFi);
+        room_extra.setIndividualEntrance(individualEntrance);
+        room_extra.setFriendlyAnimal(friendlyAnimal);
+        room_extra.setKettle(kettle);
+        room_extra.setTableware(tableware);
+        room_extra.setTableLamp(tableLamp);
     }
     
         public Room(Integer id, String roomName, Integer numberOfSingleBeds, Integer numberOfDoubleBeds,
@@ -83,6 +76,7 @@ public class Room {
                 Double priceOfAdult, Double priceOfMinor, String smallDescription,
                 String bigDescription, String extraDescription, String building, 
                 ObservableList<AdditionalRoomItem> eI){
+                    room_extra = new Room_extra();
         this.id.set(id);
         this.roomName.set(roomName);
         this.numberOfSingleBeds.set(numberOfSingleBeds);
@@ -92,13 +86,17 @@ public class Room {
         this.priceOfRoom.set(priceOfRoom);
         this.priceOfAdult.set(priceOfAdult);
         this.priceOfMinor.set(priceOfMinor);
-        this.setAdditionalRoomItems(eI);
+        this.building.set(building);
+        room_extra.setAdditionalRoomItems(eI);
     }
 
     public Integer getId() {
         return id.getValue();
     }
 
+    public void setId(Integer id) {
+        this.id.set(id);
+    }
     public void setId(IntegerProperty id) {
         this.id = id;
     }
@@ -107,6 +105,7 @@ public class Room {
                 Double priceOfAdult, Double priceOfMinor, String smallDescription,
                 String bigDescription, String extraDescription, String building, 
                 ObservableList<AdditionalRoomItem> eI){
+                    room_extra = new Room_extra();
         this.roomName.set(roomName);
         this.numberOfSingleBeds.set(numberOfSingleBeds);
         this.numberOfDoubleBeds.set(numberOfDoubleBeds);
@@ -115,11 +114,11 @@ public class Room {
         this.priceOfRoom.set(priceOfRoom);
         this.priceOfAdult.set(priceOfAdult);
         this.priceOfMinor.set(priceOfMinor);
-        this.setAdditionalRoomItems(eI);
+        room_extra.setAdditionalRoomItems(eI);
     }
         
-        @Override
-        public String toString(){
+    @Override
+    public String toString(){
         return roomName.getValue();
     }
         
@@ -133,6 +132,14 @@ public class Room {
 
     public void setName(StringProperty roomName) {
         this.roomName = roomName;
+    }
+
+    public Room_extra getRoom_extra() {
+        return room_extra;
+    }
+
+    public void setRoom_extra(Room_extra room_extra) {
+        this.room_extra = room_extra;
     }
 
     public Integer getNumberOfSingleBeds() {
@@ -167,68 +174,24 @@ public class Room {
         this.floorNumber = floorNumber;
     }
 
-    public String getPriceOfRoom() {
-        return priceOfRoom.getValue() + " zł";
+    public Double getPriceOfRoom() {
+        return priceOfRoom.getValue();
     }
 
     public void setPriceOfRoom(DoubleProperty priceOfRoom) {
         this.priceOfRoom = priceOfRoom;
     }
 
-    public String getPriceOfAdult() {
-        return priceOfAdult.getValue() + " zł";
+    public Double getPriceOfAdult() {
+        return priceOfAdult.getValue();
     }
 
     public void setPriceOfAdult(DoubleProperty priceOfAdult) {
         this.priceOfAdult = priceOfAdult;
     }
 
-    public Boolean getBalcon() {
-        return balcon.get();
-    }
-
-    public Boolean getBeachScreen() {
-        return beachScreen.get();
-    }
-
-    public Boolean getBlanket() {
-        return blanket.get();
-    }
-
-    public Boolean getSunbed() {
-        return sunbed.get();
-    }
-
-    public Boolean getTv() {
-        return tv.get();
-    }
-
-    public Boolean getWiFi() {
-        return wiFi.get();
-    }
-
-    public Boolean getIndividualEntrance() {
-        return individualEntrance.get();
-    }
-
-    public Boolean getFriendlyAnimal() {
-        return friendlyAnimal.get();
-    }
-
-    public Boolean getKettle() {
-        return kettle.get();
-    }
-
-    public Boolean getTableware() {
-        return tableware.get();
-    }
-
-    public Boolean getTableLamp() {
-        return tableLamp.get();
-    }
-
-    public String getPriceOfMinor() {
-        return priceOfMinor.getValue() + " zł";
+    public Double getPriceOfMinor() {
+        return priceOfMinor.getValue();
     }
 
     public void setPriceOfMinor(DoubleProperty priceOfMinor) {
@@ -267,22 +230,7 @@ public class Room {
         this.building = building;
     }
 
-    private void setAdditionalRoomItems(ObservableList<AdditionalRoomItem> eI) {
-        for (AdditionalRoomItem ari : eI){
-            if (ari.getId() == 0) balcon.set(true);
-            if (ari.getId() == 1) beachScreen.set(true);
-            if (ari.getId() == 2) blanket.set(true);
-            if (ari.getId() == 3) sunbed.set(true);
-            if (ari.getId() == 4) tv.set(true);
-            if (ari.getId() == 5) wiFi.set(true);
-            if (ari.getId() == 6) individualEntrance.set(true);
-            if (ari.getId() == 7) friendlyAnimal.set(true);
-            if (ari.getId() == 8) kettle.set(true);
-            if (ari.getId() == 9) tableware.set(true);
-            if (ari.getId() == 10) tableLamp.set(true);
-        }
 
-    }
 
   
 }

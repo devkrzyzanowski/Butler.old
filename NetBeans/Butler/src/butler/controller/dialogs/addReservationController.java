@@ -36,26 +36,23 @@ public class addReservationController extends DialogBox implements Initializable
     @FXML TextField selectClientTextField, selectRoomTextField;
     @FXML DatePicker fromDatePicker, toDatePicker;
     @FXML Button addReservationButton;
-    @FXML ComboBox<Legend> selectStatusComboBox;
     @FXML TextField nightsNumberTextField;
     private Client selectedClient;
     private Room selectedRoom;
     private Model model;
    
     
-    private ObservableList<Room> roomObservableList = FXCollections.observableArrayList();
     
         @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = butler.Butler.model;
-        selectStatusComboBox.setItems(model.getLegendList());
     }
     
     private void sendReservationToDataBase(){
         Timestamp ts = Timestamp.valueOf(fromDatePicker.getValue().atStartOfDay());
         Timestamp ts2 = Timestamp.valueOf(toDatePicker.getValue().atStartOfDay());
         
-        model.addBookingToDataBase(ts, ts2, selectedClient.getId(), selectedRoom.getId(), selectStatusComboBox.getSelectionModel().getSelectedItem().getIdLegend());
+        model.addBookingToDataBase(ts, ts2, selectedClient.getId(), selectedRoom.getId(), 1);
     }
     
     @FXML private void addReservation(ActionEvent event){
